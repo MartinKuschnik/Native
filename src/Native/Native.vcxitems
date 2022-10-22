@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{4811ae42-c881-4e13-89f2-4b6a1d4d6107}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FormatException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)InvalidOperationException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
+  </ItemGroup>
+</Project>

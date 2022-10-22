@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{465200c6-64ca-40fb-ab6e-7ad1d9460cb2}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AddressFamily.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IpAddress.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IPEndPoint.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UdpSocket.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WsaGuard.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)IpAddress.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)IPEndPoint.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UdpSocket.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WsaGuard.cpp" />
+  </ItemGroup>
+</Project>

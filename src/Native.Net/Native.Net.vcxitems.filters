@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AddressFamily.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IpAddress.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IPEndPoint.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)UdpSocket.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WsaGuard.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)IpAddress.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)IPEndPoint.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UdpSocket.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WsaGuard.cpp" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native", "Native\Native.vcxitems", "{4811AE42-C881-4E13-89F2-4B6A1D4D6107}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native - Tests", "Native - Tests\Native - Tests.vcxproj", "{8DB1F34B-88B3-4736-A391-2E226843DE13}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Windows", "Native.Windows\Native.Windows.vcxitems", "{CBB110F4-F2CB-43AA-A711-30E9A6DCC111}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Net - Tests", "Native.Net - Tests\Native.Net - Tests.vcxproj", "{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Windows - Tests", "Native.Windows - Tests\Native.Windows - Tests.vcxproj", "{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Net", "Native.Net\Native.Net.vcxitems", "{465200C6-64CA-40FB-AB6E-7AD1D9460CB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Debug|x64.ActiveCfg = Debug|x64
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Debug|x64.Build.0 = Debug|x64
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Debug|x86.ActiveCfg = Debug|Win32
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Debug|x86.Build.0 = Debug|Win32
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Release|x64.ActiveCfg = Release|x64
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Release|x64.Build.0 = Release|x64
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Release|x86.ActiveCfg = Release|Win32
+		{8DB1F34B-88B3-4736-A391-2E226843DE13}.Release|x86.Build.0 = Release|Win32
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Debug|x64.ActiveCfg = Debug|x64
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Debug|x64.Build.0 = Debug|x64
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Debug|x86.Build.0 = Debug|Win32
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Release|x64.ActiveCfg = Release|x64
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Release|x64.Build.0 = Release|x64
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Release|x86.ActiveCfg = Release|Win32
+		{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}.Release|x86.Build.0 = Release|Win32
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Debug|x64.ActiveCfg = Debug|x64
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Debug|x64.Build.0 = Debug|x64
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Debug|x86.ActiveCfg = Debug|Win32
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Debug|x86.Build.0 = Debug|Win32
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Release|x64.ActiveCfg = Release|x64
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Release|x64.Build.0 = Release|x64
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Release|x86.ActiveCfg = Release|Win32
+		{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AF380FC-EBA3-4AC6-8A7E-C49C5288F8C6}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Native.Net\Native.Net.vcxitems*{465200c6-64ca-40fb-ab6e-7ad1d9460cb2}*SharedItemsImports = 9
+		Native\Native.vcxitems*{4811ae42-c881-4e13-89f2-4b6a1d4d6107}*SharedItemsImports = 9
+		Native\Native.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
+		Native.Windows\Native.Windows.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
+		Native\Native.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
+		Native.Windows\Native.Windows.vcxitems*{cbb110f4-f2cb-43aa-a711-30e9a6dcc111}*SharedItemsImports = 9
+		Native.Net\Native.Net.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
+		Native.Windows\Native.Windows.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
+		Native\Native.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
+	EndGlobalSection
+EndGlobal
