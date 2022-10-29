@@ -24,6 +24,8 @@ namespace Native
 
 			std::string to_string() const;
 
+			bool is_ipv4_mapped_to_ipv6() const;
+
 			static IpAddress Parse(std::string_view value, Net::AddressFamily addressFamily);
 			static IpAddress Parse(std::string_view value);
 

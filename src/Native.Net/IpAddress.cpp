@@ -47,6 +47,20 @@ namespace Native
 			return addressString;
 		}
 
+		bool IpAddress::is_ipv4_mapped_to_ipv6() const
+		{
+			// IPv4 mapped to IPv6 Addresses consist of an 80-bit prefix of zeros,
+			// the next 16 bits are ones, and the remaining, 
+			// least-significant 32 bits contain the IPv4 address.
+
+			return this->_addressFamily == AddressFamily::InterNetworkV6
+				&& this->_address.data.hi == 0x00
+				&& this->_address.v6.u.Byte[8] == 0x00
+				&& this->_address.v6.u.Byte[9] == 0x00
+				&& this->_address.v6.u.Byte[10] == 0xFF
+				&& this->_address.v6.u.Byte[11] == 0xFF;
+		}
+
 		AddressFamily IpAddress::address_family() const noexcept
 		{
 			return this->_addressFamily;
@@ -86,7 +100,7 @@ namespace Native
 		{
 			if (this->_addressFamily == AddressFamily::InterNetwork)
 				throw InvalidOperationException(fmt::format("IPv4 address can not be converted into {0}.", nameof(in6_addr)));
-			
+
 			return this->_address.v6;
 		}
 
