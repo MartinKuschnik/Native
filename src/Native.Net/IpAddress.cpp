@@ -14,8 +14,56 @@ namespace Native
 
 	namespace Net
 	{
-		const IpAddress IpAddress::Any = IpAddress(in_addr{});
-		const IpAddress IpAddress::IPv6Any = IpAddress(in6_addr{});
+		const IpAddress IpAddress::Any = IpAddress(0, 0, 0, 0, AddressFamily::InterNetworkV6);
+		const IpAddress IpAddress::IPv4Any = IpAddress(0, 0, 0, 0, AddressFamily::InterNetwork);
+		const IpAddress IpAddress::IPv6Any = IpAddress( 0, 0, 0, 0, 0, 0, 0, 0  );
+
+		// IPv4
+		IpAddress::IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4) noexcept
+			: _address({ .v4 = { b1, b2, b3, b4 } }),
+			_addressFamily(AddressFamily::InterNetwork)
+		{
+		}
+
+		// IPv4 and IPv6 (mapped)
+		IpAddress::IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, AddressFamily af) noexcept
+			: _addressFamily(af)
+		{
+			if (af == AddressFamily::InterNetwork)
+				this->_address.v4 = in_addr{ b1, b2, b3, b4 };
+			else
+				this->_address.v6 = in6_addr{ .u = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF, b1, b2, b3, b4} };
+		}
+
+		// IPv6
+		IpAddress::IpAddress(unsigned char bytes[16]) noexcept
+			: _address({ .v6 = in6_addr {.u = {.Byte = *bytes} } }),
+			_addressFamily(AddressFamily::InterNetworkV6)
+		{
+
+		}
+
+		// IPv6
+		IpAddress::IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8, unsigned char b9, unsigned char b10, unsigned char b11, unsigned char b12, unsigned char b13, unsigned char b14, unsigned char b15, unsigned char b16) noexcept
+			: _address({ .v6 = in6_addr {.u = {.Byte = {b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16}} } }),
+			_addressFamily(AddressFamily::InterNetworkV6)
+		{
+		}
+
+		// IPv6
+		IpAddress::IpAddress(unsigned short words[8]) noexcept
+			: _address({ .v6 = in6_addr {.u = {.Word = *words} } }),
+			_addressFamily(AddressFamily::InterNetworkV6)
+		{
+
+		}
+
+		// IPv6
+		IpAddress::IpAddress(unsigned short w1, unsigned short w2, unsigned short w3, unsigned short w4, unsigned short w5, unsigned short w6, unsigned short w7, unsigned short w8) noexcept
+			: _address({ .v6 = in6_addr {.u = {.Word = {w1, w2, w3, w4, w5 , w6, w7, w8}} } }),
+			_addressFamily(AddressFamily::InterNetworkV6)
+		{
+		}
 
 		IpAddress::IpAddress(in_addr address) noexcept
 			: _address({ .v4 = address }),
@@ -64,6 +112,17 @@ namespace Native
 		AddressFamily IpAddress::address_family() const noexcept
 		{
 			return this->_addressFamily;
+		}
+
+		IpAddress IpAddress::to_v4() const
+		{
+			if (this->_addressFamily == AddressFamily::InterNetwork)
+				return *this;
+
+			if (!this->is_ipv4_mapped_to_ipv6())
+				throw InvalidOperationException(fmt::format("The address {0} is no IPv6 mapped IPv4 address.", this->to_string()));
+
+			return IpAddress(this->_address.v6.u.Byte[12], this->_address.v6.u.Byte[13], this->_address.v6.u.Byte[14], this->_address.v6.u.Byte[15]);
 		}
 
 		IpAddress IpAddress::Parse(std::string_view value)

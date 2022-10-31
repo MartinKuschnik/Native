@@ -16,8 +16,19 @@ namespace Native
 		{
 		public:
 
-
 			IpAddress() = delete;
+
+			// IPv4
+			IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4) noexcept;
+
+			// IPv4 and IPv6 (mapped)
+			IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, AddressFamily af) noexcept;
+
+			// IPv6
+			IpAddress(unsigned char bytes[16]) noexcept;
+			IpAddress(unsigned short words[8]) noexcept;
+			IpAddress(unsigned char b1, unsigned char b2, unsigned char b3, unsigned char b4, unsigned char b5, unsigned char b6, unsigned char b7, unsigned char b8, unsigned char b9, unsigned char b10, unsigned char b11, unsigned char b12, unsigned char b13, unsigned char b14, unsigned char b15, unsigned char b16) noexcept;
+			IpAddress(unsigned short w1, unsigned short w2, unsigned short w3, unsigned short w4, unsigned short w5, unsigned short w6, unsigned short w7, unsigned short w8) noexcept;
 
 			IpAddress(in_addr address) noexcept;
 			IpAddress(in6_addr address) noexcept;
@@ -30,6 +41,7 @@ namespace Native
 			static IpAddress Parse(std::string_view value);
 
 			static const IpAddress Any;
+			static const IpAddress IPv4Any;
 			static const IpAddress IPv6Any;
 
 			bool operator ==(const IpAddress& other) const noexcept;
@@ -39,6 +51,8 @@ namespace Native
 			operator in6_addr() const;
 
 			AddressFamily address_family() const noexcept;
+
+			IpAddress to_v4() const;
 
 		private:
 
