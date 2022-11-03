@@ -48,7 +48,7 @@ jobs:
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: 'Native - Tests.dll'
+        testAssembly: '*test*.dll'
         searchFolder: '**\*'
         runInParallel: true
         platform: x86
