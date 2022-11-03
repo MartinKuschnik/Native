@@ -49,7 +49,7 @@ jobs:
       uses: microsoft/vstest-action@v1.0.0
       with:
         testAssembly: 'Native - Tests.dll'
-        searchFolder: '${{env.GITHUB_WORKSPACE}}src\Native**\*'
+        searchFolder: '**\*'
         runInParallel: true
         platform: x86
             
