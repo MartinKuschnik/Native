@@ -45,8 +45,8 @@ jobs:
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: '*test*.dll'
-        searchFolder: ${{env.GITHUB_WORKSPACE}} 
+        testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
+        searchFolder: ${{env.GITHUB_WORKSPACE}}src\
         runInParallel: true
         platform: x86
             
@@ -74,7 +74,7 @@ jobs:
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: '*test*.dll'
-        searchFolder: ${{env.GITHUB_WORKSPACE}} 
+        testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
+        searchFolder: ${{env.GITHUB_WORKSPACE}}src\
         runInParallel: true 
         platform: x64
