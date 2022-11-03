@@ -41,11 +41,8 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}      
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x86 ${{env.SOLUTION_FILE_PATH}}   
-            
-    - name: dump
-      run: tree  ${{env.GITHUB_WORKSPACE}}src\ /F
-      
-    - name: Run tests
+          
+    - name: Unit Tests
       uses: microsoft/vstest-action@v1.0.0
       with:
         testAssembly: '*test*.dll'
@@ -73,11 +70,10 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}}   
-      
-    - name: Run tests
+                
+    - name: Unit Tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
-        searchFolder: ${{env.GITHUB_WORKSPACE}}src\*
-        runInParallel: true 
+        testAssembly: '*test*.dll'
+        searchFolder: '**\*'
         platform: x64
