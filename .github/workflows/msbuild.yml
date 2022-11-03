@@ -37,7 +37,11 @@ jobs:
       run: C:\vcpkg\vcpkg.exe integrate install
       
     - name: vcpkg install
-      run: C:\vcpkg\vcpkg.exe install --debug
+      run: C:\vcpkg\vcpkg.exe install fmt:x64-windows-static
+      working-directory: ${{env.GITHUB_WORKSPACE}}src      
+      
+    - name: vcpkg install
+      run: C:\vcpkg\vcpkg.exe install  --debug
       working-directory: ${{env.GITHUB_WORKSPACE}}src
       
     - name: debug
