@@ -32,15 +32,9 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
-        
-    - name: dump %VCPKG_INSTALLATION_ROOT%
-      run: echo %VCPKG_INSTALLATION_ROOT%
       
-    - name: dump env
-      run: env
-      
-    - name: Setup vcpkg
-      run: C:\vcpkg\vcpkg.exe
+    - name: Install Dependencies
+      run: C:\vcpkg\vcpkg.exe install
       working-directory: ${{env.GITHUB_WORKSPACE}}src
 
     - name: Build
