@@ -17,8 +17,6 @@ env:
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
-  
-  BUILD_PLATFORM: x64|x86
 
 permissions:
   contents: read
@@ -37,10 +35,13 @@ jobs:
       run: C:\vcpkg\vcpkg.exe integrate install
             
     - name: vcpkg install
-      run: C:\vcpkg\vcpkg.exe install fmt:x64-windows
+      run: C:\vcpkg\vcpkg.exe install fmt:x64-windows fmt:x86-windows
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{env.BUILD_PLATFORM}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64|x86 ${{env.SOLUTION_FILE_PATH}}
+            
+    - name: Unit Tests
+      run: VSTest.Console "Native/src/Native - Tests/bin/Release/x64/Native - Tests.dll"
