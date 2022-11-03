@@ -47,6 +47,8 @@ jobs:
       
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
+      env:
+        ACTIONS_RUNNER_DEBUG: true
       with:
         testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
         searchFolder: ${{env.GITHUB_WORKSPACE}}src\*
