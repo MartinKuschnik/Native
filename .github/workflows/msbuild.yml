@@ -27,7 +27,6 @@ permissions:
 
 jobs:  
   build:
-    name: ${{ matrix.os }}-${{ github.workflow }}
     runs-on: [windows-latest]
 
     steps:
@@ -35,6 +34,10 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
+    
+    
+    - name: dump
+      run: dir c:
       
     - name: Setup vcpkg
       run: git clone https://github.com/Microsoft/vcpkg.git ${{env.VCPKG_DIR}} && ${{env.VCPKG_DIR}}bootstrap-vcpkg.bat
