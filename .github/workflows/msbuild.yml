@@ -41,7 +41,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}src
       
     - name: debug
-      run: tree C:\vcpkg\installed\
+      run: tree ${{env.GITHUB_WORKSPACE}}src\vcpkg_installed
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
