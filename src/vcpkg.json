@@ -4,7 +4,6 @@
    "dependencies": [
      {
       "name": "fmt",
-      "features": [ "glib" ],
       "platform": "windows & static & x64"
     }
   ]
