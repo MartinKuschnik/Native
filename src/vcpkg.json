@@ -2,6 +2,10 @@
   "name": "native",
   "version-string": "1.0.0",
    "dependencies": [
-    "fmt"
+     {
+      "name": "fmt",
+      "features": [ "glib" ],
+      "platform": "windows & static & x64"
+    }
   ]
 }
