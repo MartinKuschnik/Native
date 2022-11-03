@@ -1,4 +1,4 @@
-name: MSBuild
+name: Windows x86
 
 on:
   push:
