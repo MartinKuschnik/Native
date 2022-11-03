@@ -34,8 +34,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     
     
-    - name: dump ${{VCPKG_INSTALLATION_ROOT}}
-      run: echo ${{VCPKG_INSTALLATION_ROOT}}
+    - name: dump ${{env.VCPKG_INSTALLATION_ROOT}}
+      run: echo ${{env.VCPKG_INSTALLATION_ROOT}}
       
     - name: dump env
       run: env
