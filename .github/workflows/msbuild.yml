@@ -10,10 +10,8 @@ on:
       - published
 
 env:
-  SOLUTION_DIR: ${{env.SOLUTION_FILE_PATH}}src/
-
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: ${{env.SOLUTION_DIR}}Native.sln
+  SOLUTION_FILE_PATH: src/Native.sln
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -39,7 +37,7 @@ jobs:
     - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install fmt:x86-windows
 
-    - name: Build
+    - name: Build Solution
       working-directory: ${{env.GITHUB_WORKSPACE}}      
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x86 ${{env.SOLUTION_FILE_PATH}}   
@@ -47,9 +45,10 @@ jobs:
     - name: Unit Tests
       uses: microsoft-approved-actions/vstest@master
       with:
-        testAssembly: '*Test*.dll'
+        testAssembly: src/*Test*.dll
         searchFolder: SOLUTION_DIR
-        runInParallel: true
+        runInParallel: true        
+        working-directory: ${{env.GITHUB_WORKSPACE}}     
       
   windows-x64:
     runs-on: [windows-latest]
@@ -66,7 +65,7 @@ jobs:
     - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install fmt:x64-windows
 
-    - name: Build
+    - name: Build Solution
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}} 
@@ -74,6 +73,7 @@ jobs:
     - name: Unit Tests
       uses: microsoft-approved-actions/vstest@master
       with:
-        testAssembly: '*Test*.dll'
+        testAssembly: src/*Test*.dll
         searchFolder: SOLUTION_DIR
-        runInParallel: true
+        runInParallel: true        
+        working-directory: ${{env.GITHUB_WORKSPACE}}   
