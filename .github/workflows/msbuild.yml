@@ -37,7 +37,7 @@ jobs:
       run: C:\vcpkg\vcpkg.exe integrate install
       
     - name: vcpkg install
-      run: C:\vcpkg\vcpkg.exe install
+      run: C:\vcpkg\vcpkg.exe install --debug
       working-directory: ${{env.GITHUB_WORKSPACE}}src
       
     - name: debug
