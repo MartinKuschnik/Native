@@ -32,6 +32,9 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: vcpkg integrate install
+      run: C:\vcpkg\vcpkg.exe integrate install
             
     - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install fmt:x64-windows
