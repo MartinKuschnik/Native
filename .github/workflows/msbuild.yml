@@ -34,7 +34,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@latest
+      uses: microsoft/setup-msbuild@v1.0.2
       
     - name: Setup vcpkg
       run: git clone https://github.com/Microsoft/vcpkg.git ${{env.VCPKG_DIR}} && ${{env.VCPKG_DIR}}bootstrap-vcpkg.bat
