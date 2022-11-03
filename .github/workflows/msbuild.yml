@@ -45,9 +45,10 @@ jobs:
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: src\*test*.dll
+        testAssembly: '*test*.dll'
         searchFolder: ${{env.GITHUB_WORKSPACE}} 
         runInParallel: true
+        platform: x86
             
       
   windows-x64:
@@ -73,6 +74,7 @@ jobs:
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
       with:
-        testAssembly: src\*test*.dll
+        testAssembly: '*test*.dll'
         searchFolder: ${{env.GITHUB_WORKSPACE}} 
-        runInParallel: true  
+        runInParallel: true 
+        platform: x64
