@@ -34,14 +34,14 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     
     
-    - name: dump ${{VCPKG_INSTALLATION_ROOT}}
-      run: tree ${{VCPKG_INSTALLATION_ROOT}}
+    - name: dump $VCPKG_INSTALLATION_ROOT
+      run: tree $VCPKG_INSTALLATION_ROOT
       
     - name: dump env
       run: env
       
     - name: Setup vcpkg
-      run: ${{VCPKG_INSTALLATION_ROOT}}\vcpkg.exe
+      run: $VCPKG_INSTALLATION_ROOT\vcpkg.exe
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
