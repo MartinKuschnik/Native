@@ -46,7 +46,7 @@ jobs:
       uses: microsoft/vstest-action@v1.0.0
       with:
         testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
-        searchFolder: ${{env.GITHUB_WORKSPACE}}src\
+        searchFolder: ${{env.GITHUB_WORKSPACE}}src\*
         runInParallel: true
         platform: x86
             
@@ -75,6 +75,6 @@ jobs:
       uses: microsoft/vstest-action@v1.0.0
       with:
         testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
-        searchFolder: ${{env.GITHUB_WORKSPACE}}src\
+        searchFolder: ${{env.GITHUB_WORKSPACE}}src\*
         runInParallel: true 
         platform: x64
