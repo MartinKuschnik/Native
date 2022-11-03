@@ -32,10 +32,9 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
-    
-    
-    - name: dump ${{env.VCPKG_INSTALLATION_ROOT}}
-      run: echo ${{env.VCPKG_INSTALLATION_ROOT}}
+        
+    - name: dump $env.VCPKG_INSTALLATION_ROOT
+      run: echo $env.VCPKG_INSTALLATION_ROOT
       
     - name: dump env
       run: env
