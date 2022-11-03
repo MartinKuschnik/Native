@@ -47,11 +47,9 @@ jobs:
       
     - name: Run tests
       uses: microsoft/vstest-action@v1.0.0
-      env:
-        ACTIONS_RUNNER_DEBUG: true
       with:
-        testAssembly: '**\\*test*.dll\n!**\\*TestAdapter.dll\n!**\\obj\\**'
-        searchFolder: ${{env.GITHUB_WORKSPACE}}src\*
+        testAssembly: 'Native - Tests.dll'
+        searchFolder: '${{env.GITHUB_WORKSPACE}}src\Native - Tests\bin\Release\Win32\'
         runInParallel: true
         platform: x86
             
