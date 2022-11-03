@@ -43,7 +43,7 @@ jobs:
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x86 ${{env.SOLUTION_FILE_PATH}}   
             
     - name: Unit Tests
-      uses: microsoft-approved-actions/vstest@1.0.0
+      uses: microsoft/vstest@1.0.0
       with:
         testAssembly: src/*Test*.dll
         searchFolder: SOLUTION_DIR
@@ -71,7 +71,7 @@ jobs:
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}} 
             
     - name: Unit Tests
-      uses: microsoft-approved-actions/vstest@1.0.0
+      uses: microsoft/vstest@1.0.0
       with:
         testAssembly: src/*Test*.dll
         searchFolder: SOLUTION_DIR
