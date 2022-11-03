@@ -39,6 +39,9 @@ jobs:
     - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install
       working-directory: ${{env.GITHUB_WORKSPACE}}src
+      
+    - name: debug
+      run: tree C:\vcpkg\installed\
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
