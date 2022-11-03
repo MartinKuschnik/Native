@@ -1,9 +1,0 @@
-{
-  "name": "native",
-  "version-string": "1.0.0",
-   "dependencies": [
-     {
-      "name": "fmt"
-    }
-  ]
-}
