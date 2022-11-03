@@ -33,7 +33,10 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
       
-    - name: Install Dependencies
+    - name: vcpkg integrate install
+      run: C:\vcpkg\vcpkg.ex integrate install
+      
+    - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install
       working-directory: ${{env.GITHUB_WORKSPACE}}src
 
