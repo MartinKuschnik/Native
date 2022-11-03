@@ -5,13 +5,13 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native", "Native\Native.vcxitems", "{4811AE42-C881-4E13-89F2-4B6A1D4D6107}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native - Tests", "Native - Tests\Native - Tests.vcxproj", "{8DB1F34B-88B3-4736-A391-2E226843DE13}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native - Tests", "Native-Tests\Native-Tests.vcxproj", "{8DB1F34B-88B3-4736-A391-2E226843DE13}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Windows", "Native.Windows\Native.Windows.vcxitems", "{CBB110F4-F2CB-43AA-A711-30E9A6DCC111}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Net - Tests", "Native.Net - Tests\Native.Net - Tests.vcxproj", "{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Net - Tests", "Native.Net-Tests\Native.Net-Tests.vcxproj", "{D1215A4B-40FA-4F1D-96A2-BC5BDC690AC1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Windows - Tests", "Native.Windows - Tests\Native.Windows - Tests.vcxproj", "{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Windows - Tests", "Native.Windows-Tests\Native.Windows-Tests.vcxproj", "{C732DF2F-9582-4DB5-9CAD-5A4F55C02DB1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Net", "Native.Net\Native.Net.vcxitems", "{465200C6-64CA-40FB-AB6E-7AD1D9460CB2}"
 EndProject
