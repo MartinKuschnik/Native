@@ -10,8 +10,10 @@ on:
       - published
 
 env:
+  SOLUTION_DIR: ${{env.SOLUTION_FILE_PATH}}src/
+
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: src/Native.sln
+  SOLUTION_FILE_PATH: ${{env.SOLUTION_DIR}}Native.sln
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -22,7 +24,7 @@ permissions:
   contents: read
 
 jobs:  
-  build-x86:
+  windows-x86:
     runs-on: [windows-latest]
 
     steps:
@@ -38,15 +40,18 @@ jobs:
       run: C:\vcpkg\vcpkg.exe install fmt:x86-windows
 
     - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      working-directory: ${{env.GITHUB_WORKSPACE}}      
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x86 ${{env.SOLUTION_FILE_PATH}}   
             
     - name: Unit Tests
-      run: VSTest.Console "Native/src/Native - Tests/bin/Release/x86/Native - Tests.dll"
+      uses: microsoft-approved-actions/vstest@master
+      with:
+        testAssembly: '*Test*.dll'
+        searchFolder: SOLUTION_DIR
+        runInParallel: true
       
-  build-x64:
+  windows-x64:
     runs-on: [windows-latest]
 
     steps:
@@ -62,10 +67,13 @@ jobs:
       run: C:\vcpkg\vcpkg.exe install fmt:x64-windows
 
     - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      working-directory: ${{env.GITHUB_WORKSPACE}}     
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}} 
             
     - name: Unit Tests
-      run: VSTest.Console "Native/src/Native - Tests/bin/Release/x64/Native - Tests.dll"
+      uses: microsoft-approved-actions/vstest@master
+      with:
+        testAssembly: '*Test*.dll'
+        searchFolder: SOLUTION_DIR
+        runInParallel: true
