@@ -34,7 +34,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
       
     - name: vcpkg integrate install
-      run: C:\vcpkg\vcpkg.ex integrate install
+      run: C:\vcpkg\vcpkg.exe integrate install
       
     - name: vcpkg install
       run: C:\vcpkg\vcpkg.exe install
