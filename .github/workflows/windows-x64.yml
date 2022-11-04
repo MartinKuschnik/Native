@@ -1,0 +1,50 @@
+name: Windows x64
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types:
+      - published
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: src/Native.sln
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:       
+  build-windows-x64:
+    runs-on: [windows-latest]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: vcpkg integrate install
+      run: C:\vcpkg\vcpkg.exe integrate install
+            
+    - name: vcpkg install
+      run: C:\vcpkg\vcpkg.exe install fmt:x64-windows
+
+    - name: Build Solution
+      working-directory: ${{env.GITHUB_WORKSPACE}}     
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ${{env.SOLUTION_FILE_PATH}}   
+                
+    - name: Unit Tests
+      uses: microsoft/vstest-action@v1.0.0
+      with:
+        testAssembly: '*test*.dll'
+        searchFolder: '**\*'
+        platform: x64
