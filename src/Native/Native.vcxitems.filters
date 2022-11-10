@@ -5,10 +5,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InvalidOperationException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Console.cpp" />
   </ItemGroup>
 </Project>

@@ -14,12 +14,14 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormatException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InvalidOperationException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Console.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
