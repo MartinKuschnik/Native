@@ -1,7 +1,5 @@
 #include "Console.h"
 
-#include <Windows.h>
-
 #include "Win32Exception.h"
 
 using namespace Native::Windows;
@@ -14,7 +12,7 @@ namespace Native
 
 	const Event<ConsoleCancelEventArgs> Console::CancelKeyPress = Console::_CancelKeyPressEventSource.create_event();
 
-	BOOL Console::ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept
+	BOOL WINAPI Console::ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept
 	{
 		ConsoleCancelEventArgs args;
 

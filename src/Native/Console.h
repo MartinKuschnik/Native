@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Windows.h>
+
 #include "Event.h"
 
 namespace Native
@@ -37,7 +39,7 @@ namespace Native
 
 		static void CancelKeyPressEventChanged();
 
-		static int ConsoleCtrlHandlerRoutine(unsigned long dwCtrlType) noexcept;
+		static BOOL WINAPI ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept;
 
 	public:
 
