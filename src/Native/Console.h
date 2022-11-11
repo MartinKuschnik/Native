@@ -1,8 +1,14 @@
 #pragma once
 
+
+
 #include <functional>
 #include <memory>
 #include <unordered_set>
+
+#include <optional>
+
+#include <Windows.h>
 
 namespace Native
 {
@@ -10,33 +16,33 @@ namespace Native
 	class EventSource;
 
 	template<class TArgs>
-	class EventRegistration
+	class EventSubscription
 	{
 	private:
 		EventSource<TArgs>* _source;
 
 	public:
-		const std::shared_ptr<std::function<void(TArgs)>> Target;
+		const std::shared_ptr<std::function<void(TArgs&)>> Target;
 
-		EventRegistration(const std::shared_ptr<std::function<void(TArgs)>> target, EventSource<TArgs>* const source)
+		EventSubscription(const std::shared_ptr<std::function<void(TArgs&)>> target, EventSource<TArgs>* const source)
 			: Target(target),
 			_source(source)
 		{
 
 		}
-		EventRegistration(const EventRegistration&) = delete;
+		EventSubscription(const EventSubscription&) = delete;
 
-		EventRegistration(EventRegistration&& other)
+		EventSubscription(EventSubscription&& other)
 			: Target(std::move(other.Target)),
 			_source(std::move(other._source))
 		{
 			other._source = nullptr;
 		}
 
-		virtual ~EventRegistration()
+		virtual ~EventSubscription()
 		{
 			if (this->_source != nullptr)
-				this->_source->remove_handler(this->Target);
+				this->_source->unsubscribe(this->Target);
 		}
 
 	private:
@@ -51,38 +57,79 @@ namespace Native
 	class EventSource
 	{
 	private:
-		std::unordered_set<std::shared_ptr<std::function<void(TArgs)>>> _handlers;
+		std::unordered_set<std::shared_ptr<std::function<void(TArgs&)>>> _handlers;
+
+		std::optional<std::function<void(void)>> _subscriptionChanged;
 
 	public:
-		EventSource() = default;
+		EventSource()
+			: _subscriptionChanged(std::nullopt)
+		{
+		}
+
+		EventSource(std::function<void(void)> subscriptionChanged)
+			: _subscriptionChanged(subscriptionChanged)
+		{
+		}
+
+		EventSource(std::function<void(void)>&& subscriptionChanged)
+			: _subscriptionChanged(subscriptionChanged)
+		{
+		}
+
+		template <class TMethod, class TInstance>
+		EventSource(TMethod&& method, TInstance instance)
+			: _subscriptionChanged(std::bind(method, instance))
+		{
+		}
+
+		template <class TMethod>
+		EventSource(TMethod&& method)
+			: _subscriptionChanged(std::bind(method))
+		{
+		}
+
 		virtual ~EventSource() = default;
 
-		EventRegistration<TArgs> add_handler(std::function<void(TArgs)> eventListener)
+		[[nodiscard]] 
+		EventSubscription<TArgs> subscribe(std::function<void(TArgs&)> eventListener)
 		{
-			auto pEventListener = std::make_shared<std::function<void(TArgs)>>(eventListener);
+			auto pEventListener = std::make_shared<std::function<void(TArgs&)>>(eventListener);
 
-			EventRegistration<TArgs> reg(pEventListener, this);
+			EventSubscription<TArgs> sub(pEventListener, this);
 
 			this->_handlers.insert(pEventListener);
 
-			return reg;
+			if (this->_subscriptionChanged.has_value())
+				this->_subscriptionChanged.value()();
+
+			return sub;
 		}
 
-
-		void remove_handler(std::shared_ptr<std::function<void(TArgs)>> eventListener)
+		void unsubscribe(std::shared_ptr<std::function<void(TArgs&)>> eventListener)
 		{
 			this->_handlers.erase(eventListener);
+
+			if (this->_subscriptionChanged.has_value())
+				this->_subscriptionChanged.value()();
 		}
 
-		void operator () (TArgs args)
+		void operator()(TArgs& args)
 		{
-			for (const std::shared_ptr<std::function<void(TArgs)>> handler : this->_handlers)
+			for (const std::shared_ptr<std::function<void(TArgs&)>> handler : this->_handlers)
 			{
 				handler->operator()(args);
 			}
 		}
 
-		Event<TArgs> create_event() 
+		[[nodiscard]] 
+		constexpr bool has_subscribers() const
+		{
+			return !this->_handlers.empty();
+		}
+
+		[[nodiscard]] 
+		Event<TArgs> create_event()
 		{
 			return Event<TArgs>(this);
 		}
@@ -94,6 +141,8 @@ namespace Native
 	template<class TArgs>
 	class Event
 	{
+#define NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED "This function creating a subscription represented by the return value. Discarding the return value will destroy the subscription instantly."
+
 	private:
 		EventSource<TArgs>* const _source;
 
@@ -105,26 +154,44 @@ namespace Native
 
 		virtual ~Event() = default;
 
-		EventRegistration<TArgs> operator +=(std::function<void(TArgs)> eventListener) const
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		EventSubscription<TArgs> subscribe(std::function<void(TArgs&)> eventListener) const
 		{
-			return this->_source->add_handler(eventListener);
+			return this->_source->subscribe(eventListener);
+		}
+
+		template <class TMethod, class TInstance>
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		EventSubscription<TArgs> subscribe(TMethod&& func, TInstance&& object) const
+		{
+			return this->_source->subscribe(std::bind(func, object, std::placeholders::_1));
+		}
+
+
+		template <class TMethod>
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		EventSubscription<TArgs> subscribe(TMethod&& func) const
+		{
+			return this->_source->subscribe(std::bind(func, std::placeholders::_1));
 		}
 	};
 
 	class ConsoleCancelEventArgs
 	{
-	public:
-		int Al;
-
-		ConsoleCancelEventArgs() = default;
-		ConsoleCancelEventArgs(int a)
-			: Al(a)
-		{
-
-		}
-		~ConsoleCancelEventArgs() = default;
-
 	private:
+		bool _canceled = false;
+
+	public:
+
+		void Cancel() noexcept
+		{
+			this->_canceled = true;
+		}
+
+		constexpr bool is_canceled() const noexcept
+		{
+			return this->_canceled;
+		}
 
 	};
 
@@ -132,14 +199,19 @@ namespace Native
 	{
 	private:
 
+		static EventSource<ConsoleCancelEventArgs> _CancelKeyPressEventSource;
+
+		static bool _CtrlHandlerSetted;
+
 		Console(); // static class
 
-		static EventSource<ConsoleCancelEventArgs> CancelKeyPressEventSource;
+		static void CancelKeyPressEventChanged();
+
+		static BOOL ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept;
 
 	public:
 
 		static const Event<ConsoleCancelEventArgs> CancelKeyPress;
-
 
 	};
 }
