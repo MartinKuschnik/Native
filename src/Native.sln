@@ -57,6 +57,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Native.Net\Native.Net.vcxitems*{465200c6-64ca-40fb-ab6e-7ad1d9460cb2}*SharedItemsImports = 9
 		Native\Native.vcxitems*{4811ae42-c881-4e13-89f2-4b6a1d4d6107}*SharedItemsImports = 9
+		Native.Windows\Native.Windows.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native\Native.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
 		Native\Native.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
