@@ -13,12 +13,12 @@ namespace Native
 	class Event
 	{
 
-	public:
-
 #pragma region Subclasses
 
+	private:
 		class Source;
 
+	public:
 		class Subscription
 		{
 		private:
@@ -52,6 +52,7 @@ namespace Native
 
 		};
 
+	private:
 		class Source
 		{
 		private:
@@ -133,10 +134,6 @@ namespace Native
 			{
 				return !this->_handlers.empty();
 			}
-
-
-		private:
-
 		};
 
 #pragma endregion
@@ -175,21 +172,21 @@ namespace Native
 		virtual ~Event() noexcept = default;
 
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(std::function<void(TArgs&)> eventListener) const
+		constexpr Subscription subscribe(std::function<void(TArgs&)> eventListener) const
 		{
 			return this->_source->subscribe(eventListener);
 		}
 
 		template <class TMethod, class TInstance>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(TMethod&& func, TInstance&& object) const
+		constexpr Subscription subscribe(TMethod&& func, TInstance&& object) const
 		{
 			return this->_source->subscribe(std::bind(func, object, std::placeholders::_1));
 		}
 
 		template <class TMethod>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(TMethod&& func) const
+		constexpr Subscription subscribe(TMethod&& func) const
 		{
 			return this->_source->subscribe(std::bind(func, std::placeholders::_1));
 		}
@@ -198,12 +195,12 @@ namespace Native
 
 		friend TEventSource;    //friend class
 
-		constexpr void operator ()(TArgs& args)
+		constexpr void operator()(TArgs& args) const
 		{
 			this->_source->operator()(args);
 		}
 
-		constexpr void operator ()(TArgs&& args)
+		constexpr void operator()(TArgs&& args) const
 		{
 			this->_source->operator()(args);
 		}
