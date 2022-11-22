@@ -168,6 +168,28 @@ namespace Native
 		{
 		}
 
+		Event(std::function<void(void)> subscriptionChanged)
+			: _source(std::make_unique<Source>(subscriptionChanged))
+		{
+		}
+
+		Event(std::function<void(void)>&& subscriptionChanged)
+			: _source(std::make_unique<Source>(subscriptionChanged))
+		{
+		}
+
+		template <class TMethod, class TInstance>
+		Event(TMethod method, TInstance instance)
+			: _source(std::make_unique<Source>(method, instance))
+		{
+		}
+
+		template <class TMethod>
+		Event(TMethod method)
+			: _source(std::make_unique<Source>(method))
+		{
+		}
+
 		virtual ~Event() noexcept = default;
 
 		void operator = (const Event& other) noexcept

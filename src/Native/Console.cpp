@@ -8,7 +8,7 @@ namespace Native
 {
 	bool Console::_CtrlHandlerSetted = false;
 
-	const ConsoleCancelEvent Console::CancelKeyPress;
+	const ConsoleCancelEvent Console::CancelKeyPress(&Console::CancelKeyPressEventChanged);
 
 	BOOL WINAPI Console::ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept
 	{
