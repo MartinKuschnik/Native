@@ -63,5 +63,17 @@ namespace NativeTests
 
 			Assert::AreEqual(false, eventHandlerCalled);
 		}
+
+		TEST_METHOD(Kill)
+		{
+			TestEvent::Source source = TestEvent::Source();
+			TestEvent event = source.create_event();
+
+			TestEvent::Subscription subscription = event.subscribe([&](auto& args) {  });
+
+			source.~Source();
+
+			subscription.~Subscription();
+		}
 	};
 }
