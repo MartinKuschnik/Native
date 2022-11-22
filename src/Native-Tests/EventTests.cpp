@@ -74,8 +74,15 @@ namespace NativeTests
 			TestEvent::Source source = TestEvent::Source();
 			TestEvent event = source.create_event();
 
-			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) { eventHandlerOneCalledAt = high_resolution_clock::now(); });
-			TestEvent::Subscription subscriptionTwo = event.subscribe([&](auto& args) { eventHandlerTwoCalledAt = high_resolution_clock::now(); });
+			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) {
+					eventHandlerOneCalledAt = high_resolution_clock::now();
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				});
+			
+			TestEvent::Subscription subscriptionTwo = event.subscribe([&](auto& args) {
+					eventHandlerTwoCalledAt = high_resolution_clock::now();
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				});
 
 			source(TestEventArgs());
 
