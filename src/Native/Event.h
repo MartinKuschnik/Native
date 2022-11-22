@@ -178,29 +178,19 @@ namespace Native
 		{
 		}
 
-		template <class TMethod, class TInstance>
-		Event(TMethod method, TInstance instance)
-			: _source(std::make_unique<Source>(method, instance))
-		{
-		}
-
 		template <class TMethod>
 		Event(TMethod method)
 			: _source(std::make_unique<Source>(method))
 		{
 		}
 
+		template <class TMethod, class TInstance>
+		Event(TMethod method, TInstance instance)
+			: _source(std::make_unique<Source>(method, instance))
+		{
+		}
+
 		virtual ~Event() noexcept = default;
-
-		void operator = (const Event& other) noexcept
-		{
-			this->_source = other._source;
-		}
-
-		void operator = (Event&& other) noexcept
-		{
-			this->_source = other._source;
-		}
 
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
 		Subscription subscribe(std::function<void(TArgs&)> eventListener) const
