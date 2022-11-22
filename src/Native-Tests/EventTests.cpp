@@ -68,7 +68,6 @@ namespace NativeTests
 
 			time_point eventHandlerOneCalledAt, eventHandlerTwoCalledAt;
 
-			TestEvent::Source source = TestEvent::Source();
 			TestEvent event;
 
 			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) { eventHandlerOneCalledAt = high_resolution_clock::now(); });
