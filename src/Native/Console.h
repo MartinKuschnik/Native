@@ -13,7 +13,7 @@ namespace Native
 
 	public:
 
-		void Cancel() noexcept
+		void cancel() noexcept
 		{
 			this->_canceled = true;
 		}
