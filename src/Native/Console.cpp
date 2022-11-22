@@ -8,9 +8,7 @@ namespace Native
 {
 	bool Console::_CtrlHandlerSetted = false;
 
-	Event<ConsoleCancelEventArgs>::Source Console::_CancelKeyPressEventSource(&CancelKeyPressEventChanged);
-
-	const Event<ConsoleCancelEventArgs> Console::CancelKeyPress = Console::_CancelKeyPressEventSource.create_event();
+	const ConsoleCancelEvent Console::CancelKeyPress;
 
 	BOOL WINAPI Console::ConsoleCtrlHandlerRoutine(DWORD dwCtrlType) noexcept
 	{
@@ -20,7 +18,7 @@ namespace Native
 		{
 			case CTRL_C_EVENT:
 
-				Console::_CancelKeyPressEventSource(args);
+				Console::CancelKeyPress(args);
 
 				// Signal is handled - don't pass it on to the next handler
 				return args.is_canceled() ? TRUE : FALSE;
@@ -32,7 +30,7 @@ namespace Native
 
 	void Console::CancelKeyPressEventChanged()
 	{
-		if (_CancelKeyPressEventSource.has_subscribers())
+		if (CancelKeyPress.has_subscribers())
 		{
 			if (!Console::_CtrlHandlerSetted)
 			{

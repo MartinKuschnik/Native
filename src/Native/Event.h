@@ -9,7 +9,7 @@
 
 namespace Native
 {
-	template<class TArgs>
+	template<class TArgs, class TEventSource>
 	class Event
 	{
 
@@ -134,11 +134,6 @@ namespace Native
 				return !this->_handlers.empty();
 			}
 
-			[[nodiscard]]
-			Event<TArgs> create_event()
-			{
-				return Event<TArgs>(this);
-			}
 
 		private:
 
@@ -147,15 +142,33 @@ namespace Native
 #pragma endregion
 
 	private:
-		Source* _source;
+		const std::unique_ptr<Source> _source;
+		
+		friend TEventSource;    //friend class
+
+		constexpr void operator ()(TArgs& args) const
+		{
+			this->_source->operator()(args);
+		}
+
+		constexpr void operator ()(TArgs&& args) const
+		{
+			this->_source->operator()(args);
+		}
+
+		[[nodiscard]]
+		constexpr bool has_subscribers() const
+		{
+			return this->_source->has_subscribers();
+		}
 
 	public:
-		Event(Source* const source)
-			: _source(source)
+		Event() noexcept
+			: _source(std::make_unique<Source>())
 		{
 		}
 
-		virtual ~Event() = default;
+		virtual ~Event() noexcept = default;
 
 		void operator = (const Event& other) noexcept
 		{
