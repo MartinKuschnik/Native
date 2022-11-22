@@ -36,7 +36,7 @@ namespace Native
 			Subscription(const Subscription&) = delete;
 
 			Subscription(Subscription&& other) noexcept
-				: Target(std::move(other.Target)),
+				: Target(other.Target),
 				_source(std::move(other._source))
 			{
 				other._source = nullptr;
@@ -87,7 +87,11 @@ namespace Native
 			{
 			}
 
-			virtual ~Source() = default;
+			virtual ~Source() 
+			{
+				this->_handlers.clear();
+				this->_subscriptionChanged = std::nullopt;
+			}
 
 			[[nodiscard]]
 			Subscription subscribe(std::function<void(TArgs&)> eventListener)
