@@ -143,24 +143,6 @@ namespace Native
 
 	private:
 		const std::unique_ptr<Source> _source;
-		
-		friend TEventSource;    //friend class
-
-		constexpr void operator ()(TArgs& args) const
-		{
-			this->_source->operator()(args);
-		}
-
-		constexpr void operator ()(TArgs&& args) const
-		{
-			this->_source->operator()(args);
-		}
-
-		[[nodiscard]]
-		constexpr bool has_subscribers() const
-		{
-			return this->_source->has_subscribers();
-		}
 
 	public:
 		Event() noexcept
@@ -210,6 +192,26 @@ namespace Native
 		Subscription subscribe(TMethod&& func) const
 		{
 			return this->_source->subscribe(std::bind(func, std::placeholders::_1));
+		}
+
+	private:
+
+		friend TEventSource;    //friend class
+
+		constexpr void operator ()(TArgs& args)
+		{
+			this->_source->operator()(args);
+		}
+
+		constexpr void operator ()(TArgs&& args)
+		{
+			this->_source->operator()(args);
+		}
+
+		[[nodiscard]]
+		constexpr bool has_subscribers() const
+		{
+			return this->_source->has_subscribers();
 		}
 	};
 }
