@@ -63,30 +63,5 @@ namespace NativeTests
 
 			Assert::AreEqual(false, eventHandlerCalled);
 		}
-
-		TEST_METHOD(FunctionCallOperator_CallsEverySubscribedFunctionInSubscripedOrder)
-		{
-			using namespace std::chrono;
-			using time_point = high_resolution_clock::time_point;
-
-			time_point eventHandlerOneCalledAt, eventHandlerTwoCalledAt;
-
-			TestEvent::Source source = TestEvent::Source();
-			TestEvent event = source.create_event();
-
-			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) {
-					eventHandlerOneCalledAt = high_resolution_clock::now();
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
-				});
-			
-			TestEvent::Subscription subscriptionTwo = event.subscribe([&](auto& args) {
-					eventHandlerTwoCalledAt = high_resolution_clock::now();
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
-				});
-
-			source(TestEventArgs());
-
-			Assert::IsTrue(eventHandlerOneCalledAt < eventHandlerTwoCalledAt);
-		}
 	};
 }
