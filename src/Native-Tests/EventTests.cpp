@@ -24,7 +24,7 @@ namespace NativeTests
 
 			TestEvent event;
 
-			TestEvent::Subscription subscription = event.subscribe([&](auto& args) { eventHandlerCalled = true; });
+			TestEvent::Subscription subscription = event.add([&](auto& args) { eventHandlerCalled = true; });
 
 			event(TestEventArgs());
 
@@ -37,8 +37,8 @@ namespace NativeTests
 
 			TestEvent event;
 
-			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) { eventHandlerOneCalled = true; });
-			TestEvent::Subscription subscriptionTwo = event.subscribe([&](auto& args) { eventHandlerTwoCalled = true; });
+			TestEvent::Subscription subscriptionOne = event.add([&](auto& args) { eventHandlerOneCalled = true; });
+			TestEvent::Subscription subscriptionTwo = event.add([&](auto& args) { eventHandlerTwoCalled = true; });
 
 			event(TestEventArgs());
 
@@ -53,7 +53,7 @@ namespace NativeTests
 			TestEvent event;
 
 			{
-				TestEvent::Subscription subscription = event.subscribe([&](auto& args) { eventHandlerCalled = true; });
+				TestEvent::Subscription subscription = event.add([&](auto& args) { eventHandlerCalled = true; });
 			}
 
 			event(TestEventArgs());
@@ -64,20 +64,13 @@ namespace NativeTests
 		TEST_METHOD(Destructor_DestroysSubscriptions)
 		{
 			std::unique_ptr<TestEvent::Subscription> pSub;
-
 			{
+				TestEvent event;
 
-			TestEvent event;
-
-				
-				TestEvent::Subscription subscription = event.subscribe([&](auto& args) {});
+				TestEvent::Subscription subscription = event.add([&](auto& args) {});
 
 				pSub = std::make_unique<TestEvent::Subscription>(std::move(subscription));
-
 			}
-
-
-
 		}
 	};
 }
