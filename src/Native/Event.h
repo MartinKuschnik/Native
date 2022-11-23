@@ -164,7 +164,7 @@ namespace Native
 		virtual ~Event() noexcept = default;
 
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		constexpr Subscription add(EventHandler eventListener) const
+		constexpr Subscription subscribe(EventHandler eventListener) const
 		{
 			std::shared_ptr<EventHandler> pEventListener = this->_eventHandlerList->add(eventListener);
 		
@@ -173,16 +173,16 @@ namespace Native
 
 		template <class TMethod, class TInstance>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		constexpr Subscription add(TMethod&& func, TInstance&& object) const
+		constexpr Subscription subscribe(TMethod&& func, TInstance&& object) const
 		{
-			return this->add(static_cast<EventHandler>(std::bind(func, object, std::placeholders::_1)));
+			return this->subscribe(static_cast<EventHandler>(std::bind(func, object, std::placeholders::_1)));
 		}
 
 		template <class TMethod>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		constexpr Subscription add(TMethod&& func) const
+		constexpr Subscription subscribe(TMethod&& func) const
 		{
-			return this->add(static_cast<EventHandler>(std::bind(func, std::placeholders::_1)));
+			return this->subscribe(static_cast<EventHandler>(std::bind(func, std::placeholders::_1)));
 		}
 
 	private:
