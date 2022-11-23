@@ -66,14 +66,22 @@ namespace NativeTests
 
 		TEST_METHOD(Destructor_DestroysSubscriptions)
 		{
-			TestEvent::Source source = TestEvent::Source();
-			TestEvent event = source.create_event();
+			std::unique_ptr<TestEvent::Subscription> pSub;
 
-			TestEvent::Subscription subscription = event.subscribe([&](auto& args) {  });
+			{
 
-			source.~Source();
+				TestEvent::Source source = TestEvent::Source();
+				TestEvent event = source.create_event();
 
-			subscription.~Subscription();
+				
+				TestEvent::Subscription subscription = event.subscribe([&](auto& args) {});
+
+				pSub = std::make_unique<TestEvent::Subscription>(std::move(subscription));
+
+			}
+
+
+
 		}
 	};
 }

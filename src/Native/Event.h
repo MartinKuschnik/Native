@@ -24,12 +24,15 @@ namespace Native
 		private:
 			Source* _source;
 
+			const std::shared_ptr<std::atomic_bool> _signal;
+
 		public:
 			const std::shared_ptr<std::function<void(TArgs&)>> Target;
 
-			Subscription(const std::shared_ptr<std::function<void(TArgs&)>> target, Source* const source)
+			Subscription(const std::shared_ptr<std::function<void(TArgs&)>> target, Source* const source, const std::shared_ptr<std::atomic_bool> signal)
 				: Target(target),
-				_source(source)
+				_source(source),
+				_signal(signal)
 			{
 
 			}
@@ -37,14 +40,15 @@ namespace Native
 
 			Subscription(Subscription&& other) noexcept
 				: Target(other.Target),
-				_source(std::move(other._source))
+				_source(std::move(other._source)),
+				_signal(other._signal)
 			{
 				other._source = nullptr;
 			}
 
 			virtual ~Subscription()
 			{
-				if (this->_source != nullptr)
+				if (this->_source != nullptr && *this->_signal == true)
 					this->_source->unsubscribe(this->Target);
 			}
 
@@ -59,38 +63,48 @@ namespace Native
 
 			std::optional<std::function<void(void)>> _subscriptionChanged;
 
+			std::shared_ptr<std::atomic_bool> _subscriptionSignal;
+
 		public:
+
+			Source(const Source&) = delete;
+			Source(Source&&) = delete;
+
 			Source()
-				: _subscriptionChanged(std::nullopt)
+				: _subscriptionChanged(std::nullopt),
+				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
 			{
 			}
 
 			Source(std::function<void(void)> subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged)
+				: _subscriptionChanged(subscriptionChanged),
+				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
 			{
 			}
 
 			Source(std::function<void(void)>&& subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged)
+				: _subscriptionChanged(subscriptionChanged),
+				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
 			{
 			}
 
 			template <class TMethod, class TInstance>
 			Source(TMethod&& method, TInstance instance)
-				: _subscriptionChanged(std::bind(method, instance))
+				: _subscriptionChanged(std::bind(method, instance)),
+				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
 			{
 			}
 
 			template <class TMethod>
 			Source(TMethod&& method)
-				: _subscriptionChanged(std::bind(method))
+				: _subscriptionChanged(std::bind(method)),
+				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
 			{
 			}
 
-			virtual ~Source() 
+			virtual ~Source()
 			{
-				this->_handlers.clear();
-				this->_subscriptionChanged = std::nullopt;
+				*this->_subscriptionSignal = false;
 			}
 
 			[[nodiscard]]
@@ -98,7 +112,7 @@ namespace Native
 			{
 				auto pEventListener = std::make_shared<std::function<void(TArgs&)>>(eventListener);
 
-				Subscription sub(pEventListener, this);
+				Subscription sub(pEventListener, this, this->_subscriptionSignal);
 
 				this->_handlers.insert(pEventListener);
 
