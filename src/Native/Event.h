@@ -22,37 +22,26 @@ namespace Native
 		class Subscription
 		{
 		private:
-			Source* _source;
-
-			const std::shared_ptr<std::atomic_bool> _signal;
+			const std::shared_ptr<Source> _source;
 
 		public:
 			const std::shared_ptr<std::function<void(TArgs&)>> Target;
 
-			Subscription(const std::shared_ptr<std::function<void(TArgs&)>> target, Source* const source, const std::shared_ptr<std::atomic_bool> signal)
+			Subscription(const std::shared_ptr<std::function<void(TArgs&)>> target, const std::shared_ptr<Source> source)
 				: Target(target),
-				_source(source),
-				_signal(signal)
+				_source(source)
 			{
 
 			}
 			Subscription(const Subscription&) = delete;
 
-			Subscription(Subscription&& other) noexcept
-				: Target(other.Target),
-				_source(std::move(other._source)),
-				_signal(other._signal)
-			{
-				other._source = nullptr;
-			}
+			Subscription(Subscription&& other) noexcept = default;
 
 			virtual ~Subscription()
 			{
-				if (this->_source != nullptr && *this->_signal == true)
+				if (this->_source != nullptr)
 					this->_source->unsubscribe(this->Target);
 			}
-
-		private:
 
 		};
 
@@ -64,63 +53,51 @@ namespace Native
 
 			std::optional<std::function<void(void)>> _subscriptionChanged;
 
-			std::shared_ptr<std::atomic_bool> _subscriptionSignal;
-
 		public:
 
 			Source(const Source&) = delete;
 			Source(Source&&) = delete;
 
 			Source()
-				: _subscriptionChanged(std::nullopt),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+				: _subscriptionChanged(std::nullopt)
 			{
 			}
 
 			Source(std::function<void(void)> subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+				: _subscriptionChanged(subscriptionChanged)
 			{
 			}
 
 			Source(std::function<void(void)>&& subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+				: _subscriptionChanged(subscriptionChanged)
 			{
 			}
 
 			template <class TMethod, class TInstance>
 			Source(TMethod&& method, TInstance instance)
-				: _subscriptionChanged(std::bind(method, instance)),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+				: _subscriptionChanged(std::bind(method, instance))
 			{
 			}
 
 			template <class TMethod>
 			Source(TMethod&& method)
-				: _subscriptionChanged(std::bind(method)),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+				: _subscriptionChanged(std::bind(method))
 			{
 			}
 
-			virtual ~Source()
-			{
-				*this->_subscriptionSignal = false;
-			}
+			virtual ~Source() noexcept = default;
 
 			[[nodiscard]]
-			Subscription subscribe(std::function<void(TArgs&)> eventListener)
+			std::shared_ptr<std::function<void(TArgs&)>> subscribe(std::function<void(TArgs&)> eventListener)
 			{
 				auto pEventListener = std::make_shared<std::function<void(TArgs&)>>(eventListener);
-
-				Subscription sub(pEventListener, this, this->_subscriptionSignal);
 
 				this->_handlers.insert(pEventListener);
 
 				if (this->_subscriptionChanged.has_value())
 					this->_subscriptionChanged.value()();
 
-				return sub;
+				return pEventListener;
 			}
 
 			void unsubscribe(std::shared_ptr<std::function<void(TArgs&)>> eventListener)
@@ -134,17 +111,13 @@ namespace Native
 			void operator()(TArgs& args)
 			{
 				for (const std::shared_ptr<std::function<void(TArgs&)>> handler : this->_handlers)
-				{
 					handler->operator()(args);
-				}
 			}
 
 			void operator()(TArgs&& args)
 			{
 				for (const std::shared_ptr<std::function<void(TArgs&)>> handler : this->_handlers)
-				{
 					handler->operator()(args);
-				}
 			}
 
 			[[nodiscard]]
@@ -157,33 +130,33 @@ namespace Native
 #pragma endregion
 
 	private:
-		const std::unique_ptr<Source> _source;
+		const std::shared_ptr<Source> _source;
 
 	public:
 		Event() noexcept
-			: _source(std::make_unique<Source>())
+			: _source(std::make_shared<Source>())
 		{
 		}
 
 		Event(std::function<void(void)> subscriptionChanged)
-			: _source(std::make_unique<Source>(subscriptionChanged))
+			: _source(std::make_shared<Source>(subscriptionChanged))
 		{
 		}
 
 		Event(std::function<void(void)>&& subscriptionChanged)
-			: _source(std::make_unique<Source>(subscriptionChanged))
+			: _source(std::make_shared<Source>(subscriptionChanged))
 		{
 		}
 
 		template <class TMethod>
 		Event(TMethod method)
-			: _source(std::make_unique<Source>(method))
+			: _source(std::make_shared<Source>(method))
 		{
 		}
 
 		template <class TMethod, class TInstance>
 		Event(TMethod method, TInstance instance)
-			: _source(std::make_unique<Source>(method, instance))
+			: _source(std::make_shared<Source>(method, instance))
 		{
 		}
 
@@ -192,21 +165,23 @@ namespace Native
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
 		constexpr Subscription subscribe(std::function<void(TArgs&)> eventListener) const
 		{
-			return this->_source->subscribe(eventListener);
+			std::shared_ptr<std::function<void(TArgs&)>> pEventListener = this->_source->subscribe(eventListener);
+		
+			return Subscription(pEventListener, this->_source);
 		}
 
 		template <class TMethod, class TInstance>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
 		constexpr Subscription subscribe(TMethod&& func, TInstance&& object) const
 		{
-			return this->_source->subscribe(std::bind(func, object, std::placeholders::_1));
+			return this->subscribe(static_cast<std::function<void(TArgs&)>>(std::bind(func, object, std::placeholders::_1)));
 		}
 
 		template <class TMethod>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
 		constexpr Subscription subscribe(TMethod&& func) const
 		{
-			return this->_source->subscribe(std::bind(func, std::placeholders::_1));
+			return this->subscribe(static_cast<std::function<void(TArgs&)>>(std::bind(func, std::placeholders::_1)));
 		}
 
 	private:
