@@ -22,7 +22,7 @@ namespace Native
 
 			std::string errorMessage = Win32::GetWin32ErrorMessage(errorCode);
 
-			os << methodName << "(...) failed!" << " (Win32ErrorCode=0x" << std::uppercase << std::hex << std::setw(8) << errorCode << std::nouppercase;
+			os << methodName << "(...) failed! (Win32ErrorCode=0x" << std::uppercase << std::hex << std::setw(8) << errorCode << std::nouppercase;
 
 			if (errorMessage.size() > 0)
 				os << ": " << errorMessage;
