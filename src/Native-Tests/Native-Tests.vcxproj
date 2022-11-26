@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="EventTests.cpp" />
     <ClCompile Include="FormatExceptionTests.cpp" />
+    <ClCompile Include="GuidTests.cpp" />
     <ClCompile Include="InvalidOperationExceptionTests.cpp" />
     <ClCompile Include="NotSupportedExceptionTests.cpp" />
   </ItemGroup>
