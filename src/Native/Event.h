@@ -9,122 +9,101 @@
 
 namespace Native
 {
-	template<class TArgs>
+	template<class TArgs, class TEventSource>
 	class Event
 	{
-
-	public:
+		using EventHandler = std::function<void(TArgs&)>;
 
 #pragma region Subclasses
 
-		class Source;
+	private:
+		class EventHandlerList;
 
+	public:
 		class Subscription
 		{
 		private:
-			Source* _source;
-
-			const std::shared_ptr<std::atomic_bool> _signal;
+			const std::shared_ptr<EventHandlerList> _eventHandlerList;
 
 		public:
-			const std::shared_ptr<std::function<void(TArgs&)>> Target;
+			const std::shared_ptr<EventHandler> Target;
 
-			Subscription(const std::shared_ptr<std::function<void(TArgs&)>> target, Source* const source, const std::shared_ptr<std::atomic_bool> signal)
+			Subscription(const std::shared_ptr<EventHandler> target, const std::shared_ptr<EventHandlerList> eventHandlerList)
 				: Target(target),
-				_source(source),
-				_signal(signal)
+				_eventHandlerList(eventHandlerList)
 			{
 
 			}
 			Subscription(const Subscription&) = delete;
 
-			Subscription(Subscription&& other) noexcept
-				: Target(other.Target),
-				_source(std::move(other._source)),
-				_signal(other._signal)
-			{
-				other._source = nullptr;
-			}
+			Subscription(Subscription&& other) noexcept = default;
 
 			virtual ~Subscription()
 			{
-				if (this->_source != nullptr && *this->_signal == true)
-					this->_source->unsubscribe(this->Target);
+				if (this->_eventHandlerList != nullptr)
+					this->_eventHandlerList->remove(this->Target);
 			}
-
-		private:
 
 		};
 
-		class Source
+	private:
+		class EventHandlerList
 		{
 		private:
-			std::unordered_set<std::shared_ptr<std::function<void(TArgs&)>>> _handlers;
+			std::unordered_set<std::shared_ptr<EventHandler>> _handlers;
 
 			std::optional<std::function<void(void)>> _subscriptionChanged;
 
-			std::shared_ptr<std::atomic_bool> _subscriptionSignal;
-
 		public:
 
-			Source(const Source&) = delete;
-			Source(Source&&) = delete;
+			EventHandlerList(const EventHandlerList&) = delete;
+			EventHandlerList(EventHandlerList&&) = delete;
 
-			Source()
-				: _subscriptionChanged(std::nullopt),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+			EventHandlerList()
+				: _subscriptionChanged(std::nullopt)
 			{
 			}
 
-			Source(std::function<void(void)> subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+			EventHandlerList(std::function<void(void)> subscriptionChanged)
+				: _subscriptionChanged(subscriptionChanged)
 			{
 			}
 
-			Source(std::function<void(void)>&& subscriptionChanged)
-				: _subscriptionChanged(subscriptionChanged),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+			EventHandlerList(std::function<void(void)>&& subscriptionChanged)
+				: _subscriptionChanged(subscriptionChanged)
 			{
 			}
 
 			template <class TMethod, class TInstance>
-			Source(TMethod&& method, TInstance instance)
-				: _subscriptionChanged(std::bind(method, instance)),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+			EventHandlerList(TMethod&& method, TInstance instance)
+				: _subscriptionChanged(std::bind(method, instance))
 			{
 			}
 
 			template <class TMethod>
-			Source(TMethod&& method)
-				: _subscriptionChanged(std::bind(method)),
-				_subscriptionSignal(std::make_shared<std::atomic_bool>(true))
+			EventHandlerList(TMethod&& method)
+				: _subscriptionChanged(std::bind(method))
 			{
 			}
 
-			virtual ~Source()
-			{
-				*this->_subscriptionSignal = false;
-			}
+			virtual ~EventHandlerList() noexcept = default;
 
 			[[nodiscard]]
-			Subscription subscribe(std::function<void(TArgs&)> eventListener)
+			std::shared_ptr<EventHandler> add(EventHandler eventHandler)
 			{
-				auto pEventListener = std::make_shared<std::function<void(TArgs&)>>(eventListener);
-
-				Subscription sub(pEventListener, this, this->_subscriptionSignal);
+				auto pEventListener = std::make_shared<EventHandler>(eventHandler);
 
 				this->_handlers.insert(pEventListener);
 
 				if (this->_subscriptionChanged.has_value())
 					this->_subscriptionChanged.value()();
 
-				return sub;
+				return pEventListener;
 			}
 
-			void unsubscribe(std::shared_ptr<std::function<void(TArgs&)>> eventListener)
+			void remove(std::shared_ptr<EventHandler> eventHandler)
 			{
-				this->_handlers.erase(eventListener);
+				this->_handlers.erase(eventHandler);
 
 				if (this->_subscriptionChanged.has_value())
 					this->_subscriptionChanged.value()();
@@ -132,77 +111,98 @@ namespace Native
 
 			void operator()(TArgs& args)
 			{
-				for (const std::shared_ptr<std::function<void(TArgs&)>> handler : this->_handlers)
-				{
+				for (const std::shared_ptr<EventHandler> handler : this->_handlers)
 					handler->operator()(args);
-				}
 			}
 
 			void operator()(TArgs&& args)
 			{
-				for (const std::shared_ptr<std::function<void(TArgs&)>> handler : this->_handlers)
-				{
+				for (const std::shared_ptr<EventHandler> handler : this->_handlers)
 					handler->operator()(args);
-				}
 			}
 
 			[[nodiscard]]
-			constexpr bool has_subscribers() const
+			constexpr bool empty() const
 			{
-				return !this->_handlers.empty();
+				return this->_handlers.empty();
 			}
-
-			[[nodiscard]]
-			Event<TArgs> create_event()
-			{
-				return Event<TArgs>(this);
-			}
-
-		private:
-
 		};
 
 #pragma endregion
 
 	private:
-		Source* _source;
+		const std::shared_ptr<EventHandlerList> _eventHandlerList;
 
 	public:
-		Event(Source* const source)
-			: _source(source)
+		Event() noexcept
+			: _eventHandlerList(std::make_shared<EventHandlerList>())
 		{
 		}
 
-		virtual ~Event() = default;
-
-		void operator = (const Event& other) noexcept
+		Event(std::function<void(void)> subscriptionChanged)
+			: _eventHandlerList(std::make_shared<EventHandlerList>(subscriptionChanged))
 		{
-			this->_source = other._source;
 		}
 
-		void operator = (Event&& other) noexcept
+		Event(std::function<void(void)>&& subscriptionChanged)
+			: _eventHandlerList(std::make_shared<EventHandlerList>(subscriptionChanged))
 		{
-			this->_source = other._source;
 		}
+
+		template <class TMethod>
+		Event(TMethod method)
+			: _eventHandlerList(std::make_shared<EventHandlerList>(method))
+		{
+		}
+
+		template <class TMethod, class TInstance>
+		Event(TMethod method, TInstance instance)
+			: _eventHandlerList(std::make_shared<EventHandlerList>(method, instance))
+		{
+		}
+
+		virtual ~Event() noexcept = default;
 
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(std::function<void(TArgs&)> eventListener) const
+		constexpr Subscription subscribe(EventHandler eventListener) const
 		{
-			return this->_source->subscribe(eventListener);
+			std::shared_ptr<EventHandler> pEventListener = this->_eventHandlerList->add(eventListener);
+		
+			return Subscription(pEventListener, this->_eventHandlerList);
 		}
 
 		template <class TMethod, class TInstance>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(TMethod&& func, TInstance&& object) const
+		constexpr Subscription subscribe(TMethod&& func, TInstance&& object) const
 		{
-			return this->_source->subscribe(std::bind(func, object, std::placeholders::_1));
+			return this->subscribe(static_cast<EventHandler>(std::bind(func, object, std::placeholders::_1)));
 		}
 
 		template <class TMethod>
 		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
-		Subscription subscribe(TMethod&& func) const
+		constexpr Subscription subscribe(TMethod&& func) const
 		{
-			return this->_source->subscribe(std::bind(func, std::placeholders::_1));
+			return this->subscribe(static_cast<EventHandler>(std::bind(func, std::placeholders::_1)));
+		}
+
+	private:
+
+		friend TEventSource;    //friend class
+
+		constexpr void operator()(TArgs& args) const
+		{
+			this->_eventHandlerList->operator()(args);
+		}
+
+		constexpr void operator()(TArgs&& args) const
+		{
+			this->_eventHandlerList->operator()(args);
+		}
+
+		[[nodiscard]]
+		constexpr bool has_subscribers() const
+		{
+			return !this->_eventHandlerList->empty();
 		}
 	};
 }

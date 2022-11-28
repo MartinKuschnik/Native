@@ -25,13 +25,13 @@ namespace Native
 
 	};
 
-	using ConsoleCancelEvent = Event<ConsoleCancelEventArgs>;
+	class Console;
+
+	using ConsoleCancelEvent = Event<ConsoleCancelEventArgs, Console>;
 
 	class Console
 	{
 	private:
-
-		static ConsoleCancelEvent::Source _CancelKeyPressEventSource;
 
 		static bool _CtrlHandlerSetted;
 

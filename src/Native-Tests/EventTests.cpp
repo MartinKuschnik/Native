@@ -15,19 +15,18 @@ namespace NativeTests
 
 		class TestEventArgs { };
 
-		using TestEvent = Event<TestEventArgs>;
+		using TestEvent = Event<TestEventArgs, EventTests>;
 
 	public:
 		TEST_METHOD(FunctionCallOperator_CallsSubscribedFunction)
 		{
 			bool eventHandlerCalled = false;
 
-			TestEvent::Source source = TestEvent::Source();
-			TestEvent event = source.create_event();
+			TestEvent event;
 
 			TestEvent::Subscription subscription = event.subscribe([&](auto& args) { eventHandlerCalled = true; });
 
-			source(TestEventArgs());
+			event(TestEventArgs());
 
 			Assert::AreEqual(true, eventHandlerCalled);
 		}
@@ -36,13 +35,12 @@ namespace NativeTests
 		{
 			bool eventHandlerOneCalled = false, eventHandlerTwoCalled = false;
 
-			TestEvent::Source source = TestEvent::Source();
-			TestEvent event = source.create_event();
+			TestEvent event;
 
 			TestEvent::Subscription subscriptionOne = event.subscribe([&](auto& args) { eventHandlerOneCalled = true; });
 			TestEvent::Subscription subscriptionTwo = event.subscribe([&](auto& args) { eventHandlerTwoCalled = true; });
 
-			source(TestEventArgs());
+			event(TestEventArgs());
 
 			Assert::AreEqual(true, eventHandlerOneCalled);
 			Assert::AreEqual(true, eventHandlerTwoCalled);
@@ -52,14 +50,13 @@ namespace NativeTests
 		{
 			bool eventHandlerCalled = false;
 
-			TestEvent::Source source = TestEvent::Source();
-			TestEvent event = source.create_event();
+			TestEvent event;
 
 			{
 				TestEvent::Subscription subscription = event.subscribe([&](auto& args) { eventHandlerCalled = true; });
 			}
 
-			source(TestEventArgs());
+			event(TestEventArgs());
 
 			Assert::AreEqual(false, eventHandlerCalled);
 		}
@@ -67,21 +64,13 @@ namespace NativeTests
 		TEST_METHOD(Destructor_DestroysSubscriptions)
 		{
 			std::unique_ptr<TestEvent::Subscription> pSub;
-
 			{
+				TestEvent event;
 
-				TestEvent::Source source = TestEvent::Source();
-				TestEvent event = source.create_event();
-
-				
 				TestEvent::Subscription subscription = event.subscribe([&](auto& args) {});
 
 				pSub = std::make_unique<TestEvent::Subscription>(std::move(subscription));
-
 			}
-
-
-
 		}
 	};
 }
