@@ -22,5 +22,8 @@
     <ClCompile Include="GuidTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="ArgumentExceptionTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

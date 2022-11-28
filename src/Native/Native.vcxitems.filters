@@ -8,6 +8,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Guid.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
@@ -15,5 +16,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Console.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Guid.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ArgumentException.cpp" />
   </ItemGroup>
 </Project>
