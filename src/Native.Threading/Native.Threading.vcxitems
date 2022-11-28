@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{5de1910b-8b93-4608-a7db-734fccc63037}</ItemsProjectGuid>
+    <ItemsProjectGuid>{0eacdc02-c95e-4a18-91de-0c0145c99a32}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -14,11 +14,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)ServiceBase.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ServiceHost.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CancellationToken.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ServiceBase.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)ServiceHost.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CancellationToken.cpp" />
   </ItemGroup>
 </Project>

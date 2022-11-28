@@ -19,6 +19,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.ServiceModel", "Nati
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.ServiceModel - Tests", "Native.ServiceModel-Tests\Native.ServiceModel-Tests.vcxproj", "{83F870F1-D088-4756-84F6-E290F7FAB4D5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Threading", "Native.Threading\Native.Threading.vcxitems", "{0EACDC02-C95E-4A18-91DE-0C0145C99A32}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Threading-Tests", "Native.Threading-Tests\Native.Threading-Tests.vcxproj", "{574DC77A-DCF8-47E0-8E22-4162160E4713}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -59,6 +63,14 @@ Global
 		{83F870F1-D088-4756-84F6-E290F7FAB4D5}.Release|x64.Build.0 = Release|x64
 		{83F870F1-D088-4756-84F6-E290F7FAB4D5}.Release|x86.ActiveCfg = Release|Win32
 		{83F870F1-D088-4756-84F6-E290F7FAB4D5}.Release|x86.Build.0 = Release|Win32
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Debug|x64.ActiveCfg = Debug|x64
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Debug|x64.Build.0 = Debug|x64
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Debug|x86.ActiveCfg = Debug|Win32
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Debug|x86.Build.0 = Debug|Win32
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x64.ActiveCfg = Release|x64
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x64.Build.0 = Release|x64
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x86.ActiveCfg = Release|Win32
+		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,8 +79,10 @@ Global
 		SolutionGuid = {7AF380FC-EBA3-4AC6-8A7E-C49C5288F8C6}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Native.Threading\Native.Threading.vcxitems*{0eacdc02-c95e-4a18-91de-0c0145c99a32}*SharedItemsImports = 9
 		Native.Net\Native.Net.vcxitems*{465200c6-64ca-40fb-ab6e-7ad1d9460cb2}*SharedItemsImports = 9
 		Native\Native.vcxitems*{4811ae42-c881-4e13-89f2-4b6a1d4d6107}*SharedItemsImports = 9
+		Native.Threading\Native.Threading.vcxitems*{574dc77a-dcf8-47e0-8e22-4162160e4713}*SharedItemsImports = 4
 		Native.ServiceModel\Native.ServiceModel.vcxitems*{5de1910b-8b93-4608-a7db-734fccc63037}*SharedItemsImports = 9
 		Native.Windows\Native.Windows.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native\Native.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
