@@ -14,9 +14,20 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AutoResetEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CancellationToken.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CancellationTokenSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventResetMode.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ManualResetEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WaitHandle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AutoResetEvent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CancellationToken.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CancellationTokenSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventWaitHandle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ManualResetEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WaitHandle.cpp" />
   </ItemGroup>
 </Project>
