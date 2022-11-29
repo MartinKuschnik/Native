@@ -33,6 +33,12 @@ After creation the project should be renamed to `$(NameOfTheProjectToTest) - Tes
 
 Following Changes must be done additionaly to all C++ Test Projects for all Configurations and Plattforms:
 
+- Adjust Target Name
+
+    Project (right-click your project name in solution explorer) > Properties > General > Target Name: 
+
+      $(MSBuildProjectName)
+
 - Disable precompiled heasers
 
   Project (right-click your project name in solution explorer) > Properties > C++ > Precompiled Headers > Precompiled Header: 
