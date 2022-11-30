@@ -38,16 +38,5 @@ namespace NativeThreadingTests
 
 			Assert::IsFalse(token.is_cancellation_requested());
 		}
-
-		TEST_METHOD(wait_handle_Returns_The_Provided_WaitHandel)
-		{
-			const auto notSignaledWaitHandel = std::make_shared<const ManualResetEvent>(false);
-
-			const CancellationToken token(notSignaledWaitHandel);
-
-			const WaitHandle& waitHandel = token.wait_handle();
-
-			Assert::AreEqual(dynamic_cast<const void*>(notSignaledWaitHandel.get()), dynamic_cast<const void*>(&waitHandel));
-		}
 	};
 }

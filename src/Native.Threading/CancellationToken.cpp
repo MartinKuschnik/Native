@@ -7,23 +7,18 @@ namespace Native
 	namespace Threading
 	{
 		CancellationToken::CancellationToken() noexcept
-			: _waitHandle(nullptr)
+			: WaitHandle(nullptr)
 		{
 		}
 
-		CancellationToken::CancellationToken(const std::shared_ptr<const WaitHandle> waitHandle) noexcept
-			: _waitHandle(waitHandle)
+		CancellationToken::CancellationToken(const std::shared_ptr<const Threading::WaitHandle> waitHandle) noexcept
+			: WaitHandle(waitHandle)
 		{
-		}
-
-		const WaitHandle& CancellationToken::wait_handle() const noexcept
-		{
-			return *this->_waitHandle;
 		}
 
 		bool CancellationToken::is_cancellation_requested() const
 		{
-			return this->_waitHandle != nullptr && this->_waitHandle->wait_one(0ms);
+			return this->WaitHandle != nullptr && this->WaitHandle->wait_one(0ms);
 		}
 	}
 }

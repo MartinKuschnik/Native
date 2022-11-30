@@ -16,13 +16,11 @@ namespace Native
 
 			CancellationToken(const std::shared_ptr<const WaitHandle> waitHandle) noexcept;
 
-			const WaitHandle& wait_handle() const noexcept;
-
 			bool is_cancellation_requested() const;
 
+			const std::shared_ptr<const WaitHandle> WaitHandle;
 		private:
 
-			const std::shared_ptr<const WaitHandle> _waitHandle;
 		};
 	}
 }
