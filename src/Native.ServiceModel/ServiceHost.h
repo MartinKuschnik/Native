@@ -2,8 +2,12 @@
 
 #include <type_traits>
 
+#include <iostream>
+#include <conio.h>
+
+#include "CancellationTokenSource.h"
 #include "ServiceBase.h"
-#include "CancellationToken.h"
+#include "Console.h"
 
 namespace Native
 {
@@ -19,15 +23,36 @@ namespace Native
 
 			static int Run() noexcept
 			{
+				return RunAsConsole();
+			}
+
+			static int RunAsConsole()
+			{
 				T service;
-				Threading::CancellationToken cancellationToken;
-								
-				if (service.Initialize())
+				Threading::CancellationTokenSource cts;
+
+				auto subbrciption = Native::Console::CancelKeyPress.subscribe(
+					[&cts](auto& args)
+					{
+						args.cancel();
+						cts.cancel();
+					});
+
+				if (service.initialize(RunMode::Console))
 				{
-					service.Run(cancellationToken);
+					service.run(cts.token());
 				}
 
+				std::cout << "Press any key to continue . . ." << std::endl;
+				_getch(); // wait for key press
+
 				return 0;
+			}
+
+			static int RunAsService()
+			{
+				// ToDo: implement ServiceHost<T>::RunAsService
+				return ERROR_CALL_NOT_IMPLEMENTED;
 			}
 		};
 	}

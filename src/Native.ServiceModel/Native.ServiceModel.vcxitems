@@ -14,6 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)RunMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ServiceBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ServiceHost.h" />
   </ItemGroup>

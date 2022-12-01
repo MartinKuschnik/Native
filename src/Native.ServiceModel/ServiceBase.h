@@ -2,6 +2,8 @@
 
 #include "CancellationToken.h"
 
+#include "RunMode.h"
+
 namespace Native
 {
 	namespace ServiceModel
@@ -12,9 +14,9 @@ namespace Native
 
 			virtual ~ServiceBase() noexcept = default;
 
-			virtual bool Initialize() noexcept = 0;
+			virtual bool initialize(RunMode runMode) noexcept = 0;
 
-			virtual void Run(Threading::CancellationToken cancellationToken) noexcept = 0;
+			virtual void run(Threading::CancellationToken&& cancellationToken) noexcept = 0;
 		};
 	}
 }
