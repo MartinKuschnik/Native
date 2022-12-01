@@ -15,6 +15,10 @@ namespace Native
 		: GUID()
 	{
 	}
+	Guid::Guid(const Guid& other) noexcept
+		: GUID(other)
+	{
+	}
 
 	Guid::Guid(const GUID& other) noexcept
 		: GUID(other)
