@@ -11,6 +11,7 @@ namespace Native
 	public:
 
 		Guid() noexcept;
+		Guid(const Guid& other) noexcept;
 
 		const std::string string() const;
 		const std::wstring wstring() const;
