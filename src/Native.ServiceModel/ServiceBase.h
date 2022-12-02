@@ -17,6 +17,8 @@ namespace Native
 			virtual bool initialize(RunMode runMode) noexcept = 0;
 
 			virtual void run(Threading::CancellationToken&& cancellationToken) noexcept = 0;
+
+			virtual std::string name() const = 0;
 		};
 	}
 }

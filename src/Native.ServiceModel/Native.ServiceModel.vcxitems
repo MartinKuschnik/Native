@@ -19,7 +19,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ServiceHost.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ServiceBase.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ServiceHost.cpp" />
   </ItemGroup>
 </Project>

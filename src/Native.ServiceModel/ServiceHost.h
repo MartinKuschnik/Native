@@ -38,6 +38,12 @@ namespace Native
 						cts.cancel();
 					});
 
+				if (IsDebuggerPresent())
+				{
+					std::string serviceName = service.name();
+					SetConsoleTitleA(serviceName.data());
+				}
+
 				if (service.initialize(RunMode::Console))
 				{
 					service.run(cts.token());
