@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Environment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FormatException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Guid.h" />
@@ -26,6 +27,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ArgumentException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Console.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Environment.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Guid.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
