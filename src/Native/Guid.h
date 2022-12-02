@@ -21,6 +21,7 @@ namespace Native
 
 		static const Guid NewGuid();
 
+		static const Guid Parse(const std::string_view value);
 		static const Guid Parse(const std::wstring_view value);
 
 	private:

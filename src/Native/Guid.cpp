@@ -10,7 +10,7 @@ namespace Native
 
 	constexpr size_t GUID_BUFFER_SIZE = 39;
 	constexpr size_t GUID_LENGTH_WITHOUT_BRACKETS = 36;
-	
+
 	Guid::Guid() noexcept
 		: GUID()
 	{
@@ -39,8 +39,8 @@ namespace Native
 
 		std::transform(
 			asWString.begin(),
-			asWString.end(), 
-			asString.begin(), 
+			asWString.end(),
+			asString.begin(),
 			[](wchar_t c) { return (char)c; }
 		);
 
@@ -69,12 +69,45 @@ namespace Native
 		return Guid(guid);
 	}
 
+	const Guid Guid::Parse(const std::string_view value)
+	{
+		std::wstring wValue(value.begin(), value.end());
+
+		// ToDo: find a more efficient way
+		if (wValue.length() == 36)
+		{
+			wValue.insert(wValue.begin(), '{');
+			wValue.insert(wValue.end(), '}');
+		}
+
+		GUID guid;
+
+		const HRESULT hCreateGuid = CLSIDFromString(wValue.data(), &guid);
+
+		if (FAILED(hCreateGuid))
+			throw HResultException(hCreateGuid, nameof(CLSIDFromString));
+
+		return Guid(guid);
+	}
 
 	const Guid Guid::Parse(const std::wstring_view value)
 	{
 		GUID guid;
+		HRESULT hCreateGuid;
 
-		const HRESULT hCreateGuid = CLSIDFromString(value.data(), &guid);
+		// ToDo: find a more efficient way
+		if (value.length() == 36)
+		{
+			std::wstring padded(value);
+			padded.insert(padded.begin(), 1, L'{');
+			padded.insert(padded.end(), 1, '}');
+
+			hCreateGuid = CLSIDFromString(padded.data(), &guid);
+		}
+		else
+		{
+			hCreateGuid = CLSIDFromString(value.data(), &guid);
+		}
 
 		if (FAILED(hCreateGuid))
 			throw HResultException(hCreateGuid, nameof(CLSIDFromString));

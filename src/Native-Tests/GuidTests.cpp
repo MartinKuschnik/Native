@@ -38,5 +38,25 @@ namespace NativeTests
 
 			Assert::AreEqual(std::string("00000000-0000-0000-0000-000000000000"), static_cast<std::string>(emptyGuid));
 		}
+
+		TEST_METHOD(Parse_string_works_with_DefaultFormat)
+		{
+			Guid emptyGuid = Guid::Parse("00000000-0000-0000-0000-000000000000");
+		}
+
+		TEST_METHOD(Parse_string_works_with_RegistryFormat)
+		{
+			Guid emptyGuid = Guid::Parse("{00000000-0000-0000-0000-000000000000}");
+		}
+
+		TEST_METHOD(Parse_wstring_works_with_DefaultFormat)
+		{
+			Guid emptyGuid = Guid::Parse(L"00000000-0000-0000-0000-000000000000");
+		}
+
+		TEST_METHOD(Parse_wstring_works_with_RegistryFormat)
+		{
+			Guid emptyGuid = Guid::Parse(L"{00000000-0000-0000-0000-000000000000}");
+		}
 	};
 }
