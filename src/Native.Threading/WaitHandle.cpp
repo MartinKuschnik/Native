@@ -26,6 +26,24 @@ namespace Native
 				return WaitHandle::WaitOne(handels, handle_count, timeout);
 		}
 
+		bool WaitHandle::wait_one(const CancellationToken& cancellationToken) const
+		{
+			HandleArray handels;
+
+			const uint16_t handle_count_of_this = this->count_handles();
+			const uint16_t handle_count_of_ct = cancellationToken.WaitHandle->count_handles();
+
+			if (handle_count_of_this + handle_count_of_ct > handels.size())
+				throw InvalidOperationException("To much handles.");
+
+			uint16_t handle_count = this->copy_handles(handels, 0);
+			handle_count += cancellationToken.WaitHandle->copy_handles(handels, handle_count);
+
+			WaitHandle::WaitOne(handels, handle_count, -1ms);
+
+			return WaitHandle::WaitOne(handels, handle_count_of_this, 0ms);
+		}
+
 		bool WaitHandle::wait_one() const
 		{
 			return this->wait_one(-1ms);

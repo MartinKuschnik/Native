@@ -39,9 +39,9 @@ namespace Native
 				this->_manualResetEvent.set();
 			}
 
-			const T& result() const
+			const T* result() const
 			{
-				return this->_result;
+				return &this->_result;
 			}
 
 		protected:

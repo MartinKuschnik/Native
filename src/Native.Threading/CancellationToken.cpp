@@ -1,5 +1,7 @@
 #include "CancellationToken.h"
 
+#include "WaitHandle.h"
+
 using namespace std::chrono_literals;
 
 namespace Native

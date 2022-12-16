@@ -5,6 +5,8 @@
 
 #include <Windows.h>
 
+#include <CancellationToken.h>
+
 namespace Native
 {
 	namespace Threading
@@ -16,8 +18,8 @@ namespace Native
 			using HandleArray = std::array<HANDLE, MAXIMUM_WAIT_OBJECTS>;
 
 			virtual bool wait_one() const;
-
 			virtual bool wait_one(const std::chrono::milliseconds timeout) const;
+			virtual bool wait_one(const CancellationToken& cancellationToken) const;
 
 		protected:
 

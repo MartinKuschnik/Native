@@ -4,6 +4,7 @@
 #include <fmt/xchar.h>
 #include <fmt/chrono.h>
 
+#include "CancellationTokenSource.h"
 #include "TimedResetEvent.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -115,6 +116,24 @@ namespace NativeThreadingTests
 		TEST_METHOD(state_changes_at_now_plus_10ms)
 		{
 			state_changes_at_now_plus_X(10ms);
+		}
+
+		TEST_METHOD(wait_one_returns_false_when_cancellation_token_gets_cancelled)
+		{
+			CancellationTokenSource cts;
+			const TimedResetEvent event(1h);
+
+			cts.cancel();
+
+			Assert::IsFalse(event.wait_one(cts.token()));
+		}
+
+		TEST_METHOD(wait_one_returns_true_also_if_cancellation_token_does_not_get_cancelled)
+		{
+			CancellationTokenSource cts;
+			const TimedResetEvent event(50ms);
+
+			Assert::IsTrue(event.wait_one(cts.token()));
 		}
 	};
 }

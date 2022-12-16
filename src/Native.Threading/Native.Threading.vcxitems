@@ -27,8 +27,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitHandle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)AsyncCompletionSource.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)AsyncCompletionWaitHandle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)AutoResetEvent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CancellationToken.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CancellationTokenSource.cpp" />

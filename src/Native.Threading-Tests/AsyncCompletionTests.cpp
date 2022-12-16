@@ -1,6 +1,7 @@
 #include "CppUnitTest.h"
 
 #include "AsyncCompletionSource.h"
+#include "CancellationTokenSource.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -31,7 +32,7 @@ namespace NativeThreadingTests
 
 			Assert::IsTrue(acs.WaitHandle->wait_one(0ms));
 
-			Assert::AreEqual(result, acs.WaitHandle->result());
+			Assert::AreEqual(result, *acs.WaitHandle->result());
 		}
 
 		TEST_METHOD(delayed_completion_blocks_a_while)
@@ -51,7 +52,7 @@ namespace NativeThreadingTests
 
 			Assert::IsTrue(completed);
 
-			Assert::AreEqual(result, acs.WaitHandle->result());
+			Assert::AreEqual(result, *acs.WaitHandle->result());
 		}
 	};
 }
