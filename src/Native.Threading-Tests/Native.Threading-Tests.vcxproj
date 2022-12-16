@@ -180,7 +180,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CancellationTokenSourceTests.cpp" />
     <ClCompile Include="CancellationTokenTests.cpp" />
+    <ClCompile Include="MultiWaitHandleTests.cpp" />
+    <ClCompile Include="TimedResetEventTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

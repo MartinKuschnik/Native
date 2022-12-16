@@ -10,5 +10,14 @@
     <ClCompile Include="CancellationTokenTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="CancellationTokenSourceTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="TimedResetEventTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiWaitHandleTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

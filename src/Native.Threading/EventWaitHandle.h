@@ -27,13 +27,10 @@ namespace Native
 			void reset();
 			void set();
 
-			bool wait_one() const override;
-
-			bool wait_one(const std::chrono::milliseconds timeout) const override;
-
 		protected:
 
-		 HANDLE handle() const override;
+			virtual uint16_t count_handles() const override;
+			virtual uint16_t copy_handles(HandleArray& dest, const uint16_t index) const override;
 
 		private:
 			HANDLE _handle;

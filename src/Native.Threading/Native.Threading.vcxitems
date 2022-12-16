@@ -20,6 +20,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EventResetMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventWaitHandle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ManualResetEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MultiWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TimedResetEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitHandle.h" />
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +30,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CancellationTokenSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)EventWaitHandle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ManualResetEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MultiWaitHandle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TimedResetEvent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WaitHandle.cpp" />
   </ItemGroup>
 </Project>

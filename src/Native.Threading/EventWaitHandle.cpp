@@ -11,7 +11,7 @@ namespace Native
 	namespace Threading
 	{
 		EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode) noexcept
-			: EventWaitHandle(initialState, mode, std::string_view()) 
+			: EventWaitHandle(initialState, mode, std::string_view())
 		{
 
 		}
@@ -66,29 +66,16 @@ namespace Native
 				throw Windows::Win32Exception(GetLastError(), nameof(SetEvent));
 		}
 
-		bool EventWaitHandle::wait_one(const std::chrono::milliseconds timeout) const
+		uint16_t EventWaitHandle::count_handles() const
 		{
-			DWORD result = WaitForSingleObject(this->_handle, static_cast<DWORD>(timeout.count()));
-			
-			switch (result)
-			{
-				case WAIT_OBJECT_0:
-					return true;
-				case WAIT_TIMEOUT:
-					return false;
-				default:
-					throw Windows::Win32Exception(GetLastError(), nameof(WaitForSingleObject));
-			}
+			return 1;
 		}
 
-		bool EventWaitHandle::wait_one() const
+		uint16_t EventWaitHandle::copy_handles(HandleArray& dest, const uint16_t index) const
 		{
-			return this->wait_one(-1s);
-		}
+			dest[index] = this->_handle;
 
-		HANDLE EventWaitHandle::handle() const
-		{
-			return this->_handle;
+			return 1;
 		}
 	}
 }
