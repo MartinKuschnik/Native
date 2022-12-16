@@ -18,6 +18,13 @@ namespace NativeThreadingTests
 	{
 	public:
 
+		TEST_METHOD(initial_state_is_false)
+		{
+			const TimedResetEvent event(1h);
+
+			Assert::IsFalse(event.wait_one(0ms));
+		}
+
 		template <typename T>
 		void state_changes_after_X_delay(T x)
 		{
@@ -25,18 +32,13 @@ namespace NativeThreadingTests
 
 			const TimedResetEvent event(x);
 
+			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
+			
 			Assert::IsTrue(event.wait_one(x + 1ms), fmt::format(L"Handle not set after {0}", x + 2ms).c_str());
 
 			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
 			Assert::IsTrue((time + 1ms) >= x, fmt::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
-		}
-
-		TEST_METHOD(initial_state_is_false)
-		{
-			const TimedResetEvent event(1h);
-
-			Assert::IsFalse(event.wait_one(0ms));
 		}
 
 		TEST_METHOD(state_changes_after_1s_delay)
@@ -67,6 +69,52 @@ namespace NativeThreadingTests
 		TEST_METHOD(state_changes_after_10ms_delay)
 		{
 			state_changes_after_X_delay(10ms);
+		}
+
+		template <typename T>
+		void state_changes_at_now_plus_X(T x)
+		{
+			const auto start = std::chrono::high_resolution_clock::now();
+
+			const TimedResetEvent event(std::chrono::system_clock::now() + x);
+
+			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
+
+			Assert::IsTrue(event.wait_one(x + 1ms), fmt::format(L"Handle not set after {0}", x + 2ms).c_str());
+
+			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
+
+			Assert::IsTrue((time + 1ms) >= x, fmt::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_1s)
+		{
+			state_changes_at_now_plus_X(1s);
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_500ms)
+		{
+			state_changes_at_now_plus_X(500ms);
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_250ms)
+		{
+			state_changes_at_now_plus_X(250ms);
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_100ms)
+		{
+			state_changes_at_now_plus_X(100ms);
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_50ms)
+		{
+			state_changes_at_now_plus_X(50ms);
+		}
+
+		TEST_METHOD(state_changes_at_now_plus_10ms)
+		{
+			state_changes_at_now_plus_X(10ms);
 		}
 	};
 }

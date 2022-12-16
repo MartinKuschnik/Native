@@ -17,6 +17,11 @@ namespace Native
 			TimedResetEvent(const std::chrono::milliseconds delay, std::string_view name);
 			TimedResetEvent(const std::chrono::milliseconds delay, std::wstring_view name);
 
+			TimedResetEvent(const std::chrono::system_clock::time_point dueTime) noexcept;
+			TimedResetEvent(const std::chrono::system_clock::time_point dueTime, std::string_view name);
+			TimedResetEvent(const std::chrono::system_clock::time_point dueTime, std::wstring_view name);
+			
+
 			TimedResetEvent(const TimedResetEvent&) = delete;
 			TimedResetEvent(TimedResetEvent&& other) noexcept;
 

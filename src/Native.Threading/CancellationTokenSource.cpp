@@ -19,6 +19,12 @@ namespace Native
 		{
 		}
 
+		CancellationTokenSource::CancellationTokenSource(const std::chrono::system_clock::time_point dueTime) noexcept
+			: _cancellationWaitHandle(std::make_shared<ManualResetEvent>(false)),
+			_allWaitHandles({ _cancellationWaitHandle, std::make_shared<TimedResetEvent>(dueTime) })
+		{
+		}
+
 		void CancellationTokenSource::cancel() noexcept
 		{
 			this->_cancellationWaitHandle->set();
