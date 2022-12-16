@@ -31,9 +31,9 @@ namespace Native
 			return this->wait_one(-1ms);
 		}
 
-		uint16_t WaitHandle::CountHandles(const WaitHandle* handle)
+		uint16_t WaitHandle::CountHandles(const WaitHandle& handle)
 		{
-			return handle->count_handles();
+			return handle.count_handles();
 		}
 
 		uint16_t WaitHandle::CountHandles(const std::shared_ptr<WaitHandle>& handle)
@@ -41,9 +41,9 @@ namespace Native
 			return handle->count_handles();
 		}
 
-		uint16_t WaitHandle::CopyHandles(const WaitHandle* handle, HandleArray& dest, const uint16_t index)
+		uint16_t WaitHandle::CopyHandles(const WaitHandle& handle, HandleArray& dest, const uint16_t index)
 		{
-			return handle->copy_handles(dest, index);
+			return handle.copy_handles(dest, index);
 		}
 		uint16_t WaitHandle::CopyHandles(const std::shared_ptr<WaitHandle>& handle, HandleArray& dest, const uint16_t index)
 		{

@@ -24,10 +24,10 @@ namespace Native
 			virtual uint16_t count_handles() const = 0;
 			virtual uint16_t copy_handles(HandleArray& dest, const uint16_t index) const = 0;
 
-			static uint16_t CountHandles(const WaitHandle* handle);
+			static uint16_t CountHandles(const WaitHandle& handle);
 			static uint16_t CountHandles(const std::shared_ptr<WaitHandle>& handle);
 
-			static uint16_t CopyHandles(const WaitHandle* handle, HandleArray& dest, const uint16_t index);
+			static uint16_t CopyHandles(const WaitHandle& handle, HandleArray& dest, const uint16_t index);
 			static uint16_t CopyHandles(const std::shared_ptr<WaitHandle>& handle, HandleArray& dest, const uint16_t index);
 
 		private:

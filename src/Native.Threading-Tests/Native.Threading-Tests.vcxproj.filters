@@ -19,5 +19,8 @@
     <ClCompile Include="MultiWaitHandleTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="AsyncCompletionTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

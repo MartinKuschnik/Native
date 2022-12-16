@@ -180,6 +180,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AsyncCompletionTests.cpp" />
     <ClCompile Include="CancellationTokenSourceTests.cpp" />
     <ClCompile Include="CancellationTokenTests.cpp" />
     <ClCompile Include="MultiWaitHandleTests.cpp" />
