@@ -3,8 +3,6 @@
 #include "ArgumentException.h"
 #include "Win32Exception.h"
 
-#include <iostream>
-
 namespace Native
 {
 	namespace Threading
