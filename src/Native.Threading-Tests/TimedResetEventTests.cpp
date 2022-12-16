@@ -34,7 +34,7 @@ namespace NativeThreadingTests
 
 			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
 			
-			Assert::IsTrue(event.wait_one(x + 1ms), fmt::format(L"Handle not set after {0}", x + 2ms).c_str());
+			Assert::IsTrue(event.wait_one(x + 5ms), fmt::format(L"Handle not set after {0}", x + 5ms).c_str());
 
 			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
@@ -80,7 +80,7 @@ namespace NativeThreadingTests
 
 			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
 
-			Assert::IsTrue(event.wait_one(x + 1ms), fmt::format(L"Handle not set after {0}", x + 2ms).c_str());
+			Assert::IsTrue(event.wait_one(x + 5ms), fmt::format(L"Handle not set after {0}", x + 5ms).c_str());
 
 			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
