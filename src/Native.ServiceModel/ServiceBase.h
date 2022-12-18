@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "CancellationToken.h"
 
 #include "RunMode.h"
