@@ -34,7 +34,7 @@ namespace Native
 
 			void set(T&& result)
 			{
-				this->_result = result;
+				this->_result = std::move(result);
 
 				this->_manualResetEvent.set();
 			}
