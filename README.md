@@ -17,7 +17,13 @@ Following Changes must be done for all Configurations and Plattforms:
   
    Project (right-click your project name in solution explorer) > Properties > General > Intermediate Directory: 
   
-       $(ProjectDir)out\$(Configuration)\$(Platform)\
+       $(ProjectDir)out\$(Configuration)\$(Platform)\  
+ 
+- Enable Multi-Processor (Parallel) Builds
+
+  Project (right-click your project name in solution explorer) > Properties > General > Multi-processor Compilation: 
+  
+      Yes (/MP)
 
 - Set C++ Language Standard to C++20
 
