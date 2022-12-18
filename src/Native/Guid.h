@@ -19,6 +19,8 @@ namespace Native
 		operator const std::string() const;
 		operator const std::wstring() const;
 
+		static const Guid Empty;
+
 		static const Guid NewGuid();
 
 		static const Guid Parse(const std::string_view value);

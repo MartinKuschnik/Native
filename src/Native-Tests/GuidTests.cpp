@@ -25,6 +25,16 @@ namespace NativeTests
 			}
 		}
 
+		TEST_METHOD(GuidEmpty_wstring_AllZero)
+		{
+			Assert::AreEqual(std::wstring(L"00000000-0000-0000-0000-000000000000"), static_cast<std::wstring>(Guid::Empty));
+		}
+
+		TEST_METHOD(GuidEmpty_string_AllZero)
+		{
+			Assert::AreEqual(std::string("00000000-0000-0000-0000-000000000000"), static_cast<std::string>(Guid::Empty));
+		}
+
 		TEST_METHOD(EmptyGuid_wstring_AllZero)
 		{
 			Guid emptyGuid;

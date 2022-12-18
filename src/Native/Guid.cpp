@@ -11,6 +11,8 @@ namespace Native
 	constexpr size_t GUID_BUFFER_SIZE = 39;
 	constexpr size_t GUID_LENGTH_WITHOUT_BRACKETS = 36;
 
+	const Guid Guid::Empty;
+
 	Guid::Guid() noexcept
 		: GUID()
 	{
