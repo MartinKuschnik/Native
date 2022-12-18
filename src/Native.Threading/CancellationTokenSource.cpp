@@ -9,30 +9,25 @@ namespace Native
 	{
 		CancellationTokenSource::CancellationTokenSource() noexcept
 			: _cancellationWaitHandle(std::make_shared<ManualResetEvent>(false)),
-			_allWaitHandles({ _cancellationWaitHandle })
+			Token(CancellationToken(_cancellationWaitHandle ))
 		{
 		}
 
 		CancellationTokenSource::CancellationTokenSource(const std::chrono::milliseconds delay) noexcept
 			: _cancellationWaitHandle(std::make_shared<ManualResetEvent>(false)),
-			_allWaitHandles({ _cancellationWaitHandle, std::make_shared<TimedResetEvent>(delay) })
+			Token(CancellationToken(std::make_shared<MultiWaitHandle>( _cancellationWaitHandle, std::make_shared<TimedResetEvent>(delay))))
 		{
 		}
 
 		CancellationTokenSource::CancellationTokenSource(const std::chrono::system_clock::time_point dueTime) noexcept
 			: _cancellationWaitHandle(std::make_shared<ManualResetEvent>(false)),
-			_allWaitHandles({ _cancellationWaitHandle, std::make_shared<TimedResetEvent>(dueTime) })
+			Token(CancellationToken(std::make_shared<MultiWaitHandle>( _cancellationWaitHandle, std::make_shared<TimedResetEvent>(dueTime))))
 		{
 		}
 
 		void CancellationTokenSource::cancel() noexcept
 		{
 			this->_cancellationWaitHandle->set();
-		}
-
-		CancellationToken CancellationTokenSource::token() const noexcept
-		{
-			return CancellationToken(std::make_shared<MultiWaitHandle>(this->_allWaitHandles));
 		}
 	}
 }

@@ -14,12 +14,14 @@ namespace Native
 		class MultiWaitHandle : public WaitHandle
 		{
 		public:
-			template <typename... Args>
-			MultiWaitHandle(std::shared_ptr<WaitHandle> waitHandle, std::convertible_to<std::shared_ptr<WaitHandle>> auto ... args)
-				:_handles(BuildHandleVector(waitHandle, std::forward<decltype(args)>(args)...))
-			{
+			
+			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2);
 
-			}
+			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3);
+
+			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3, const std::shared_ptr<WaitHandle> waitHandle4);
+
+			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3, const std::shared_ptr<WaitHandle> waitHandle4, const std::shared_ptr<WaitHandle> waitHandle5);
 
 			template<typename T = std::iterator_traits<std::shared_ptr<WaitHandle>>>
 			MultiWaitHandle(T count_handles)

@@ -91,7 +91,7 @@ namespace NativeThreadingTests
 
 			cts.cancel();
 
-			Assert::IsFalse(handle.wait_one(cts.token()));
+			Assert::IsFalse(handle.wait_one(cts.Token));
 		}
 
 		TEST_METHOD(wait_one_returns_true_also_if_cancellation_token_does_not_get_cancelled_I)
@@ -103,7 +103,7 @@ namespace NativeThreadingTests
 
 			one->set();
 
-			Assert::IsTrue(handle.wait_one(cts.token()));
+			Assert::IsTrue(handle.wait_one(cts.Token));
 		}
 
 		TEST_METHOD(wait_one_returns_true_also_if_cancellation_token_does_not_get_cancelled_II)
@@ -115,7 +115,7 @@ namespace NativeThreadingTests
 
 			two->set();
 
-			Assert::IsTrue(handle.wait_one(cts.token()));
+			Assert::IsTrue(handle.wait_one(cts.Token));
 		}
 	};
 }

@@ -125,7 +125,7 @@ namespace NativeThreadingTests
 
 			cts.cancel();
 
-			Assert::IsFalse(event.wait_one(cts.token()));
+			Assert::IsFalse(event.wait_one(cts.Token));
 		}
 
 		TEST_METHOD(wait_one_returns_true_also_if_cancellation_token_does_not_get_cancelled)
@@ -133,7 +133,7 @@ namespace NativeThreadingTests
 			CancellationTokenSource cts;
 			const TimedResetEvent event(50ms);
 
-			Assert::IsTrue(event.wait_one(cts.token()));
+			Assert::IsTrue(event.wait_one(cts.Token));
 		}
 	};
 }

@@ -46,7 +46,7 @@ namespace Native
 
 				if (service.initialize(RunMode::Console))
 				{
-					service.run(cts.token());
+					service.run(cts.Token);
 				}
 
 				std::cout << "Press any key to continue . . ." << std::endl;

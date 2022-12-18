@@ -20,7 +20,7 @@ namespace NativeThreadingTests
 		TEST_METHOD(token_gets_canceled_after_cancel)
 		{
 			CancellationTokenSource cancellationTokenSource;
-			const CancellationToken token = cancellationTokenSource.token();
+			const CancellationToken token = cancellationTokenSource.Token;
 
 			Assert::IsFalse(token.is_cancellation_requested());
 
@@ -32,7 +32,7 @@ namespace NativeThreadingTests
 		TEST_METHOD(token_with_delay_can_be_canceled_earlier)
 		{
 			CancellationTokenSource cancellationTokenSource(1h);
-			const CancellationToken token = cancellationTokenSource.token();
+			const CancellationToken token = cancellationTokenSource.Token;
 
 			Assert::IsFalse(token.is_cancellation_requested());
 
@@ -44,7 +44,7 @@ namespace NativeThreadingTests
 		TEST_METHOD(token_with_delay_gets_canceled_after_delay)
 		{
 			const CancellationTokenSource cancellationTokenSource(100ms);
-			const CancellationToken token = cancellationTokenSource.token();
+			const CancellationToken token = cancellationTokenSource.Token;
 
 			Assert::IsFalse(token.is_cancellation_requested());
 			std::this_thread::sleep_for(50ms);
@@ -60,7 +60,7 @@ namespace NativeThreadingTests
 			const system_clock::time_point due_time = system_clock::now() + 1h;
 
 			CancellationTokenSource cancellationTokenSource(due_time);
-			const CancellationToken token = cancellationTokenSource.token();
+			const CancellationToken token = cancellationTokenSource.Token;
 
 			Assert::IsFalse(token.is_cancellation_requested());
 
@@ -74,7 +74,7 @@ namespace NativeThreadingTests
 			const system_clock::time_point due_time = system_clock::now() + 100ms;
 
 			const CancellationTokenSource cancellationTokenSource(due_time);
-			const CancellationToken token = cancellationTokenSource.token();
+			const CancellationToken token = cancellationTokenSource.Token;
 
 			Assert::IsFalse(token.is_cancellation_requested());
 			std::this_thread::sleep_for(50ms);

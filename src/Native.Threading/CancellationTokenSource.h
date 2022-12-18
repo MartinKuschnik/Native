@@ -11,6 +11,10 @@ namespace Native
 	{
 		class CancellationTokenSource
 		{
+		private:
+
+			const std::shared_ptr<ManualResetEvent> _cancellationWaitHandle;
+
 		public:
 
 			/// <summary>
@@ -39,15 +43,9 @@ namespace Native
 			void cancel() noexcept;
 
 			/// <summary>
-			/// Returns the CancellationToken associated with this CancellationTokenSource.
+			/// The CancellationToken associated with this CancellationTokenSource.
 			/// </summary>
-			/// <returns>The associated CancellationToken.</returns>
-			CancellationToken token() const noexcept;
-
-		private:
-
-			const std::shared_ptr<ManualResetEvent> _cancellationWaitHandle;
-			const std::vector<std::shared_ptr<WaitHandle>> _allWaitHandles;
+			const CancellationToken Token;
 		};
 	}
 }
