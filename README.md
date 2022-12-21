@@ -17,7 +17,7 @@ Following Changes must be done for all Configurations and Plattforms:
   
    Project (right-click your project name in solution explorer) > Properties > General > Intermediate Directory: 
   
-       $(ProjectDir)out\$(Configuration)\$(Platform)\  
+       $(ProjectDir)obj\$(Configuration)\$(Platform)\  
  
 - Enable Multi-Processor (Parallel) Builds
 
