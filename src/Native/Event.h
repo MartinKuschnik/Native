@@ -4,6 +4,7 @@
 
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <unordered_set>
 
@@ -54,6 +55,8 @@ namespace Native
 
 			std::optional<std::function<void(void)>> _subscriptionChanged;
 
+			std::mutex _syncRoot;
+
 		public:
 
 			EventHandlerList(const EventHandlerList&) = delete;
@@ -93,6 +96,8 @@ namespace Native
 			{
 				auto pEventListener = std::make_shared<EventHandler>(eventHandler);
 
+				const std::lock_guard<std::mutex> lock(this->_syncRoot);
+
 				this->_handlers.insert(pEventListener);
 
 				if (this->_subscriptionChanged.has_value())
@@ -103,6 +108,8 @@ namespace Native
 
 			void remove(std::shared_ptr<EventHandler> eventHandler)
 			{
+				const std::lock_guard<std::mutex> lock(this->_syncRoot);
+
 				this->_handlers.erase(eventHandler);
 
 				if (this->_subscriptionChanged.has_value())
@@ -111,12 +118,16 @@ namespace Native
 
 			void operator()(TArgs& args)
 			{
+				const std::lock_guard<std::mutex> lock(this->_syncRoot);
+
 				for (const std::shared_ptr<EventHandler> handler : this->_handlers)
 					handler->operator()(args);
 			}
 
 			void operator()(TArgs&& args)
 			{
+				const std::lock_guard<std::mutex> lock(this->_syncRoot);
+
 				for (const std::shared_ptr<EventHandler> handler : this->_handlers)
 					handler->operator()(args);
 			}
