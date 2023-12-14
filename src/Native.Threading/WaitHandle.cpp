@@ -1,5 +1,6 @@
 #include "WaitHandle.h"
 
+#include "CancellationToken.h"
 #include "InvalidOperationException.h"
 #include "Win32Exception.h"
 

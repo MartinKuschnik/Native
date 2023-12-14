@@ -5,12 +5,12 @@
 
 #include <Windows.h>
 
-#include <CancellationToken.h>
-
 namespace Native
 {
 	namespace Threading
 	{
+		class CancellationToken; // use forward deflation because the WaitHandle includes this header
+
 		class WaitHandle
 		{
 		public:

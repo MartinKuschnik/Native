@@ -2,12 +2,12 @@
 
 #include <memory>
 
+#include <WaitHandle.h>
+
 namespace Native
 {
 	namespace Threading
 	{
-		class WaitHandle; // use forward deflation because the WaitHandle includes this header
-
 		class CancellationToken
 		{
 		public:
