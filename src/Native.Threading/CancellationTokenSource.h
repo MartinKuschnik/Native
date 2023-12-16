@@ -13,7 +13,13 @@ namespace Native
 		{
 		private:
 
-			const std::shared_ptr<ManualResetEvent> _cancellationWaitHandle;
+			std::shared_ptr<ManualResetEvent> _cancellationWaitHandle;
+
+			CancellationTokenSource(const CancellationToken one) noexcept;
+
+			CancellationTokenSource(const CancellationToken one, const CancellationToken two) noexcept;
+
+			CancellationTokenSource(const CancellationToken one, const CancellationToken two, const CancellationToken three) noexcept;
 
 		public:
 
@@ -35,6 +41,7 @@ namespace Native
 			CancellationTokenSource(const std::chrono::system_clock::time_point dueTime) noexcept;
 
 			CancellationTokenSource(const CancellationTokenSource&) = delete;
+
 			CancellationTokenSource(CancellationTokenSource&&) noexcept = default;
 
 			/// <summary>
@@ -46,6 +53,30 @@ namespace Native
 			/// The CancellationToken associated with this CancellationTokenSource.
 			/// </summary>
 			const CancellationToken Token;
+
+			/// <summary>
+			/// Creates a CancellationTokenSource that will be in the canceled state when the source token is in the canceled state.
+			/// </summary>
+			/// <param name="one">The first cancellation token to observe.</param>
+			/// <returns>A CancellationTokenSource that is linked to the source token.</returns>
+			static CancellationTokenSource CreateLinkedTokenSource(const CancellationToken one);
+
+			/// <summary>
+			/// Creates a CancellationTokenSource that will be in the canceled state when any of the source tokens are in the canceled state.
+			/// </summary>
+			/// <param name="one">The first cancellation token to observe.</param>
+			/// <param name="two">The second cancellation token to observe.</param>
+			/// <returns>A CancellationTokenSource that is linked to the source tokens.</returns>
+			static CancellationTokenSource CreateLinkedTokenSource(const CancellationToken one, const CancellationToken two);
+
+			/// <summary>
+			/// Creates a CancellationTokenSource that will be in the canceled state when any of the source tokens are in the canceled state.
+			/// </summary>
+			/// <param name="one">The first cancellation token to observe.</param>
+			/// <param name="two">The second cancellation token to observe.</param>
+			/// <param name="three">The third cancellation token to observe.</param>
+			/// <returns>A CancellationTokenSource that is linked to the source tokens.</returns>
+			static CancellationTokenSource CreateLinkedTokenSource(const CancellationToken one, const CancellationToken two, const CancellationToken three);
 		};
 	}
 }

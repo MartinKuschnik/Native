@@ -15,15 +15,15 @@ namespace Native
 		{
 		public:
 			
-			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2);
+			MultiWaitHandle(const std::shared_ptr<const WaitHandle> waitHandle1, const std::shared_ptr<const WaitHandle> waitHandle2);
 
-			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3);
+			MultiWaitHandle(const std::shared_ptr<const WaitHandle> waitHandle1, const std::shared_ptr<const WaitHandle> waitHandle2, const std::shared_ptr<const WaitHandle> waitHandle3);
 
-			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3, const std::shared_ptr<WaitHandle> waitHandle4);
+			MultiWaitHandle(const std::shared_ptr<const WaitHandle> waitHandle1, const std::shared_ptr<const WaitHandle> waitHandle2, const std::shared_ptr<const WaitHandle> waitHandle3, const std::shared_ptr<const WaitHandle> waitHandle4);
 
-			MultiWaitHandle(const std::shared_ptr<WaitHandle> waitHandle1, const std::shared_ptr<WaitHandle> waitHandle2, const std::shared_ptr<WaitHandle> waitHandle3, const std::shared_ptr<WaitHandle> waitHandle4, const std::shared_ptr<WaitHandle> waitHandle5);
+			MultiWaitHandle(const std::shared_ptr<const WaitHandle> waitHandle1, const std::shared_ptr<const WaitHandle> waitHandle2, const std::shared_ptr<const WaitHandle> waitHandle3, const std::shared_ptr<const WaitHandle> waitHandle4, const std::shared_ptr<const WaitHandle> waitHandle5);
 
-			template<typename T = std::iterator_traits<std::shared_ptr<WaitHandle>>>
+			template<typename T = std::iterator_traits<std::shared_ptr<const WaitHandle>>>
 			MultiWaitHandle(T count_handles)
 				: _handles(BuildHandleVector(count_handles))
 			{
@@ -36,23 +36,23 @@ namespace Native
 
 		private:
 
-			const std::vector<std::shared_ptr<WaitHandle>> _handles;
+			const std::vector<std::shared_ptr<const WaitHandle>> _handles;
 
 			template <typename... Args>
-			static std::vector<std::shared_ptr<WaitHandle>> BuildHandleVector(std::shared_ptr<WaitHandle> waitHandle, std::convertible_to<std::shared_ptr<WaitHandle>> auto ... args)
+			static std::vector<std::shared_ptr<const WaitHandle>> BuildHandleVector(std::shared_ptr<const WaitHandle> waitHandle, std::convertible_to<std::shared_ptr<const WaitHandle>> auto ... args)
 			{
-				std::vector<std::shared_ptr<WaitHandle>> count_handles { waitHandle };
+				std::vector<std::shared_ptr<const WaitHandle>> count_handles { waitHandle };
 
-				for (const auto& item : std::array<std::shared_ptr<WaitHandle>, sizeof...(args)>{std::forward<decltype(args)>(args)...})
+				for (const auto& item : std::array<std::shared_ptr<const WaitHandle>, sizeof...(args)>{std::forward<decltype(args)>(args)...})
 					count_handles.push_back(item);
 
 				return count_handles;
 			}
 
-			template<typename T = std::iterator_traits<std::shared_ptr<WaitHandle>>>
-			static std::vector<std::shared_ptr<WaitHandle>> BuildHandleVector(T count_handles)
+			template<typename T = std::iterator_traits<std::shared_ptr<const WaitHandle>>>
+			static std::vector<std::shared_ptr<const WaitHandle>> BuildHandleVector(T count_handles)
 			{
-				std::vector<std::shared_ptr<WaitHandle>> vec;
+				std::vector<std::shared_ptr<const WaitHandle>> vec;
 
 				for (const auto& handle : count_handles)
 					vec.push_back(handle);
