@@ -1,5 +1,7 @@
 #include "CppUnitTest.h"
 
+#include <thread>
+
 #include "ManualResetEvent.h"
 
 #include "CancellationTokenSource.h"

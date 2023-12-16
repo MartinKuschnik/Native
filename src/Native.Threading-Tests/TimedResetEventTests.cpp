@@ -1,8 +1,6 @@
 #include "CppUnitTest.h"
 
-#include <fmt/format.h>
-#include <fmt/xchar.h>
-#include <fmt/chrono.h>
+#include <format>
 
 #include "CancellationTokenSource.h"
 #include "TimedResetEvent.h"
@@ -35,11 +33,11 @@ namespace NativeThreadingTests
 
 			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
 			
-			Assert::IsTrue(event.wait_one(x + 5ms), fmt::format(L"Handle not set after {0}", x + 5ms).c_str());
+			Assert::IsTrue(event.wait_one(x + 5ms), std::format(L"Handle not set after {0}", x + 5ms).c_str());
 
 			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
-			Assert::IsTrue((time + 1ms) >= x, fmt::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
+			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
 
 		TEST_METHOD(state_changes_after_1s_delay)
@@ -81,11 +79,11 @@ namespace NativeThreadingTests
 
 			Assert::IsFalse(event.wait_one(0ms), L"Handle must not be set instantly after creation.");
 
-			Assert::IsTrue(event.wait_one(x + 10ms), fmt::format(L"Handle not set after {0}", x + 10ms).c_str());
+			Assert::IsTrue(event.wait_one(x + 10ms), std::format(L"Handle not set after {0}", x + 10ms).c_str());
 
 			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
-			Assert::IsTrue((time + 1ms) >= x, fmt::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
+			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
 
 		TEST_METHOD(state_changes_at_now_plus_1s)

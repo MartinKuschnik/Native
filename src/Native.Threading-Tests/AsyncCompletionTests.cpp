@@ -1,5 +1,7 @@
 #include "CppUnitTest.h"
 
+#include <thread>
+
 #include "AsyncCompletionSource.h"
 #include "CancellationTokenSource.h"
 
