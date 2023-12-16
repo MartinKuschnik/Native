@@ -2,7 +2,7 @@
 
 #include <ws2tcpip.h>
 
-#include <fmt/format.h>
+#include <format>
 
 #include "InvalidOperationException.h"
 #include "FormatException.h"
@@ -120,7 +120,7 @@ namespace Native
 				return *this;
 
 			if (!this->is_ipv4_mapped_to_ipv6())
-				throw InvalidOperationException(fmt::format("The address {0} is no IPv6 mapped IPv4 address.", this->to_string()));
+				throw InvalidOperationException(std::format("The address {0} is no IPv6 mapped IPv4 address.", this->to_string()));
 
 			return IpAddress(this->_address.v6.u.Byte[12], this->_address.v6.u.Byte[13], this->_address.v6.u.Byte[14], this->_address.v6.u.Byte[15]);
 		}
@@ -150,7 +150,7 @@ namespace Native
 		IpAddress::operator in_addr() const
 		{
 			if (this->_addressFamily == AddressFamily::InterNetworkV6)
-				throw InvalidOperationException(fmt::format("IPv6 address can not be converted into {0}.", nameof(in_addr)));
+				throw InvalidOperationException(std::format("IPv6 address can not be converted into {0}.", nameof(in_addr)));
 
 			return this->_address.v4;
 		}
@@ -158,7 +158,7 @@ namespace Native
 		IpAddress::operator in6_addr() const
 		{
 			if (this->_addressFamily == AddressFamily::InterNetwork)
-				throw InvalidOperationException(fmt::format("IPv4 address can not be converted into {0}.", nameof(in6_addr)));
+				throw InvalidOperationException(std::format("IPv4 address can not be converted into {0}.", nameof(in6_addr)));
 
 			return this->_address.v6;
 		}
@@ -174,7 +174,7 @@ namespace Native
 				case 1:
 					return IpAddress(address);
 				case 0:
-					throw FormatException(fmt::format("\"{0}\" is no valid IP address.", value));
+					throw FormatException(std::format("\"{0}\" is no valid IP address.", value));
 				case -1:
 				default:
 					throw Win32Exception(WSAGetLastError(), nameof(inet_pton));
@@ -192,7 +192,7 @@ namespace Native
 				case 1:
 					return IpAddress(address);
 				case 0:
-					throw FormatException(fmt::format("\"{0}\" is no valid IP v6 address.", value));
+					throw FormatException(std::format("\"{0}\" is no valid IP v6 address.", value));
 				case -1:
 				default:
 					throw Win32Exception(WSAGetLastError(), nameof(inet_pton));
