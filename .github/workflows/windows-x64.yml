@@ -21,7 +21,7 @@ permissions:
 
 jobs:       
   build-windows-x64:
-    runs-on: [windows-latest]
+    runs-on: [self-hosted, windows-latest]
 
     steps:
     - uses: actions/checkout@v3
