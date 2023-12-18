@@ -19,31 +19,24 @@ env:
 permissions:
   contents: read
 
-jobs:  
+jobs:       
   build-windows-x86:
-    runs-on: [windows-latest]
+    runs-on: [self-hosted, windows-latest]
 
     steps:
     - uses: actions/checkout@v3
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1.3
+      uses: microsoft/setup-msbuild@v1.1.3  
       
-    - name: vcpkg integrate install
-      run: C:\vcpkg\vcpkg.exe integrate install
-            
-    - name: vcpkg install
-      run: C:\vcpkg\vcpkg.exe install fmt:x86-windows
-
-    - name: Build Solution
-      working-directory: ${{env.GITHUB_WORKSPACE}}      
+    - name: Build Solution (x86)
+      working-directory: ${{env.GITHUB_WORKSPACE}}     
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x86 ${{env.SOLUTION_FILE_PATH}}   
-          
-    - name: Unit Tests
+        
+    - name: Unit Tests (x86)
       uses: microsoft/vstest-action@v1.0.0
       with:
         testAssembly: '*test*.dll'
         searchFolder: '**\*'
-        runInParallel: true
         platform: x86
