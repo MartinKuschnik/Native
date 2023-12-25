@@ -10,6 +10,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Guid.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Environment.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ByteSizeLiterals.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
