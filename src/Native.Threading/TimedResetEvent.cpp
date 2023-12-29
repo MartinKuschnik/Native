@@ -95,15 +95,8 @@ namespace Native
 		}
 
 		TimedResetEvent::TimedResetEvent(TimedResetEvent&& other) noexcept
+			: _handle(std::move(std::move(other._handle)))
 		{
-			this->_handle = other._handle;
-			other._handle = INVALID_HANDLE_VALUE;
-		}
-
-		TimedResetEvent::~TimedResetEvent() noexcept
-		{
-			if (this->_handle != INVALID_HANDLE_VALUE)
-				CloseHandle(this->_handle);
 		}
 
 		uint16_t TimedResetEvent::count_handles() const

@@ -39,15 +39,8 @@ namespace Native
 		}
 
 		EventWaitHandle::EventWaitHandle(EventWaitHandle&& other) noexcept
+			: _handle(std::move(other._handle))
 		{
-			this->_handle = other._handle;
-			other._handle = INVALID_HANDLE_VALUE;
-		}
-
-		EventWaitHandle::~EventWaitHandle() noexcept
-		{
-			if (this->_handle != INVALID_HANDLE_VALUE)
-				CloseHandle(this->_handle);
 		}
 
 		void EventWaitHandle::reset()

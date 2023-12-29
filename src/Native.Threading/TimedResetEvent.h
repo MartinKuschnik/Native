@@ -5,6 +5,8 @@
 
 #include "EventResetMode.h"
 
+#include "Handle.h"
+
 namespace Native
 {
 	namespace Threading
@@ -25,15 +27,13 @@ namespace Native
 			TimedResetEvent(const TimedResetEvent&) = delete;
 			TimedResetEvent(TimedResetEvent&& other) noexcept;
 
-			~TimedResetEvent() noexcept;
-
 		protected:
 
 			virtual uint16_t count_handles() const override;
 			virtual uint16_t copy_handles(HandleArray& dest, const uint16_t index) const override;
 
 		private:
-			HANDLE _handle;
+			Windows::Handle _handle;
 		};
 	}
 }
