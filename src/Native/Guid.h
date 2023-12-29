@@ -11,6 +11,7 @@ namespace Native
 	public:
 
 		Guid() noexcept;
+		Guid(const GUID& other) noexcept;
 		Guid(const Guid& other) noexcept;
 
 		const std::string string() const;
@@ -25,9 +26,6 @@ namespace Native
 
 		static const Guid Parse(const std::string_view value);
 		static const Guid Parse(const std::wstring_view value);
-
-	private:
-		Guid(const GUID& other) noexcept;
 	};
 }
 
