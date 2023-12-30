@@ -14,6 +14,7 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ComRuntime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Handle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HResultException.cpp" />
@@ -21,6 +22,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Win32Exception.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ComObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ComRuntime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HResultException.h" />

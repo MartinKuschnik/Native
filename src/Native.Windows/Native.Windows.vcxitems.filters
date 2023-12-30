@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Handle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)HResultException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Win32.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Win32Exception.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ComRuntime.cpp">
+      <Filter>COM</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HResultException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Win32.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Win32Exception.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ComObject.h">
+      <Filter>COM</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ComRuntime.h">
+      <Filter>COM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="COM">
+      <UniqueIdentifier>{87ccebad-9331-478d-a12b-47298453c95e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
