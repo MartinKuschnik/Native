@@ -27,10 +27,7 @@ namespace NativeThreadingTests
 		template <typename T>
 		void state_changes_after_X_delay(T x)
 		{
-			LARGE_INTEGER starting_time, ending_time, elapsed_microseconds, frequency;
-
-			QueryPerformanceFrequency(&frequency);
-			QueryPerformanceCounter(&starting_time);
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			const TimedResetEvent event(x);
 
@@ -38,21 +35,7 @@ namespace NativeThreadingTests
 			
 			Assert::IsTrue(event.wait_one(x + 5ms), std::format(L"Handle not set after {0}", x + 5ms).c_str());
 
-			QueryPerformanceCounter(&ending_time);
-
-			//
-			// We now have the elapsed number of ticks, along with the
-			// number of ticks-per-second. We use these values
-			// to convert to the number of elapsed microseconds.
-			// To guard against loss-of-precision, we convert
-			// to microseconds *before* dividing by ticks-per-second.
-			//
-
-			elapsed_microseconds.QuadPart = ending_time.QuadPart - starting_time.QuadPart;
-			elapsed_microseconds.QuadPart *= 1000000;
-			elapsed_microseconds.QuadPart /= frequency.QuadPart;
-
-			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::microseconds(elapsed_microseconds.QuadPart));
+			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
 			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
@@ -79,7 +62,7 @@ namespace NativeThreadingTests
 
 		TEST_METHOD(state_changes_after_50ms_delay)
 		{
-			state_changes_after_X_delay(50ms);
+			state_changes_after_X_delay(500ms);
 		}
 
 		TEST_METHOD(state_changes_after_10ms_delay)
@@ -90,10 +73,7 @@ namespace NativeThreadingTests
 		template <typename T>
 		void state_changes_at_now_plus_X(T x)
 		{
-			LARGE_INTEGER starting_time, ending_time, elapsed_microseconds, frequency;
-
-			QueryPerformanceFrequency(&frequency);
-			QueryPerformanceCounter(&starting_time);
+			const auto start = std::chrono::high_resolution_clock::now();
 
 			const TimedResetEvent event(std::chrono::system_clock::now() + x);
 
@@ -101,21 +81,7 @@ namespace NativeThreadingTests
 
 			Assert::IsTrue(event.wait_one(x + 10ms), std::format(L"Handle not set after {0}", x + 10ms).c_str());
 
-			QueryPerformanceCounter(&ending_time);
-
-			//
-			// We now have the elapsed number of ticks, along with the
-			// number of ticks-per-second. We use these values
-			// to convert to the number of elapsed microseconds.
-			// To guard against loss-of-precision, we convert
-			// to microseconds *before* dividing by ticks-per-second.
-			//
-
-			elapsed_microseconds.QuadPart = ending_time.QuadPart - starting_time.QuadPart;
-			elapsed_microseconds.QuadPart *= 1000000;
-			elapsed_microseconds.QuadPart /= frequency.QuadPart;
-
-			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::microseconds(elapsed_microseconds.QuadPart));
+			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
 
 			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
