@@ -37,7 +37,7 @@ namespace Native
 			return this->_handle;
 		}
 
-		Handle& Handle::operator=(const HANDLE& handle)
+		Handle& Handle::operator=(const HANDLE& handle) noexcept
 		{
 			if (this->_handle != INVALID_HANDLE_VALUE)
 				CloseHandle(this->_handle);
@@ -47,12 +47,23 @@ namespace Native
 			return *this;
 		}
 
-		Handle& Handle::operator=(HANDLE&& handle)
+		Handle& Handle::operator=(HANDLE&& handle) noexcept
 		{
 			if (this->_handle != INVALID_HANDLE_VALUE)
 				CloseHandle(this->_handle);
 
 			this->_handle = handle;
+
+			return *this;
+		}
+
+		Handle& Handle::operator=(Handle&& other) noexcept
+		{
+			if (this->_handle != INVALID_HANDLE_VALUE)
+				CloseHandle(this->_handle);
+
+			this->_handle = other._handle;
+			other._handle = INVALID_HANDLE_VALUE;
 
 			return *this;
 		}

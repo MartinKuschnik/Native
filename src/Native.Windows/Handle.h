@@ -25,8 +25,10 @@ namespace Native
 
 			operator const HANDLE() const noexcept;
 
-			Handle& operator=(const HANDLE& handle);
-			Handle& operator=(HANDLE&& handle);
+			Handle& operator=(const HANDLE& handle) noexcept;
+			Handle& operator=(HANDLE&& handle) noexcept;
+
+			Handle& operator=(Handle&& other) noexcept;
 		};
 	}
 }
