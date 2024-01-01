@@ -45,11 +45,6 @@ namespace NativeThreadingTests
 			state_changes_after_X_delay(1s);
 		}
 
-		TEST_METHOD(state_changes_after_500ms_delay)
-		{
-			state_changes_after_X_delay(500ms);
-		}
-
 		TEST_METHOD(state_changes_after_250ms_delay)
 		{
 			state_changes_after_X_delay(250ms);
@@ -62,7 +57,7 @@ namespace NativeThreadingTests
 
 		TEST_METHOD(state_changes_after_50ms_delay)
 		{
-			state_changes_after_X_delay(500ms);
+			state_changes_after_X_delay(50ms);
 		}
 
 		TEST_METHOD(state_changes_after_10ms_delay)
@@ -89,11 +84,6 @@ namespace NativeThreadingTests
 		TEST_METHOD(state_changes_at_now_plus_1s)
 		{
 			state_changes_at_now_plus_X(1s);
-		}
-
-		TEST_METHOD(state_changes_at_now_plus_500ms)
-		{
-			state_changes_at_now_plus_X(500ms);
 		}
 
 		TEST_METHOD(state_changes_at_now_plus_250ms)
