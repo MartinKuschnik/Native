@@ -27,7 +27,7 @@ namespace NativeThreadingTests
 		template <typename T>
 		void state_changes_after_X_delay(T x)
 		{
-			const auto start = std::chrono::high_resolution_clock::now();
+			const auto start = std::chrono::steady_clock::now();
 
 			const TimedResetEvent event(x);
 
@@ -35,7 +35,7 @@ namespace NativeThreadingTests
 			
 			Assert::IsTrue(event.wait_one(x + 5ms), std::format(L"Handle not set after {0}", x + 5ms).c_str());
 
-			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
+			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
 
 			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
@@ -73,7 +73,7 @@ namespace NativeThreadingTests
 		template <typename T>
 		void state_changes_at_now_plus_X(T x)
 		{
-			const auto start = std::chrono::high_resolution_clock::now();
+			const auto start = std::chrono::steady_clock::now();
 
 			const TimedResetEvent event(std::chrono::system_clock::now() + x);
 
@@ -81,7 +81,7 @@ namespace NativeThreadingTests
 
 			Assert::IsTrue(event.wait_one(x + 10ms), std::format(L"Handle not set after {0}", x + 10ms).c_str());
 
-			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);
+			const auto time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
 
 			Assert::IsTrue((time + 1ms) >= x, std::format(L"Taken time ({0}) less than expected ({1})", time, x).c_str());
 		}
