@@ -11,6 +11,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Environment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ByteSizeLiterals.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
@@ -20,5 +21,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Guid.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ArgumentException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Environment.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Encoding.cpp" />
   </ItemGroup>
 </Project>

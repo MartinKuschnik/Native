@@ -23,6 +23,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Guid.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InvalidOperationException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -33,5 +34,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Guid.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Encoding.cpp" />
   </ItemGroup>
 </Project>
