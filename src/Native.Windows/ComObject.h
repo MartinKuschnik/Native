@@ -34,7 +34,7 @@ namespace Native
 
 				ComObject(const ComObject&) = delete;
 
-				ComObject(ComObject&& other)
+				ComObject(ComObject&& other) noexcept
 					: _ptr(other._ptr)
 				{
 					other._ptr = nullptr;

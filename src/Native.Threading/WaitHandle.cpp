@@ -34,7 +34,7 @@ namespace Native
 			const uint16_t handle_count_of_this = this->count_handles();
 			const uint16_t handle_count_of_ct = cancellationToken.WaitHandle->count_handles();
 
-			if (handle_count_of_this + handle_count_of_ct > handels.size())
+			if (static_cast<size_t>(handle_count_of_this + handle_count_of_ct) > handels.size())
 				throw InvalidOperationException("To much handles.");
 
 			uint16_t handle_count = this->copy_handles(handels, 0);
