@@ -1,19 +1,14 @@
 #pragma once
 
-#include <exception>
-#include <string>
+#include "Exception.h"
+
 
 namespace Native
 {
-	class NotSupportedException : public std::exception
+	class NotSupportedException : public Exception
 	{
 
 	public:
-		NotSupportedException(const std::string&& message) noexcept;
-
-		const char* what() const throw() override;
-
-	private:
-		const std::string _message;
+		NotSupportedException(std::string&& message) noexcept;
 	};
 }

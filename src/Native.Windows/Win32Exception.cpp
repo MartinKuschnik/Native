@@ -10,8 +10,8 @@ namespace Native
 	namespace Windows
 	{
 		Win32Exception::Win32Exception(const unsigned long errorCode, const char* methodName)
-			: m_ErrorCode(errorCode),
-			m_Message(Win32Exception::FormatErrorMessage(errorCode, methodName))
+			: Native::Exception(nameof(Win32Exception), Win32Exception::FormatErrorMessage(errorCode, methodName)),
+			  m_ErrorCode(errorCode)
 		{
 		}
 
@@ -30,11 +30,6 @@ namespace Native
 			os << ")";
 
 			return os.str();
-		}
-
-		const char* Win32Exception::what() const throw ()
-		{
-			return m_Message.c_str();
 		}
 	}
 }

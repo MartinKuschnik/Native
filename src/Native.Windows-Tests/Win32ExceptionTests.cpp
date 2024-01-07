@@ -22,13 +22,13 @@ namespace NativeWindowsTests
 			}
 		}
 
-		TEST_METHOD(What_ShouldReturnTheCorrectExceptionMessage)
+		TEST_METHOD(What_ShouldContainTheExceptionMessage)
 		{
 			const char* expactedMessage = "ShouldBeThrowable(...) failed! (Win32ErrorCode=0x0000007B: The filename, directory name, or volume label syntax is incorrect.)";
 
 			Win32Exception ex(0x0000007B, nameof(ShouldBeThrowable));
 
-			Assert::AreEqual(expactedMessage, ex.what());
+			Assert::AreNotEqual(std::string_view(ex.what()).find(expactedMessage), std::string::npos);
 		}
 	};
 }

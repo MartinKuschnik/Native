@@ -1,15 +1,11 @@
 #include "ArgumentException.h"
 
+#include "Util.h"
+
 namespace Native
 {
-	ArgumentException::ArgumentException(const std::string&& message) noexcept
-		: _message(message)
+	ArgumentException::ArgumentException(std::string&& message) noexcept
+		: Exception(nameof(ArgumentException), std::move(message))
 	{
-
-	}
-
-	const char* ArgumentException::what() const throw()
-	{
-		return _message.c_str();
 	}
 }

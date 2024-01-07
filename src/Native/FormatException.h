@@ -1,19 +1,12 @@
 #pragma once
 
-#include <exception>
-#include <string>
+#include "Exception.h"
 
 namespace Native
 {
-	class FormatException : public std::exception
+	class FormatException : public Exception
 	{
-
 	public:
-		FormatException(const std::string&& message) noexcept;
-
-		const char* what() const throw() override;
-
-	private:
-		const std::string _message;
+		FormatException(std::string&& message) noexcept;
 	};
 }

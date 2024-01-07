@@ -11,8 +11,8 @@ namespace Native
 	namespace Windows
 	{
 		ConfigurationManagerReturnCodeException::ConfigurationManagerReturnCodeException(const CONFIGRET returnCode, const char* methodName)
-			: _returnCode(returnCode),
-			_message(ConfigurationManagerReturnCodeException::FormatErrorMessage(returnCode, methodName))
+			: Exception(nameof(ConfigurationManagerReturnCodeException), ConfigurationManagerReturnCodeException::FormatErrorMessage(returnCode, methodName)),
+			_returnCode(returnCode)
 		{
 		}
 
@@ -91,11 +91,6 @@ namespace Native
 			os << ")";
 
 			return os.str();
-		}
-
-		const char* ConfigurationManagerReturnCodeException::what() const throw ()
-		{
-			return this->_message.c_str();
 		}
 	}
 }

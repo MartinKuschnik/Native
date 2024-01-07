@@ -1,20 +1,13 @@
 #pragma once
 
-#include <exception>
-#include <string>
+#include "Exception.h"
 
 namespace Native
 {
-	class ArgumentException : public std::exception
+	class ArgumentException : public Exception
 	{
-
 	public:
-		ArgumentException(const std::string&& message) noexcept;
-
-		const char* what() const throw() override;
-
-	private:
-		const std::string _message;
+		ArgumentException(std::string&& message) noexcept;
 	};
 }
 

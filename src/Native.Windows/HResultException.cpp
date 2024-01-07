@@ -10,8 +10,8 @@ namespace Native
 	namespace Windows
 	{
 		HResultException::HResultException(const HRESULT hresult, const std::string& methodName)
-			: m_HResult(hresult),
-			m_Message(HResultException::FormatErrorMessage(hresult, methodName))
+			: Exception(nameof(HResultException), HResultException::FormatErrorMessage(hresult, methodName)),
+			m_HResult(hresult)
 		{
 		}
 
@@ -31,11 +31,6 @@ namespace Native
 			os << ")";
 
 			return os.str();
-		}
-
-		const char* HResultException::what() const throw ()
-		{
-			return m_Message.c_str();
 		}
 	}
 }

@@ -1,21 +1,12 @@
 #pragma once
 
-#pragma once
-
-#include <exception>
-#include <string>
+#include "Exception.h"
 
 namespace Native
 {
-	class InvalidOperationException : public std::exception
+	class InvalidOperationException : public Exception
 	{
-
 	public:
-		InvalidOperationException(const std::string&& message) noexcept;
-
-		const char* what() const throw() override;
-
-	private:
-		const std::string _message;
+		InvalidOperationException(std::string&& message) noexcept;
 	};
 }

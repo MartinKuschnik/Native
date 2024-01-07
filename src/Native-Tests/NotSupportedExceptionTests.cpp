@@ -24,13 +24,13 @@ namespace NativeTests
 			}
 		}
 
-		TEST_METHOD(What_ShouldReturnTheExceptionMessage)
+		TEST_METHOD(What_ShouldContainTheExceptionMessage)
 		{
 			const char* message = "This is the exception message.";
 
 			NotSupportedException ex(message);
 
-			Assert::AreEqual(message, ex.what());
+			Assert::AreNotEqual(std::string_view(ex.what()).find(message), std::string::npos);
 		}
 	};
 }

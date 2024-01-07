@@ -1,15 +1,11 @@
 #include "NotSupportedException.h"
 
+#include "Util.h"
+
 namespace Native
 {
-	NotSupportedException::NotSupportedException(const std::string&& message) noexcept
-		: _message(message)
+	NotSupportedException::NotSupportedException(std::string&& message) noexcept
+		: Exception(nameof(NotSupportedException), std::move(message))
 	{
-
-	}
-
-	const char* NotSupportedException::what() const throw()
-	{
-		return _message.c_str();
 	}
 }

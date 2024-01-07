@@ -1,15 +1,11 @@
 #include "InvalidOperationException.h"
 
+#include "Util.h"
+
 namespace Native
 {
-	InvalidOperationException::InvalidOperationException(const std::string&& message) noexcept
-		: _message(message)
+	InvalidOperationException::InvalidOperationException(std::string&& message) noexcept
+		: Exception(nameof(InvalidOperationException), std::move(message))
 	{
-
-	}
-
-	const char* InvalidOperationException::what() const throw()
-	{
-		return _message.c_str();
 	}
 }
