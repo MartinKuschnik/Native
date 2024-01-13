@@ -8,13 +8,14 @@ namespace Native
 	class Exception : public std::exception
 	{
 	public:
-		Exception(std::string&& exception_name, std::string&& message) noexcept;
+		Exception(std::string&& message) noexcept;
 
 		const char* what() const throw() override;
 
 	protected:
 		const std::string _message;
 
+		Exception(std::string&& exception_name, std::string&& message) noexcept;
 
 	private:
 		const std::string _exceptionName;

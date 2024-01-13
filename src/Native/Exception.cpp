@@ -6,8 +6,15 @@
 #include <stacktrace>
 #endif
 
+#include "Util.h"
+
 namespace Native
 {
+	Exception::Exception(std::string&& message) noexcept
+		: Exception(nameof(Exception), std::move(message))
+	{
+	}
+
 	Exception::Exception(std::string&& exception_name, std::string&& message) noexcept
 		: _message(std::move(message)),
 		_exceptionName(std::move(exception_name)),
