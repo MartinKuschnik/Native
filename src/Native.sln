@@ -19,9 +19,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.ServiceModel - Tests
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Threading", "Native.Threading\Native.Threading.vcxitems", "{0EACDC02-C95E-4A18-91DE-0C0145C99A32}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Threading-Tests", "Native.Threading-Tests\Native.Threading-Tests.vcxproj", "{574DC77A-DCF8-47E0-8E22-4162160E4713}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Threading - Tests", "Native.Threading-Tests\Native.Threading-Tests.vcxproj", "{574DC77A-DCF8-47E0-8E22-4162160E4713}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.ServiceModel", "Native.ServiceModel\Native.ServiceModel.vcxitems", "{5DE1910B-8B93-4608-A7DB-734FCCC63037}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Diagnostics", "Native.Diagnostics\Native.Diagnostics.vcxitems", "{AC176215-3986-4698-BB71-EF66F5D98C2E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Diagnostics - Tests", "Native.Diagnostics-Tests\Native.Diagnostics-Tests.vcxproj", "{A147BF09-6361-4916-A413-79132059DD59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,14 @@ Global
 		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x64.Build.0 = Release|x64
 		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x86.ActiveCfg = Release|Win32
 		{574DC77A-DCF8-47E0-8E22-4162160E4713}.Release|x86.Build.0 = Release|Win32
+		{A147BF09-6361-4916-A413-79132059DD59}.Debug|x64.ActiveCfg = Debug|x64
+		{A147BF09-6361-4916-A413-79132059DD59}.Debug|x64.Build.0 = Debug|x64
+		{A147BF09-6361-4916-A413-79132059DD59}.Debug|x86.ActiveCfg = Debug|Win32
+		{A147BF09-6361-4916-A413-79132059DD59}.Debug|x86.Build.0 = Debug|Win32
+		{A147BF09-6361-4916-A413-79132059DD59}.Release|x64.ActiveCfg = Release|x64
+		{A147BF09-6361-4916-A413-79132059DD59}.Release|x64.Build.0 = Release|x64
+		{A147BF09-6361-4916-A413-79132059DD59}.Release|x86.ActiveCfg = Release|Win32
+		{A147BF09-6361-4916-A413-79132059DD59}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +100,8 @@ Global
 		Native.ServiceModel\Native.ServiceModel.vcxitems*{5de1910b-8b93-4608-a7db-734fccc63037}*SharedItemsImports = 9
 		Native.Windows\Native.Windows.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native\Native.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
+		Native.Diagnostics\Native.Diagnostics.vcxitems*{a147bf09-6361-4916-a413-79132059dd59}*SharedItemsImports = 4
+		Native.Diagnostics\Native.Diagnostics.vcxitems*{ac176215-3986-4698-bb71-ef66f5d98c2e}*SharedItemsImports = 9
 		Native.Windows\Native.Windows.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
 		Native\Native.vcxitems*{c732df2f-9582-4db5-9cad-5a4f55c02db1}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{cbb110f4-f2cb-43aa-a711-30e9a6dcc111}*SharedItemsImports = 9
