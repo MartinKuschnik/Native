@@ -4,13 +4,11 @@ namespace Native
 {
 	namespace IO
 	{
-		void Stream::copy_to(Stream* destination, const uint64_t buffer_size)
+		void Stream::copy_to(Stream* destination, const size_t buffer_size)
 		{
-			std::vector<std::byte> buffer;
+			std::vector<std::byte> buffer(buffer_size);
 
-			buffer.reserve(buffer_size);
-
-			uint64_t read;
+			size_t read;
 
 			while ((read = this->read(buffer.data(), buffer_size)) != 0)
 				destination->write(buffer.data(), buffer_size);

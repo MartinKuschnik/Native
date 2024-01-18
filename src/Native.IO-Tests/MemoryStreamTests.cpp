@@ -183,7 +183,7 @@ namespace NativeIOTests
 			// Act
 			mem_stream.write(input_string.data(), input_string.size());
 			mem_stream.seek(0, SeekOrigin::Begin);
-			const uint64_t read = mem_stream.read(output_string.data(), input_string.size());
+			const size_t read = mem_stream.read(output_string.data(), input_string.size());
 
 			// Assert
 			Assert::AreEqual(std::string_view(input_string), std::string_view(output_string.data(), read));
@@ -192,13 +192,13 @@ namespace NativeIOTests
 		TEST_METHOD(read_does_not_exeed_buffer)
 		{
 			// Arrange
-			constexpr uint64_t stream_size = 512;
+			constexpr size_t stream_size = 512;
 
 			MemoryStream mem_stream(stream_size);
 			std::array<char, stream_size * 2> buffer;
 
 			// Act
-			const uint64_t read = mem_stream.read(buffer.data(), buffer.size());
+			const size_t read = mem_stream.read(buffer.data(), buffer.size());
 
 			// Assert
 			Assert::AreEqual(stream_size, read);

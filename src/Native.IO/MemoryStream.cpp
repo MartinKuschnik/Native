@@ -8,19 +8,28 @@ namespace Native
 	namespace IO
 	{
 		MemoryStream::MemoryStream() noexcept
-			: _data(nullptr),
-			_size(0),
+			: _size(0),
 			_writable(false),
+			_data(nullptr),
 			_position(0)
 		{
 		}
 
-		MemoryStream::MemoryStream(const uint64_t size, const bool writable)
-			: _data(new std::byte[size]),
-			_size(size),
+		MemoryStream::MemoryStream(const size_t size, const bool writable)
+			: _size(size),
 			_writable(writable),
+			_data(new std::byte[size]),
 			_position(0)
 		{
+		}
+
+		MemoryStream::MemoryStream(MemoryStream&& other) noexcept
+			: _size(other._size),
+			_writable(other._writable),
+			_data(other._data),
+			_position(other._position)
+		{
+			other._data = nullptr;
 		}
 
 		MemoryStream::~MemoryStream() noexcept
@@ -57,9 +66,9 @@ namespace Native
 			return this->_position = new_pos;
 		}
 
-		uint64_t MemoryStream::read(void* buffer, const uint64_t buffer_size)
+		size_t MemoryStream::read(void* buffer, const size_t buffer_size)
 		{
-			const uint64_t bytes_to_read = std::min(buffer_size, this->_size - this->_position);
+			const size_t bytes_to_read = std::min(buffer_size, static_cast<size_t>(this->_size - this->_position));
 
 			std::memcpy(buffer, this->_data + this->_position, bytes_to_read);
 
@@ -68,7 +77,7 @@ namespace Native
 			return bytes_to_read;
 		}
 
-		void MemoryStream::write(const void* buffer, const uint64_t buffer_size)
+		void MemoryStream::write(const void* buffer, const size_t buffer_size)
 		{
 			if (this->_size - this->_position < buffer_size)
 				throw Native::InvalidOperationException("To much data.");

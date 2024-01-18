@@ -12,7 +12,11 @@ namespace Native
 		{
 		public:
 			MemoryStream() noexcept;
-			MemoryStream(const uint64_t size, const bool writable = true);
+			MemoryStream(const size_t size, const bool writable = true);
+
+			MemoryStream(MemoryStream&& other) noexcept;
+			MemoryStream(const MemoryStream&) = delete;
+
 			~MemoryStream() noexcept;
 
 			/// <summary>
@@ -102,19 +106,20 @@ namespace Native
 			/// This can be less than the size of the buffer if that many bytes are not currently available,
 			/// or zero (0) if the buffer's length is zero or the end of the stream has been reached.
 			/// </returns>
-			virtual uint64_t read(void* buffer, const uint64_t buffer_size) override;
+			virtual size_t read(void* buffer, const size_t buffer_size) override;
 
 			/// <summary>
 			/// Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
 			/// </summary>
 			/// <param name="buffer">A region of memory. This method copies the contents of this region to the current stream.</param>
 			/// <param name="buffer_size">The size of th buffer.</param>
-			virtual void write(const void* buffer, const uint64_t buffer_size) override;
+			virtual void write(const void* buffer, const size_t buffer_size) override;
 
 		private:
-			std::byte* const _data;
 			const uint64_t _size;
 			const bool _writable;
+
+			std::byte* _data;
 
 			uint64_t _position;
 		};

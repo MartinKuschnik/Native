@@ -35,7 +35,7 @@ namespace NativeIOTests
 
 			const uint64_t pos_after_seek = file_stream.seek(0, SeekOrigin::Begin);
 
-			const uint64_t read = file_stream.read(output_string.data(), output_string.size());
+			const size_t read = file_stream.read(output_string.data(), output_string.size());
 
 			file_stream.close();
 

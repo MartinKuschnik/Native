@@ -18,6 +18,9 @@ namespace Native
 		public:
 			FileStream(const std::filesystem::path path, const FileMode mode, const FileAccess access, const FileShare share);
 
+			FileStream(FileStream&& other) noexcept;
+			FileStream(const FileStream&) = delete;
+
 			virtual ~FileStream() noexcept = default;
 
 			/// <summary>
@@ -92,14 +95,14 @@ namespace Native
 			/// This can be less than the size of the buffer if that many bytes are not currently available,
 			/// or zero (0) if the buffer's length is zero or the end of the stream has been reached.
 			/// </returns>
-			virtual uint64_t read(void* buffer, const uint64_t buffer_size) override;
+			virtual size_t read(void* buffer, const size_t buffer_size) override;
 
 			/// <summary>
 			/// Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
 			/// </summary>
 			/// <param name="buffer">A region of memory. This method copies the contents of this region to the current stream.</param>
 			/// <param name="buffer_size">The size of th buffer.</param>
-			virtual void write(const void* buffer, const uint64_t buffer_size) override;
+			virtual void write(const void* buffer, const size_t buffer_size) override;
 
 		private:
 

@@ -18,7 +18,7 @@ namespace Native
 			// We pick a value that is the largest multiple of 4096 that is still smaller than the large object heap threshold (85K).
 			// The CopyTo/CopyToAsync buffer is short-lived and is likely to be collected at Gen0, and it offers a significant
 			// improvement in Copy performance.
-			static constexpr inline uint64_t DefaultCopyBufferSize = 81920;
+			static constexpr inline size_t DefaultCopyBufferSize = 81920;
 
 			virtual ~Stream() = default;
 
@@ -85,20 +85,20 @@ namespace Native
 			/// This can be less than the size of the buffer if that many bytes are not currently available,
 			/// or zero (0) if the buffer's length is zero or the end of the stream has been reached.
 			/// </returns>
-			virtual uint64_t read(void* buffer, const uint64_t buffer_size) = 0;
+			virtual size_t read(void* buffer, const size_t buffer_size) = 0;
 
 			/// <summary>
 			/// Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
 			/// </summary>
 			/// <param name="buffer">A region of memory. This method copies the contents of this region to the current stream.</param>
 			/// <param name="buffer_size">The size of th buffer.</param>
-			virtual void write(const void* buffer, const uint64_t buffer_size) = 0;
+			virtual void write(const void* buffer, const size_t buffer_size) = 0;
 
 			/// <summary>
 			/// Reads the bytes from the current stream and writes them to another stream. Both streams positions are advanced by the number of bytes copied.
 			/// </summary>
 			/// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
-			virtual void copy_to(Stream* destination, const uint64_t buffer_size = DefaultCopyBufferSize);
+			virtual void copy_to(Stream* destination, const size_t buffer_size = DefaultCopyBufferSize);
 		};
 	}
 }

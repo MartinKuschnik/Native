@@ -15,6 +15,12 @@ namespace Native
 		{
 		}
 
+		FileStream::FileStream(FileStream&& other) noexcept
+			:_handle(std::move(other._handle)),
+			_access(other._access)
+		{
+		}
+
 		uint64_t FileStream::length() const
 		{
 			LARGE_INTEGER value;
@@ -83,12 +89,9 @@ namespace Native
 		}
 
 
-		uint64_t FileStream::read(void* buffer, const uint64_t buffer_size)
+		size_t FileStream::read(void* buffer, const size_t buffer_size)
 		{
 			DWORD read;
-
-			if (buffer_size > 0xffffffffUL)
-				throw Native::NotSupportedException("Buffer to big.");
 
 			const bool success = ReadFile(this->_handle, buffer, static_cast<DWORD>(buffer_size), &read, nullptr);
 
@@ -98,12 +101,9 @@ namespace Native
 			return read;
 		}
 
-		void FileStream::write(const void* buffer, const uint64_t buffer_size)
+		void FileStream::write(const void* buffer, const size_t buffer_size)
 		{
 			DWORD total_written = 0;
-
-			if (buffer_size > 0xffffffffUL)
-				throw Native::NotSupportedException("Buffer to big.");
 
 			do
 			{
