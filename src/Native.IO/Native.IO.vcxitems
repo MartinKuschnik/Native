@@ -25,5 +25,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FileStream.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MemoryStream.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Stream.cpp" />
   </ItemGroup>
 </Project>
