@@ -87,7 +87,7 @@ namespace Native
 			/// <summary>
 			/// Sets the length of the current stream.
 			/// </summary>
-			virtual void set_length() override
+			virtual void set_length(const uint64_t length) override
 			{
 				throw Native::NotSupportedException("The MemoryStream does not support changing the length of the stream.");
 			}

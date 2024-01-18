@@ -10,5 +10,8 @@
     <ClCompile Include="MemoryStreamTests.cpp">
       <Filter>MemoryStream</Filter>
     </ClCompile>
+    <ClCompile Include="FileStreamTests.cpp">
+      <Filter>MemoryStream</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

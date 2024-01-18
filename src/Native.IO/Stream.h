@@ -67,7 +67,7 @@ namespace Native
 			/// <summary>
 			/// Sets the length of the current stream.
 			/// </summary>
-			virtual void set_length() = 0 ;
+			virtual void set_length(const uint64_t length) = 0 ;
 
 			/// <summary>
 			/// Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.

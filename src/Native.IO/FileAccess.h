@@ -4,8 +4,8 @@ namespace Native
 {
 	namespace IO
 	{
-		enum class FileAccess
-		{
+        enum class FileAccess
+        {
             // Specifies read access to the file. Data can be read from the file and
             // the file pointer can be moved. Combine with WRITE for read-write access.
             Read = 1,
@@ -18,6 +18,6 @@ namespace Native
             // file and the file pointer can be moved. Data can also be read from the 
             // file.
             ReadWrite = 3
-		}
+        };
 	}
 }
