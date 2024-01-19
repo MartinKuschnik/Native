@@ -21,11 +21,8 @@ namespace NativeIOTests
 			// Arrange
 			const std::string input_string = "This is the data that is written and read to/from the MemoryStream.";
 
-			MemoryStream mem_stream_1(input_string.size());
+			MemoryStream mem_stream_1(input_string.data(), input_string.size());
 			MemoryStream mem_stream_2(input_string.size());
-
-			mem_stream_1.write(input_string.data(), input_string.size());
-			mem_stream_1.seek(0, SeekOrigin::Begin);
 
 			// Act
 			const size_t copied = mem_stream_1.copy_to(&mem_stream_2, input_string.length() / 3);
@@ -39,11 +36,8 @@ namespace NativeIOTests
 			// Arrange
 			const std::string input_string = "This is the data that is written and read to/from the MemoryStream.";
 
-			MemoryStream mem_stream_1(input_string.size());
+			MemoryStream mem_stream_1(input_string.data(), input_string.size());
 			MemoryStream mem_stream_2(input_string.size());
-
-			mem_stream_1.write(input_string.data(), input_string.size());
-			mem_stream_1.seek(0, SeekOrigin::Begin);
 
 			// Act
 			const size_t copied = mem_stream_1.copy_to(&mem_stream_2, input_string.length());

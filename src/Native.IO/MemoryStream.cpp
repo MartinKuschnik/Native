@@ -23,6 +23,15 @@ namespace Native
 		{
 		}
 
+		MemoryStream::MemoryStream(const void* const initial_data, const size_t size, const bool writable)
+			: _size(size),
+			_writable(writable),
+			_data(new std::byte[size]),
+			_position(0)
+		{
+			std::memcpy(this->_data, initial_data, size);
+		}
+
 		MemoryStream::MemoryStream(MemoryStream&& other) noexcept
 			: _size(other._size),
 			_writable(other._writable),

@@ -14,7 +14,8 @@ namespace Native
 			MemoryStream() noexcept;
 			MemoryStream(const size_t size, const bool writable = true);
 
-
+			MemoryStream(const void* initial_data, const size_t size, const bool writable = true);
+			
 			MemoryStream(MemoryStream&& other) noexcept;
 			MemoryStream(const MemoryStream&) = delete;
 

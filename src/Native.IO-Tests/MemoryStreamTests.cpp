@@ -219,5 +219,17 @@ namespace NativeIOTests
 			Assert::AreEqual(stream_size, read);
 		}
 
+		TEST_METHOD(initial_data_is_copied)
+		{
+			// Arrange
+			const std::string input_string = "This is the data that is written and read to/from the MemoryStream.";
+
+			// Act
+			MemoryStream mem_stream(input_string.data(), input_string.size());
+
+			// Assert
+			Assert::AreEqual(std::string_view(input_string), std::string_view(reinterpret_cast<const char*>(mem_stream.data()), static_cast<size_t>(mem_stream.length())));
+		}
+
 	};
 }
