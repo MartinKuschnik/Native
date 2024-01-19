@@ -98,7 +98,8 @@ namespace Native
 			/// Reads the bytes from the current stream and writes them to another stream. Both streams positions are advanced by the number of bytes copied.
 			/// </summary>
 			/// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
-			virtual void copy_to(Stream* destination, const size_t buffer_size = DefaultCopyBufferSize);
+			/// <returns>The number of bytes copied.</returns>
+			virtual size_t copy_to(Stream* destination, const size_t buffer_size = DefaultCopyBufferSize);
 		};
 	}
 }
