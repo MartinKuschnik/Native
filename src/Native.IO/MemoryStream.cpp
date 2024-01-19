@@ -83,6 +83,8 @@ namespace Native
 				throw Native::InvalidOperationException("To much data.");
 
 			std::memcpy(this->_data + this->_position, buffer, buffer_size);
+
+			this->_position += buffer_size;
 		}
 	}
 }

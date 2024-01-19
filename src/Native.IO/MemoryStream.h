@@ -14,6 +14,7 @@ namespace Native
 			MemoryStream() noexcept;
 			MemoryStream(const size_t size, const bool writable = true);
 
+
 			MemoryStream(MemoryStream&& other) noexcept;
 			MemoryStream(const MemoryStream&) = delete;
 
@@ -114,6 +115,11 @@ namespace Native
 			/// <param name="buffer">A region of memory. This method copies the contents of this region to the current stream.</param>
 			/// <param name="buffer_size">The size of th buffer.</param>
 			virtual void write(const void* buffer, const size_t buffer_size) override;
+
+			constexpr const std::byte* data() const
+			{
+				return this->_data;
+			}
 
 		private:
 			const uint64_t _size;

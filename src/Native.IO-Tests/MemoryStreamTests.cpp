@@ -170,6 +170,21 @@ namespace NativeIOTests
 				mem_stream.write(buffer, sizeof(buffer));				
 			});
 		}
+		TEST_METHOD(write_moves_position)
+		{
+			// Arrange
+			constexpr size_t buffer_size = 256;
+
+			std::array<std::byte, buffer_size> buffer;
+
+			MemoryStream mem_stream(512);
+
+			// Act
+			mem_stream.write(buffer.data(), buffer.size());
+
+			// Assert
+			Assert::AreEqual(buffer_size, mem_stream.position());
+		}
 
 		TEST_METHOD(read_written_data)
 		{
