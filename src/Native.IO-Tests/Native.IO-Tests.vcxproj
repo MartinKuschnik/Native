@@ -186,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="FileStreamTests.cpp" />
     <ClCompile Include="MemoryStreamTests.cpp" />
+    <ClCompile Include="StreamTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
