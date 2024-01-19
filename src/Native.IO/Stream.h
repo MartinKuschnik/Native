@@ -2,9 +2,9 @@
 
 #include <stdint.h>
 #include <chrono>
-#include <span>
 
 #include "SeekOrigin.h"
+#include "CancellationToken.h"
 
 namespace Native
 {
@@ -99,7 +99,7 @@ namespace Native
 			/// </summary>
 			/// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
 			/// <returns>The number of bytes copied.</returns>
-			virtual size_t copy_to(Stream* const destination, const size_t buffer_size = DefaultCopyBufferSize);
+			virtual size_t copy_to(Stream* const destination, const size_t buffer_size = DefaultCopyBufferSize, const Threading::CancellationToken cancellation_token = Threading::CancellationToken::None);
 		};
 	}
 }
