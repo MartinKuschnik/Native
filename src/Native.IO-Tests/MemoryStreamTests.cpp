@@ -183,7 +183,7 @@ namespace NativeIOTests
 			mem_stream.write(buffer.data(), buffer.size());
 
 			// Assert
-			Assert::AreEqual(buffer_size, mem_stream.position());
+			Assert::AreEqual(buffer_size, static_cast<size_t>(mem_stream.position()));
 		}
 
 		TEST_METHOD(read_written_data)
