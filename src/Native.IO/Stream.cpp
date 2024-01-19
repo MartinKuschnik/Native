@@ -4,7 +4,7 @@ namespace Native
 {
 	namespace IO
 	{
-		size_t Stream::copy_to(Stream* destination, const size_t buffer_size)
+		size_t Stream::copy_to(Stream* const destination, const size_t buffer_size)
 		{
 			const auto buffer = std::make_unique_for_overwrite<std::byte[]>(buffer_size);
 
