@@ -8,10 +8,7 @@ namespace Native
 {
 	namespace Threading
 	{
-		CancellationToken::CancellationToken() noexcept
-			: WaitHandle(nullptr)
-		{
-		}
+		const CancellationToken CancellationToken::None = CancellationToken();
 
 		CancellationToken::CancellationToken(const std::shared_ptr<const Threading::WaitHandle> waitHandle) noexcept
 			: WaitHandle(waitHandle)

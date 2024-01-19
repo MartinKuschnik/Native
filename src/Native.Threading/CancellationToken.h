@@ -12,7 +12,13 @@ namespace Native
 		{
 		public:
 
-			CancellationToken() noexcept;
+			static const CancellationToken None;
+
+			constexpr CancellationToken()  noexcept
+				: WaitHandle(nullptr)
+			{
+
+			}
 
 			CancellationToken(const std::shared_ptr<const WaitHandle> waitHandle) noexcept;
 
