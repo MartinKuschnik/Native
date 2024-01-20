@@ -124,7 +124,7 @@ struct std::formatter<Native::ByteSize, char> : std::formatter<string_view, char
 };
 
 template <>
-struct std::formatter<Native::ByteSize, wchar_t> : std::formatter<wstring, wchar_t>
+struct std::formatter<Native::ByteSize, wchar_t> : std::formatter<wstring_view, wchar_t>
 {
 	auto format(const Native::ByteSize& byte_size, std::wformat_context& ctx) const
 	{
@@ -137,6 +137,6 @@ struct std::formatter<Native::ByteSize, wchar_t> : std::formatter<wstring, wchar
 		if (result == 0)
 			throw Native::Exception(std::format("{0} failed.", nameof(StrFormatByteSizeW)));
 
-		return std::formatter<wstring, wchar_t>::format(std::wstring(buffer), ctx);
+		return std::formatter<wstring_view, wchar_t>::format(std::wstring(buffer), ctx);
 	}
 };
