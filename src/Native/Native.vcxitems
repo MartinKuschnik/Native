@@ -15,7 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)ByteSizeLiterals.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ByteSize.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Environment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />

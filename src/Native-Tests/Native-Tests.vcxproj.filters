@@ -25,5 +25,8 @@
     <ClCompile Include="ArgumentExceptionTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="ByteSizeTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
