@@ -13,19 +13,7 @@ namespace Native
 
 	const Guid Guid::Empty;
 
-	Guid::Guid() noexcept
-		: GUID()
-	{
-	}
-	Guid::Guid(const Guid& other) noexcept
-		: GUID(other)
-	{
-	}
 
-	Guid::Guid(const GUID& other) noexcept
-		: GUID(other)
-	{
-	}
 
 	const std::string Guid::string() const
 	{

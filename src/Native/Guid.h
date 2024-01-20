@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <format>
 
 #include "combaseapi.h"
 
@@ -10,9 +11,19 @@ namespace Native
 	{
 	public:
 
-		Guid() noexcept;
-		Guid(const GUID& other) noexcept;
-		Guid(const Guid& other) noexcept;
+		constexpr Guid() noexcept
+			: GUID()
+		{
+		}
+
+		constexpr Guid(const GUID& other) noexcept
+			: GUID(other)
+		{
+		}
+		constexpr Guid(const Guid& other) noexcept
+			: GUID(other)
+		{
+		}
 
 		const std::string string() const;
 		const std::wstring wstring() const;
