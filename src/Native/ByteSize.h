@@ -106,17 +106,37 @@ namespace Native
 }
 
 template <>
-struct std::formatter<Native::ByteSize> : std::formatter<string_view>
+struct std::formatter<Native::ByteSize, char> : std::formatter<string_view, char>
 {
-	auto format(const Native::ByteSize& byte_size, std::format_context& ctx) const {
+	auto format(const Native::ByteSize& byte_size, std::format_context& ctx) const
+	{
+		constexpr size_t buffer_size = 40;
 
-		char buffer[40];
+		char buffer[buffer_size];
 
-		const auto result = StrFormatByteSize64A(static_cast<LONGLONG>(byte_size), buffer, sizeof(buffer));
+		const auto result = StrFormatByteSize64A(static_cast<LONGLONG>(byte_size), buffer, buffer_size);
 
 		if (result == 0)
 			throw Native::Exception(std::format("{0} failed.", nameof(StrFormatByteSize64A)));
 
 		return std::formatter<string_view>::format(std::string(buffer), ctx);
+	}
+};
+
+template <>
+struct std::formatter<Native::ByteSize, wchar_t> : std::formatter<wstring, wchar_t>
+{
+	auto format(const Native::ByteSize& byte_size, std::wformat_context& ctx) const
+	{
+		constexpr size_t buffer_size = 40;
+
+		wchar_t buffer[buffer_size];
+
+		const auto result = StrFormatByteSizeW(static_cast<LONGLONG>(byte_size), buffer, buffer_size);
+
+		if (result == 0)
+			throw Native::Exception(std::format("{0} failed.", nameof(StrFormatByteSizeW)));
+
+		return std::formatter<wstring, wchar_t>::format(std::wstring(buffer), ctx);
 	}
 };
