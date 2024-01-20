@@ -53,5 +53,22 @@ namespace std {
 			return hash(p[0]) ^ hash(p[1]);
 		}
 	};
-
 }
+
+template <>
+struct std::formatter<Native::Guid, char> : std::formatter<string_view, char>
+{
+	auto format(const Native::Guid& guid, std::format_context& ctx) const
+	{
+		return std::formatter<string_view>::format(guid.string(), ctx);
+	}
+};
+
+template <>
+struct std::formatter<Native::Guid, wchar_t> : std::formatter<wstring_view, wchar_t>
+{
+	auto format(const Native::Guid& guid, std::wformat_context& ctx) const
+	{
+		return std::formatter<wstring_view, wchar_t>::format(guid.wstring(), ctx);
+	}
+};
