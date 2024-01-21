@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <format>
 
 #include <Windows.h>
 #include <ws2def.h>
@@ -33,7 +34,8 @@ namespace Native
 			IpAddress(in_addr address) noexcept;
 			IpAddress(in6_addr address) noexcept;
 
-			std::string to_string() const;
+			std::string string() const;
+			std::wstring wstring() const;
 
 			bool is_ipv4_mapped_to_ipv6() const;
 
@@ -74,6 +76,25 @@ namespace Native
 			static IpAddress ParseV4(std::string_view value);
 			static IpAddress ParseV6(std::string_view value);
 		};
-
 	}
 }
+
+
+
+template <>
+struct std::formatter<Native::Net::IpAddress, char> : std::formatter<string_view, char>
+{
+	auto format(const Native::Net::IpAddress& ip_address, std::format_context& ctx) const
+	{
+		return std::formatter<string_view>::format(ip_address.string(), ctx);
+	}
+};
+
+template <>
+struct std::formatter<Native::Net::IpAddress, wchar_t> : std::formatter<wstring_view, wchar_t>
+{
+	auto format(const Native::Net::IpAddress& ip_address, std::wformat_context& ctx) const
+	{
+		return std::formatter<wstring_view, wchar_t>::format(ip_address.wstring(), ctx);
+	}
+};

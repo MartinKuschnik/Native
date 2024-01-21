@@ -79,7 +79,7 @@ namespace Native
 
 		}
 
-		std::string IpAddress::to_string() const
+		std::string IpAddress::string() const
 		{
 			std::string addressString(this->_addressFamily == AddressFamily::InterNetworkV6 ? 46 : 16, '\0');
 
@@ -91,6 +91,22 @@ namespace Native
 				throw Win32Exception(WSAGetLastError(), nameof(inet_ntop));
 
 			addressString.resize(addressString.find('\0'));
+
+			return addressString;
+		}
+
+		std::wstring IpAddress::wstring() const
+		{
+			std::wstring addressString(this->_addressFamily == AddressFamily::InterNetworkV6 ? 46 : 16, '\0');
+
+			const ADDRESS_FAMILY af = this->_addressFamily == AddressFamily::InterNetworkV6 ? AF_INET6 : AF_INET;
+
+			auto res = InetNtopW(af, &this->_address, addressString.data(), addressString.capacity());
+
+			if (res == nullptr)
+				throw Win32Exception(WSAGetLastError(), nameof(inet_ntop));
+
+			addressString.resize(addressString.find(L'\0'));
 
 			return addressString;
 		}
@@ -120,7 +136,7 @@ namespace Native
 				return *this;
 
 			if (!this->is_ipv4_mapped_to_ipv6())
-				throw InvalidOperationException(std::format("The address {0} is no IPv6 mapped IPv4 address.", this->to_string()));
+				throw InvalidOperationException(std::format("The address {0} is no IPv6 mapped IPv4 address.", this->string()));
 
 			return IpAddress(this->_address.v6.u.Byte[12], this->_address.v6.u.Byte[13], this->_address.v6.u.Byte[14], this->_address.v6.u.Byte[15]);
 		}

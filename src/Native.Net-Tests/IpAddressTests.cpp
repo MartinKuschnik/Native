@@ -175,33 +175,122 @@ namespace NativeNetTests
 
 #pragma endregion
 
-#pragma region to_string
+#pragma region string
 
-		TEST_METHOD(to_string_IpV4)
+		TEST_METHOD(string_IpV4)
 		{
 			IpAddress ipv4Address(100, 5, 200, 12);
 
-			std::string ipv4_addr_as_string = ipv4Address.to_string();
+			std::string ipv4_addr_as_string = ipv4Address.string();
 
 			Assert::AreEqual("100.5.200.12", ipv4_addr_as_string.c_str());
 		}
 
-		TEST_METHOD(to_string_IpV6)
+		TEST_METHOD(string_IpV6)
 		{
 			IpAddress ipv6Address(0x20, 0x01, 0x0d, 0xb8, 0x85, 0xa3, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34);
 
-			std::string ipv6_addr_as_string = ipv6Address.to_string();
+			std::string ipv6_addr_as_string = ipv6Address.string();
 
 			Assert::AreEqual("2001:db8:85a3::8a2e:370:7334", ipv6_addr_as_string.c_str());
 		}
 
-		TEST_METHOD(to_string_IPv4MappedToIPv6)
+		TEST_METHOD(string_IPv4MappedToIPv6)
 		{
 			IpAddress ipv6Address(192,0,2,128, AddressFamily::InterNetworkV6);
 
-			std::string ipv6_addr_as_string = ipv6Address.to_string();
+			std::string ipv6_addr_as_string = ipv6Address.string();
 
 			Assert::AreEqual("::ffff:192.0.2.128", ipv6_addr_as_string.c_str());
+		}
+
+#pragma endregion
+
+#pragma region wstring
+
+		TEST_METHOD(wstring_IpV4)
+		{
+			IpAddress ipv4Address(100, 5, 200, 12);
+
+			std::wstring ipv4_addr_as_string = ipv4Address.wstring();
+
+			Assert::AreEqual(L"100.5.200.12", ipv4_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(wstring_IpV6)
+		{
+			IpAddress ipv6Address(0x20, 0x01, 0x0d, 0xb8, 0x85, 0xa3, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34);
+
+			std::wstring ipv6_addr_as_string = ipv6Address.wstring();
+
+			Assert::AreEqual(L"2001:db8:85a3::8a2e:370:7334", ipv6_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(wstring_IPv4MappedToIPv6)
+		{
+			IpAddress ipv6Address(192, 0, 2, 128, AddressFamily::InterNetworkV6);
+
+			std::wstring ipv6_addr_as_string = ipv6Address.wstring();
+
+			Assert::AreEqual(L"::ffff:192.0.2.128", ipv6_addr_as_string.c_str());
+		}
+
+#pragma endregion
+
+#pragma region Format
+
+		TEST_METHOD(Format_IpV4_ToString)
+		{
+			IpAddress ipv4Address(100, 5, 200, 12);
+
+			std::string ipv4_addr_as_string = std::format("{0}", ipv4Address);
+
+			Assert::AreEqual("100.5.200.12", ipv4_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(Format_IpV6_ToString)
+		{
+			IpAddress ipv6Address(0x20, 0x01, 0x0d, 0xb8, 0x85, 0xa3, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34);
+
+			std::string ipv6_addr_as_string = std::format("{0}", ipv6Address);
+
+			Assert::AreEqual("2001:db8:85a3::8a2e:370:7334", ipv6_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(Format_IPv4MappedToIPv6_ToString)
+		{
+			IpAddress ipv6Address(192, 0, 2, 128, AddressFamily::InterNetworkV6);
+
+			std::string ipv6_addr_as_string = std::format("{0}", ipv6Address);
+
+			Assert::AreEqual("::ffff:192.0.2.128", ipv6_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(Format_IpV4_ToWString)
+		{
+			IpAddress ipv4Address(100, 5, 200, 12);
+
+			std::wstring ipv4_addr_as_string = std::format(L"{0}", ipv4Address);
+
+			Assert::AreEqual(L"100.5.200.12", ipv4_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(Format_IpV6_ToWString)
+		{
+			IpAddress ipv6Address(0x20, 0x01, 0x0d, 0xb8, 0x85, 0xa3, 0x00, 0x00, 0x00, 0x00, 0x8a, 0x2e, 0x03, 0x70, 0x73, 0x34);
+
+			std::wstring ipv6_addr_as_string = std::format(L"{0}", ipv6Address);
+
+			Assert::AreEqual(L"2001:db8:85a3::8a2e:370:7334", ipv6_addr_as_string.c_str());
+		}
+
+		TEST_METHOD(Format_IPv4MappedToIPv6_ToWString)
+		{
+			IpAddress ipv6Address(192, 0, 2, 128, AddressFamily::InterNetworkV6);
+
+			std::wstring ipv6_addr_as_string = std::format(L"{0}", ipv6Address);
+
+			Assert::AreEqual(L"::ffff:192.0.2.128", ipv6_addr_as_string.c_str());
 		}
 
 #pragma endregion
