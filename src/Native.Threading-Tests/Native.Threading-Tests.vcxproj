@@ -189,6 +189,7 @@
     <ClCompile Include="CancellationTokenTests.cpp" />
     <ClCompile Include="MultiWaitHandleTests.cpp" />
     <ClCompile Include="TimedResetEventTests.cpp" />
+    <ClCompile Include="WaitHandleTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

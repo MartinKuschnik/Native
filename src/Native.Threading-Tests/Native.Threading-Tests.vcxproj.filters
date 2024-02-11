@@ -22,5 +22,8 @@
     <ClCompile Include="AsyncCompletionTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="WaitHandleTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

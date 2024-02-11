@@ -2,6 +2,8 @@
 
 #include <array>
 #include <chrono>
+#include <optional>
+#include <span>
 
 #include <Windows.h>
 
@@ -21,6 +23,12 @@ namespace Native
 			virtual bool wait_one(const std::chrono::milliseconds timeout) const;
 			virtual bool wait_one(const CancellationToken& cancellationToken) const;
 
+			static bool WaitAll(const std::span<const std::shared_ptr<WaitHandle>> handles);
+			static bool WaitAll(const std::span<const std::shared_ptr<WaitHandle>> handles, const CancellationToken& cancellation_token);
+
+			static uint8_t WaitAny(const std::span<const std::shared_ptr<WaitHandle>> handles);
+			static std::optional<uint8_t> WaitAny(const std::span<const std::shared_ptr<WaitHandle>> handles, const CancellationToken& cancellation_token);
+
 		protected:
 
 			virtual uint16_t count_handles() const = 0;
@@ -33,8 +41,9 @@ namespace Native
 			static uint16_t CopyHandles(const std::shared_ptr<const WaitHandle>& handle, HandleArray& dest, const uint16_t index);
 
 		private:
-			static bool WaitOne(const HANDLE handle, const std::chrono::milliseconds timeout);
-			static bool WaitOne(const HandleArray& handles, const uint16_t handleCount, const std::chrono::milliseconds timeout);
+			static bool Wait(const HANDLE handle, const std::chrono::milliseconds timeout);
+			static std::optional<uint8_t> WaitAny(const HandleArray& handles, const uint16_t handleCount, const std::chrono::milliseconds timeout);
+			static bool WaitAll(const HandleArray& handles, const uint16_t handleCount, const std::chrono::milliseconds timeout);
 		};
 	}
 }
