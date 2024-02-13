@@ -2,15 +2,13 @@
 
 
 #include <execution>
-#include <functional>
-#include <optional>
-#include <span>
 #include <experimental/generator>
+#include <functional>
+#include <span>
 
 #include "ParallelOptions.h"
 #include "Task.h"
 
-#include <iostream>
 
 namespace Native
 {
@@ -58,23 +56,23 @@ namespace Native
 
 				template<typename T, typename TFunc>
 					requires std::convertible_to<TFunc, std::function<void(T)>>
-				static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc body)
+				static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func)
 				{
-					ForEach(std::forward<std::experimental::generator<T>>(source), parallel_options, static_cast<std::function<void(T)>>(body));
+					ForEach(std::move(source), parallel_options, std::forward<std::function<void(T)>>(func));
 				}
 
 				template<typename T, typename TFunc, typename  TInstance>
-				static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& body, TInstance&& args)
+				static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func, TInstance&& instance)
 				{
-					ForEach(std::forward<std::experimental::generator<T>>(source), parallel_options, std::bind(std::forward<TFunc>(body), std::forward<TInstance>(args), std::placeholders::_1));
+					ForEach(std::move(source), parallel_options, std::bind(std::forward<TFunc>(func), std::forward<TInstance>(instance), std::placeholders::_1));
 				}
 
 			private:
 
 				template<typename T>
-				static void Execute(std::function<void(T)> action_to_execute, T element)
+				static void Execute(std::function<void(T)> action_to_execute, T param)
 				{
-					action_to_execute(element);
+					action_to_execute(param);
 				}
 			};
 		}

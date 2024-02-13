@@ -72,7 +72,7 @@ namespace Native
 				std::shared_ptr<ManualResetEvent> _mutableWaitHandle;
 
 				Task(std::shared_ptr<Callable<TResult>>&& callable)
-					: _callable(std::forward<std::shared_ptr<Callable<TResult>>>(callable)),
+					: _callable(std::move(callable)),
 					_mutableWaitHandle(std::make_shared<ManualResetEvent>(false))
 
 				{
@@ -209,7 +209,7 @@ namespace Native
 
 				static bool WaitAll(const std::span<const Task<TResult>> tasks)
 				{
-					return WaitAll(std::forward<const std::span<const Task<TResult>>>(tasks), CancellationToken::None);
+					return WaitAll(tasks, CancellationToken::None);
 				}
 
 				static bool WaitAll(const std::span<const Task<TResult>> tasks, const CancellationToken& cancellationToken)
