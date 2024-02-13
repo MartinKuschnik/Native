@@ -188,6 +188,8 @@
     <ClCompile Include="CancellationTokenSourceTests.cpp" />
     <ClCompile Include="CancellationTokenTests.cpp" />
     <ClCompile Include="MultiWaitHandleTests.cpp" />
+    <ClCompile Include="ParallelTests.cpp" />
+    <ClCompile Include="TaskTests.cpp" />
     <ClCompile Include="TimedResetEventTests.cpp" />
     <ClCompile Include="WaitHandleTests.cpp" />
   </ItemGroup>

@@ -25,5 +25,11 @@
     <ClCompile Include="WaitHandleTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="TaskTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ParallelTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

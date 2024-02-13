@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AutoResetEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CancellationToken.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)CancellationTokenSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventWaitHandle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)ManualResetEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MultiWaitHandle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)TimedResetEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WaitHandle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AsyncCompletionSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AsyncCompletionWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AutoResetEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CancellationToken.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CancellationTokenSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventResetMode.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ManualResetEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MultiWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TimedResetEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Parallel.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ParallelOptions.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Tasks">
+      <UniqueIdentifier>{c693d95e-e80a-4c3e-aedd-b72a7defc0eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

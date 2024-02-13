@@ -13,6 +13,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ByteSize.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)AggregateException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
@@ -24,5 +25,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Environment.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Encoding.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Exception.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)AggregateException.cpp" />
   </ItemGroup>
 </Project>

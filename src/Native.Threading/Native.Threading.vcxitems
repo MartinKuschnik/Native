@@ -23,6 +23,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)EventWaitHandle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ManualResetEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MultiWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Parallel.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ParallelOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Task.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)TimedResetEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WaitHandle.h" />
   </ItemGroup>

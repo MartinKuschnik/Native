@@ -36,10 +36,13 @@ namespace Native
 #if _HAS_CXX23
 		for (const std::stacktrace_entry& stack_entry : std::stacktrace::current(3)) // skip child exception ctor Exception ctor and BuildWhat method
 		{
-			os << std::endl << "   at " << stack_entry.description();
+			if (!stack_entry.description().empty())
+			{
+				os << std::endl << "   at " << stack_entry.description();
 
-			if (!stack_entry.source_file().empty())
-				os << " in " << stack_entry.source_file() << ":line " << stack_entry.source_line();
+				if (!stack_entry.source_file().empty())
+					os << " in " << stack_entry.source_file() << ":line " << stack_entry.source_line();
+			}
 		}
 #endif
 
