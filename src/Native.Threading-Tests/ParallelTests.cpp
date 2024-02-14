@@ -54,7 +54,7 @@ namespace NativeThreadingTests
 			}
 		};
 
-		TEST_METHOD(ForEach_works_with_lambda_expression)
+		TEST_METHOD(ForEach_works_with_generator_and_lambda_expression)
 		{
 			// Arrange
 			constexpr int amount_of_numbers = 100;
@@ -72,7 +72,7 @@ namespace NativeThreadingTests
 			Assert::AreEqual(amount_of_numbers, static_cast<int>(calls));
 		}
 
-		TEST_METHOD(ForEach_works_with_static_method)
+		TEST_METHOD(ForEach_works_with_generator_and_static_method)
 		{
 			// Arrange
 			constexpr int amount_of_numbers = 100;
@@ -88,7 +88,7 @@ namespace NativeThreadingTests
 			Assert::AreEqual(amount_of_numbers, static_cast<int>(SaticForEachCallback<int>::Calls));
 		}
 
-		TEST_METHOD(ForEach_works_with_non_static_method)
+		TEST_METHOD(ForEach_works_with_generator_and_non_static_method)
 		{
 			// Arrange
 			constexpr int amount_of_numbers = 100;
@@ -102,6 +102,56 @@ namespace NativeThreadingTests
 
 			// Assert
 			Assert::AreEqual(amount_of_numbers, static_cast<int>(*callback.Calls));
+		}
+
+		TEST_METHOD(ForEach_works_with_span_and_lambda_expression)
+		{
+			// Arrange
+			constexpr const std::array<int, 5> ints { 5, 6, 7, 8, 9};
+
+			const ParallelOptions parallel_options;
+
+			std::atomic<size_t> calls;
+
+			// Act
+			Parallel::ForEach(std::span(ints.begin(), ints.size()), parallel_options, [&calls](int i) {
+				calls++;
+				});
+
+			// Assert
+			Assert::AreEqual(ints.size(), static_cast<size_t>(calls));
+		}
+
+		TEST_METHOD(ForEach_works_with_span_and_static_method)
+		{
+			// Arrange
+			constexpr const std::array<int, 5> ints{ 5, 6, 7, 8, 9 };
+
+			const ParallelOptions parallel_options;
+
+			SaticForEachCallback<int>::Calls = 0;
+
+			// Act
+			Parallel::ForEach(std::span(ints.begin(), ints.size()), parallel_options, &SaticForEachCallback<int>::Callback);
+
+			// Assert
+			Assert::AreEqual(ints.size(), static_cast<size_t>(SaticForEachCallback<int>::Calls));
+		}
+
+		TEST_METHOD(ForEach_works_with_span_and_non_static_method)
+		{
+			// Arrange
+			constexpr const std::array<int, 5> ints{ 5, 6, 7, 8, 9 };
+
+			const ParallelOptions parallel_options;
+
+			NonSaticForEachCallback<int> callback{ std::make_shared<std::atomic<uint32_t>>(0) };
+
+			// Act
+			Parallel::ForEach(std::span(ints.begin(), ints.size()), parallel_options, &NonSaticForEachCallback<int>::Callback, callback);
+
+			// Assert
+			Assert::AreEqual(ints.size(), static_cast<size_t>(*callback.Calls));
 		}
 
 		TEST_METHOD(ForEach_rethrows_exceptions)
