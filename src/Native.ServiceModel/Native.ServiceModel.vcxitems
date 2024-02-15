@@ -15,10 +15,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)RunMode.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeriveControlsAccepted.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeriveStatus.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SeriveType.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ServiceBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ServiceHost.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)ServiceHost.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)ServiceStatusHandle.h" />
   </ItemGroup>
 </Project>
