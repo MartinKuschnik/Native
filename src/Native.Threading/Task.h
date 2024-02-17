@@ -160,6 +160,8 @@ namespace Native
 				{
 					std::vector<std::shared_ptr<WaitHandle>> wait_handles;
 
+					wait_handles.reserve(tasks.size());
+
 					for (const Task<TResult> task : tasks)
 					{
 						std::shared_ptr<WaitHandle> wait_handle = task._mutableWaitHandle;
@@ -189,6 +191,8 @@ namespace Native
 				{
 					std::vector<std::shared_ptr<WaitHandle>> wait_handles;
 
+					wait_handles.reserve(tasks.size());
+
 					for (const Task<TResult> task : tasks)
 					{
 						std::shared_ptr<WaitHandle> wait_handle = task._mutableWaitHandle;
@@ -215,6 +219,8 @@ namespace Native
 				static bool WaitAll(const std::span<const Task<TResult>> tasks, const CancellationToken& cancellationToken)
 				{
 					std::vector<std::shared_ptr<WaitHandle>> wait_handles;
+
+					wait_handles.reserve(tasks.size());
 
 					for (const Task<TResult> task : tasks)
 					{
