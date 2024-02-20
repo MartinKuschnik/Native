@@ -88,7 +88,7 @@ namespace Native
 				return NO_ERROR;
 			}
 
-			static void ServiceMain(DWORD dwNumServicesArgs, char** lpServiceArgVectors)
+			static void __stdcall ServiceMain(DWORD dwNumServicesArgs, char** lpServiceArgVectors)
 			{
 				Threading::CancellationTokenSource cancellation_token_source;
 
@@ -110,7 +110,7 @@ namespace Native
 				status_handle.set_status(SeriveStatus::Stopped);
 			}
 
-			static DWORD ServiceCtrHandler(DWORD dwControl, DWORD dwEventType, void* lpEventData, void* lpContext)
+			static DWORD __stdcall ServiceCtrHandler(DWORD dwControl, DWORD dwEventType, void* lpEventData, void* lpContext)
 			{
 				const ServiceContext* context = reinterpret_cast<ServiceContext*>(lpContext);
 
