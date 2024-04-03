@@ -157,5 +157,40 @@ namespace NativeThreadingTests
 			// Assert
 			Assert::IsTrue(result.has_value());
 		}
+
+		TEST_METHOD(WaitAny_with_Timebased_CancellationToken)
+		{
+			// Arrange
+			const std::shared_ptr<ManualResetEvent> mre1 = std::make_shared<ManualResetEvent>(false);
+			const std::shared_ptr<ManualResetEvent> mre2 = std::make_shared<ManualResetEvent>(false);
+
+			const std::array<const std::shared_ptr<WaitHandle>, 2> wait_handles{ mre1 , mre2 };
+
+			CancellationTokenSource cts(10ms);
+
+			// Act
+			const std::optional<uint8_t> result = WaitHandle::WaitAny(wait_handles, cts.Token);
+
+			// Assert
+			Assert::IsFalse(result.has_value());
+		}
+
+		TEST_METHOD(WaitAny_with_Canceled_CancellationToken)
+		{
+			// Arrange
+			const std::shared_ptr<ManualResetEvent> mre1 = std::make_shared<ManualResetEvent>(false);
+			const std::shared_ptr<ManualResetEvent> mre2 = std::make_shared<ManualResetEvent>(false);
+
+			const std::array<const std::shared_ptr<WaitHandle>, 2> wait_handles{ mre1 , mre2 };
+
+			CancellationTokenSource cts;
+			cts.cancel();
+
+			// Act
+			const std::optional<uint8_t> result = WaitHandle::WaitAny(wait_handles, cts.Token);
+
+			// Assert
+			Assert::IsFalse(result.has_value());
+		}
 	};
 }

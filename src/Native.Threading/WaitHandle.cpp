@@ -142,7 +142,7 @@ namespace Native
 
 			std::optional<uint8_t> index_satisfied = WaitHandle::WaitAny(_handels, total_handle_count, -1ms);
 
-			if (index_satisfied > handle_count)
+			if (index_satisfied >= handle_count)
 				return std::nullopt;
 
 			return index_satisfied;
