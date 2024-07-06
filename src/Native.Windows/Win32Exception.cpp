@@ -11,7 +11,7 @@ namespace Native
 	{
 		Win32Exception::Win32Exception(const unsigned long errorCode, const char* methodName)
 			: Native::Exception(nameof(Win32Exception), Win32Exception::FormatErrorMessage(errorCode, methodName)),
-			  m_ErrorCode(errorCode)
+			  ErrorCode(errorCode)
 		{
 		}
 
