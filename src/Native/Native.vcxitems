@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FormatException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Guid.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)InvalidOperationException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lazy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />

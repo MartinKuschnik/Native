@@ -14,6 +14,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ByteSize.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)AggregateException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Lazy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />

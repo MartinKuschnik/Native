@@ -28,5 +28,8 @@
     <ClCompile Include="ByteSizeTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="LazyTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

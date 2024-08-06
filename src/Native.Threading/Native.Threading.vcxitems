@@ -21,6 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CancellationTokenSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventResetMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)EventWaitHandle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LazyThreadSafetyMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ManualResetEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MultiWaitHandle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Parallel.h" />

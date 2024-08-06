@@ -111,6 +111,7 @@ Global
 		Native\Native.vcxitems*{574dc77a-dcf8-47e0-8e22-4162160e4713}*SharedItemsImports = 4
 		Native.ServiceModel\Native.ServiceModel.vcxitems*{5de1910b-8b93-4608-a7db-734fccc63037}*SharedItemsImports = 9
 		Native.IO\Native.IO.vcxitems*{7f4d02a4-5a91-49f9-857a-eb3884acd146}*SharedItemsImports = 9
+		Native.Threading\Native.Threading.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native\Native.vcxitems*{8db1f34b-88b3-4736-a391-2e226843de13}*SharedItemsImports = 4
 		Native.Diagnostics\Native.Diagnostics.vcxitems*{a147bf09-6361-4916-a413-79132059dd59}*SharedItemsImports = 4

@@ -21,7 +21,7 @@ namespace NativeTests
 			// Act
 			const std::string as_string = std::format("{0}", byte_size);
 
-			//Assert
+			// Assert
 			Assert::AreEqual("1.00 KB"s, as_string);
 		}
 
@@ -33,7 +33,7 @@ namespace NativeTests
 			// Act
 			const std::string as_string = std::format("{0}", byte_size);
 
-			//Assert
+			// Assert
 			Assert::AreEqual("1.00 MB"s, as_string);
 		}
 
@@ -45,7 +45,7 @@ namespace NativeTests
 			// Act
 			const std::string as_string = std::format("{0}", byte_size);
 
-			//Assert
+			// Assert
 			Assert::AreEqual("1.00 GB"s, as_string);
 		}
 
@@ -57,7 +57,7 @@ namespace NativeTests
 			// Act
 			const std::string as_string = std::format("{0}", byte_size);
 
-			//Assert
+			// Assert
 			Assert::AreEqual("1.00 TB"s, as_string);
 		}
 
@@ -69,7 +69,7 @@ namespace NativeTests
 			// Act
 			const std::string as_string = std::format("{0}", byte_size);
 
-			//Assert
+			// Assert
 			Assert::AreEqual("1.00 PB"s, as_string);
 		}
 	};
