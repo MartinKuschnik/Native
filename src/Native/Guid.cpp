@@ -13,8 +13,6 @@ namespace Native
 
 	const Guid Guid::Empty;
 
-
-
 	const std::string Guid::string() const
 	{
 		wchar_t lpsz[GUID_BUFFER_SIZE];
