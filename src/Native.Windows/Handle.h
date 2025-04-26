@@ -17,15 +17,16 @@ namespace Native
 
 			Handle() noexcept;
 			Handle(const Handle&) = delete;
-			Handle(Handle&&) noexcept;
+			Handle(Handle&& other) noexcept;
 
 			virtual ~Handle() noexcept;
 
 			bool is_valid() const noexcept;
 
+			Handle duplicate() const;
+
 			operator const HANDLE() const noexcept;
 
-			Handle& operator=(const HANDLE& handle) noexcept;
 			Handle& operator=(HANDLE&& handle) noexcept;
 
 			Handle& operator=(Handle&& other) noexcept;
