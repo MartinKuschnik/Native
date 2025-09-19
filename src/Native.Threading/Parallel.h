@@ -2,7 +2,7 @@
 
 
 #include <execution>
-#include <experimental/generator>
+#include <generator>
 #include <functional>
 #include <span>
 
@@ -23,7 +23,7 @@ namespace Native
 				Parallel() = delete;
 
 				template<typename T>
-				constexpr static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, std::function<void(T)> body)
+				constexpr static void ForEach(std::generator<T>&& source, const ParallelOptions& parallel_options, std::function<void(T)> body)
 				{
 					InternalForEach<T>(std::move(source), parallel_options, body);
 				}
@@ -36,7 +36,7 @@ namespace Native
 
 				template<typename T, typename TFunc>
 					requires std::convertible_to<TFunc, std::function<void(T)>>
-				constexpr static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func)
+				constexpr static void ForEach(std::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func)
 				{
 					InternalForEach<T>(std::move(source), parallel_options, std::forward<std::function<void(T)>>(func));
 				}
@@ -49,7 +49,7 @@ namespace Native
 				}
 
 				template<typename T, typename TFunc, typename  TInstance>
-				constexpr static void ForEach(std::experimental::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func, TInstance&& instance)
+				constexpr static void ForEach(std::generator<T>&& source, const ParallelOptions& parallel_options, TFunc&& func, TInstance&& instance)
 				{
 					InternalForEach<T>(std::move(source), parallel_options, std::bind(std::forward<TFunc>(func), std::forward<TInstance>(instance), std::placeholders::_1));
 				}
