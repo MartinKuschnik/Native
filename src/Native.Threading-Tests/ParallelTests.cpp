@@ -24,7 +24,7 @@ namespace NativeThreadingTests
 
 		struct TestException : public std::exception {};
 
-		static std::experimental::generator<int> GenerateInts(const int count)
+		static std::generator<int> GenerateInts(const int count)
 		{
 			for (int i = 0; i < count; i++)
 			{
