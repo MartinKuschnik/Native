@@ -14,7 +14,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)File.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FileAccess.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FileAttributes.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FileMode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FileShare.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)FileStream.h" />
@@ -23,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Stream.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)File.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FileStream.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MemoryStream.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Stream.cpp" />
