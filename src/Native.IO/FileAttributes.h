@@ -10,6 +10,11 @@ namespace Native
         enum class FileAttributes
         {
             /// <summary>
+			/// No file attributes are set.
+            /// </summary>
+            None = 0,
+
+            /// <summary>
             /// The file is read-only. ReadOnly is supported on Windows, Linux, and macOS.  
             /// On Linux and macOS, changing the ReadOnly flag is a permissions operation.
             /// </summary>
