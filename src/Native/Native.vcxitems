@@ -27,6 +27,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lazy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringCompareOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
   </ItemGroup>
   <ItemGroup>
@@ -40,5 +42,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)InvalidOperationException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Encoding.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
   </ItemGroup>
 </Project>
