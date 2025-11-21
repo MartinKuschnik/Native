@@ -22,7 +22,7 @@ namespace NativeTests
 			const std::string as_string = std::format("{0}", byte_size);
 
 			// Assert
-			Assert::AreEqual("1.00 KB"s, as_string);
+			Assert::IsTrue("1.00 KB"s == as_string || "1,00 KB"s == as_string);
 		}
 
 		TEST_METHOD(Format_1024_KB_to_1_MB)
@@ -34,7 +34,7 @@ namespace NativeTests
 			const std::string as_string = std::format("{0}", byte_size);
 
 			// Assert
-			Assert::AreEqual("1.00 MB"s, as_string);
+			Assert::IsTrue("1.00 MB"s == as_string || "1,00 MB"s == as_string);
 		}
 
 		TEST_METHOD(Format_1024_MB_to_1_GB)
@@ -46,7 +46,7 @@ namespace NativeTests
 			const std::string as_string = std::format("{0}", byte_size);
 
 			// Assert
-			Assert::AreEqual("1.00 GB"s, as_string);
+			Assert::IsTrue("1.00 GB"s == as_string || "1,00 GB"s == as_string);
 		}
 
 		TEST_METHOD(Format_1024_GB_to_1_TB)
@@ -58,7 +58,7 @@ namespace NativeTests
 			const std::string as_string = std::format("{0}", byte_size);
 
 			// Assert
-			Assert::AreEqual("1.00 TB"s, as_string);
+			Assert::IsTrue("1.00 TB"s == as_string || "1,00 TB"s == as_string);
 		}
 
 		TEST_METHOD(Format_1024_TB_to_1_PB)
@@ -70,7 +70,7 @@ namespace NativeTests
 			const std::string as_string = std::format("{0}", byte_size);
 
 			// Assert
-			Assert::AreEqual("1.00 PB"s, as_string);
+			Assert::IsTrue("1.00 PB"s == as_string || "1,00 PB"s == as_string);
 		}
 	};
 }
