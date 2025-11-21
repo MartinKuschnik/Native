@@ -10,6 +10,11 @@ namespace Native
 {
 	namespace Threading
 	{
+		EventWaitHandle::EventWaitHandle(Windows::Handle&& handle) noexcept
+			: _handle(std::move(handle))
+		{
+		}
+
 		EventWaitHandle::EventWaitHandle(bool initialState, EventResetMode mode) noexcept
 			: EventWaitHandle(initialState, mode, std::string_view())
 		{
@@ -57,6 +62,28 @@ namespace Native
 
 			if (!ret)
 				throw Windows::Win32Exception(GetLastError(), nameof(SetEvent));
+		}
+
+		std::optional<EventWaitHandle> EventWaitHandle::OpenExisting(std::string_view name)
+		{
+			if (MAX_PATH < name.length())
+				throw ArgumentException("Wait handle name too long");
+
+			constexpr DWORD access_rights = MAXIMUM_ALLOWED | SYNCHRONIZE | EVENT_MODIFY_STATE;
+
+			Windows::Handle handle = OpenEventA(access_rights, false, name.data());
+
+			if (handle == NULL)
+			{
+				const DWORD error = GetLastError();
+
+				if (error == ERROR_FILE_NOT_FOUND)
+					return std::nullopt;
+
+				throw Windows::Win32Exception(error, nameof(CreateEventW));
+			}			
+
+			return EventWaitHandle(std::move(handle));
 		}
 
 		uint16_t EventWaitHandle::count_handles() const

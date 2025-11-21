@@ -26,6 +26,8 @@ namespace Native
 			void reset();
 			void set();
 
+			static std::optional<EventWaitHandle> OpenExisting(std::string_view name);
+
 		protected:
 
 			virtual uint16_t count_handles() const override;
@@ -33,6 +35,8 @@ namespace Native
 
 		private:
 			Windows::Handle _handle;
+
+			EventWaitHandle(Windows::Handle&& handle) noexcept;
 		};
 	}
 }
