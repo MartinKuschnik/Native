@@ -2,6 +2,7 @@
 
 #include <string>
 #include <format>
+#include <optional>
 
 #include "combaseapi.h"
 
@@ -37,6 +38,9 @@ namespace Native
 
 		static const Guid Parse(const std::string_view value);
 		static const Guid Parse(const std::wstring_view value);
+
+		static const std::optional<Guid> TryParse(const std::string_view value);
+		static const std::optional<Guid> TryParse(const std::wstring_view value);
 	};
 }
 

@@ -103,6 +103,62 @@ namespace Native
 		return Guid(guid);
 	}
 
+	const std::optional<Guid> Guid::TryParse(const std::string_view value)
+	{
+		std::wstring wValue(value.begin(), value.end());
+
+		// ToDo: find a more efficient way
+		if (wValue.length() == 36)
+		{
+			wValue.insert(wValue.begin(), '{');
+			wValue.insert(wValue.end(), '}');
+		}
+
+		GUID guid;
+
+		const HRESULT hCreateGuid = CLSIDFromString(wValue.data(), &guid);
+
+		if (FAILED(hCreateGuid))
+		{
+			if (hCreateGuid == CO_E_CLASSSTRING)
+				return std::nullopt;
+
+			throw HResultException(hCreateGuid, nameof(CLSIDFromString));
+		}
+
+		return Guid(guid);
+	}
+
+	const std::optional<Guid> Guid::TryParse(const std::wstring_view value)
+	{
+		GUID guid;
+		HRESULT hCreateGuid;
+
+		// ToDo: find a more efficient way
+		if (value.length() == 36)
+		{
+			std::wstring padded(value);
+			padded.insert(padded.begin(), 1, L'{');
+			padded.insert(padded.end(), 1, '}');
+
+			hCreateGuid = CLSIDFromString(padded.data(), &guid);
+		}
+		else
+		{
+			hCreateGuid = CLSIDFromString(value.data(), &guid);
+		}
+
+		if (FAILED(hCreateGuid))
+		{
+			if (hCreateGuid == CO_E_CLASSSTRING)
+				return std::nullopt;
+
+			throw HResultException(hCreateGuid, nameof(CLSIDFromString));
+		}
+
+		return Guid(guid);
+	}
+
 	Guid::operator const std::string() const
 	{
 		return this->string();
