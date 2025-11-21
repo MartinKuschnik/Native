@@ -18,8 +18,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Handle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HResultException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SecurityIdentifier.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Win32.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Win32Exception.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)WindowsIdentity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ComObject.h" />
@@ -27,7 +29,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HResultException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SecurityIdentifier.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Win32.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Win32Exception.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)WindowsIdentity.h" />
   </ItemGroup>
 </Project>

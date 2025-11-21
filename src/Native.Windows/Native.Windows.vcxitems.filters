@@ -9,6 +9,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ComRuntime.cpp">
       <Filter>COM</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WindowsIdentity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SecurityIdentifier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
@@ -22,6 +24,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ComRuntime.h">
       <Filter>COM</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WindowsIdentity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SecurityIdentifier.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="COM">
