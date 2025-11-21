@@ -9,7 +9,6 @@ using namespace std::chrono_literals;
 
 namespace Native
 {
-	using namespace Diagnostics;
 	using namespace Windows;
 
 	namespace IO
