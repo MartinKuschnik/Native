@@ -18,6 +18,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Handle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)HResultException.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Registry.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RegistryKey.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SecurityIdentifier.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Win32.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Win32Exception.cpp" />
@@ -29,6 +31,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Handle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HResultException.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Registry.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RegistryKey.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SecurityIdentifier.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Win32.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Win32Exception.h" />

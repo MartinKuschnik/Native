@@ -11,6 +11,8 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WindowsIdentity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SecurityIdentifier.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Registry.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)RegistryKey.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)ConfigurationManagerReturnCodeException.h" />
@@ -26,6 +28,8 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WindowsIdentity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SecurityIdentifier.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Registry.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)RegistryKey.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="COM">
