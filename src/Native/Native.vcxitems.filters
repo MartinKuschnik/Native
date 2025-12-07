@@ -17,6 +17,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Lazy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringCompareOptions.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OperatingSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlatformID.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Version.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Library.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadLibraryOption.h" />
   </ItemGroup>
@@ -32,6 +35,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Exception.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)AggregateException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OperatingSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Library.cpp" />
   </ItemGroup>
 </Project>

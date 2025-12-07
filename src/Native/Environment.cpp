@@ -1,5 +1,7 @@
 #include "Environment.h"
 
+#include <string>
+
 #include <Windows.h>
 #include <dsgetdc.h>
 #include <lm.h>
@@ -7,6 +9,7 @@
 
 #include <NotSupportedException.h>
 
+#include <Registry.h>
 #include <Win32Exception.h>
 #include <HResultException.h>
 
@@ -200,5 +203,35 @@ namespace Native
 			throw HResultException(result, nameof(SHGetFolderPathA));
 
 		return std::filesystem::path(buffer);
+	}
+
+
+
+	#pragma comment(lib, "ntdll.lib")
+	extern "C" NTSYSAPI NTSTATUS NTAPI RtlGetVersion(OUT PRTL_OSVERSIONINFOEXW lpVersionInformation);
+
+	OperatingSystem Environment::GetOSVersion()
+	{
+		static OperatingSystem* pOperatingSystem;
+
+		if (pOperatingSystem == nullptr)
+		{
+			RTL_OSVERSIONINFOEXW osvi{ .dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOEXW) };
+
+			// RtlGetVersion always return STATUS_SUCCESS 
+			RtlGetVersion(&osvi);
+
+			const RegistryKey reg_key = Registry::OpenKey(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion");
+
+			const DWORD revision = reg_key.GetValue<DWORD>(L"UBR", 0);
+
+			const std::wstring edition = reg_key.GetValue<std::wstring>(L"EditionID", L"");
+
+			const Version version = Version(osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, revision);
+
+			pOperatingSystem = new OperatingSystem(PlatformID::Windows, version, osvi.wProductType != VER_NT_WORKSTATION, edition);
+		}
+
+		return *pOperatingSystem;
 	}
 }

@@ -29,9 +29,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadLibraryOption.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NotSupportedException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Encoding.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OperatingSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)PlatformID.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringCompareOptions.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)StringUtils.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Util.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)AggregateException.cpp" />
@@ -45,6 +48,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Library.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NotSupportedException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Encoding.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)OperatingSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
   </ItemGroup>
 </Project>

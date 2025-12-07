@@ -5,6 +5,8 @@
 #include <string>
 #include <filesystem>
 
+#include "OperatingSystem.h"
+
 namespace Native
 {
 	class Environment
@@ -70,5 +72,7 @@ namespace Native
 		static std::string ComputerName(const COMPUTER_NAME_FORMAT format);
 
 		static std::filesystem::path GetFolderPath(const SpecialFolder folder);
+
+		static OperatingSystem GetOSVersion();
 	};
 }
