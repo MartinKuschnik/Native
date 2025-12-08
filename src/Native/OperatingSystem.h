@@ -49,5 +49,13 @@ namespace Native
 		static bool IsOSVersionAtLeast(const uint32_t major, const uint32_t minor, const uint32_t build, const uint32_t revision);
 		static bool IsOSVersionAtLeast(const OperatingSystem& os, const uint32_t major, const uint32_t minor, const uint32_t build, const uint32_t revision);
 	};
-
 }
+
+template <>
+struct std::formatter<Native::OperatingSystem, wchar_t> : std::formatter<wstring_view, wchar_t>
+{
+	auto format(const Native::OperatingSystem& os, std::wformat_context& ctx) const 
+	{
+		return std::formatter<wstring_view, wchar_t>::format(os.wstring(), ctx);
+	}
+};
