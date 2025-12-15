@@ -21,16 +21,10 @@ namespace Native
 		// and this should not be possible because we defined it by a constant.
 		int result = StringFromGUID2(*this, &lpsz[0], GUID_BUFFER_SIZE);
 
-		const std::wstring_view asWString(&lpsz[1], GUID_LENGTH_WITHOUT_BRACKETS);
-
 		std::string asString(GUID_LENGTH_WITHOUT_BRACKETS, 0);
 
-		std::transform(
-			asWString.begin(),
-			asWString.end(),
-			asString.begin(),
-			[](wchar_t c) { return (char)c; }
-		);
+		for (size_t i = 0; i < GUID_LENGTH_WITHOUT_BRACKETS; i++)
+			asString[i] = static_cast<char>(lpsz[i + 1]);
 
 		return asString;
 	}
@@ -62,7 +56,7 @@ namespace Native
 		std::wstring wValue(value.begin(), value.end());
 
 		// ToDo: find a more efficient way
-		if (wValue.length() == 36)
+		if (wValue.length() == GUID_LENGTH_WITHOUT_BRACKETS)
 		{
 			wValue.insert(wValue.begin(), '{');
 			wValue.insert(wValue.end(), '}');
@@ -84,7 +78,7 @@ namespace Native
 		HRESULT hCreateGuid;
 
 		// ToDo: find a more efficient way
-		if (value.length() == 36)
+		if (value.length() == GUID_LENGTH_WITHOUT_BRACKETS)
 		{
 			std::wstring padded(value);
 			padded.insert(padded.begin(), 1, L'{');
@@ -108,7 +102,7 @@ namespace Native
 		std::wstring wValue(value.begin(), value.end());
 
 		// ToDo: find a more efficient way
-		if (wValue.length() == 36)
+		if (wValue.length() == GUID_LENGTH_WITHOUT_BRACKETS)
 		{
 			wValue.insert(wValue.begin(), '{');
 			wValue.insert(wValue.end(), '}');
@@ -135,7 +129,7 @@ namespace Native
 		HRESULT hCreateGuid;
 
 		// ToDo: find a more efficient way
-		if (value.length() == 36)
+		if (value.length() == GUID_LENGTH_WITHOUT_BRACKETS)
 		{
 			std::wstring padded(value);
 			padded.insert(padded.begin(), 1, L'{');
