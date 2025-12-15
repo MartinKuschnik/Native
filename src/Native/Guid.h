@@ -49,7 +49,6 @@ namespace std {
 	template <>
 	struct hash<Native::Guid>
 	{
-		// ToDo: add unit tests for hash<Native::Guid>
 		std::size_t operator()(const Native::Guid& guid) const
 		{
 			const std::uint64_t* p = reinterpret_cast<const std::uint64_t*>(&guid);
