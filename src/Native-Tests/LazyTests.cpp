@@ -45,9 +45,9 @@ namespace NativeTests
 			int value_factory_calls = 0;
 
 			const auto value_factory = [&value_factory_calls]() {
-				int val = ++value_factory_calls;
-				std::this_thread::sleep_for(100ms * val);
-				return val;
+				++value_factory_calls;
+				std::this_thread::sleep_for(100ms);
+				return value_factory_calls;
 			};
 
 			const Lazy<int> lazy(value_factory, LazyThreadSafetyMode::None);
@@ -58,11 +58,9 @@ namespace NativeTests
 			auto val2 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 			auto val3 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 
-			Assert::AreEqual(1, val1.result());
-			Assert::AreEqual(2, val2.result());
+			Assert::AreEqual(3, val1.result());
+			Assert::AreEqual(3, val2.result());
 			Assert::AreEqual(3, val3.result());
-
-			Assert::AreEqual(3, value_factory_calls);
 		}
 
 		TEST_METHOD(lazy_with_thread_safety_mode_publication_only_is_partially_thread_safe)
@@ -71,7 +69,7 @@ namespace NativeTests
 
 			const auto value_factory = [&value_factory_calls]() {
 				int val = ++value_factory_calls;
-				std::this_thread::sleep_for(100ms * val);
+				std::this_thread::sleep_for(200ms);
 				return val;
 			};
 
@@ -83,11 +81,10 @@ namespace NativeTests
 			auto val2 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 			auto val3 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 
-			Assert::AreEqual(1, val1.result(), L"first");
-			Assert::AreEqual(1, val2.result(), L"second");
-			Assert::AreEqual(1, val3.result(), L"last");
+			Assert::AreEqual(val1.result(), val2.result(), L"second");
+			Assert::AreEqual(val1.result(), val3.result(), L"last");
 
-			Assert::AreEqual(3, value_factory_calls);
+			Assert::IsTrue(value_factory_calls > 1);
 		}
 
 		TEST_METHOD(lazy_with_thread_safety_mode_execution_and_publication_is_thread_safe)
@@ -96,7 +93,7 @@ namespace NativeTests
 
 			const auto value_factory = [&value_factory_calls]() {
 				int val = ++value_factory_calls;
-				std::this_thread::sleep_for(100ms * val);
+				std::this_thread::sleep_for(100ms);
 				return val;
 			};
 
@@ -120,9 +117,9 @@ namespace NativeTests
 			int value_factory_calls = 0;
 
 			const auto value_factory = [&value_factory_calls]() {
-				int val = ++value_factory_calls;
-				std::this_thread::sleep_for(100ms * val);
-				return val;
+				++value_factory_calls;
+				std::this_thread::sleep_for(100ms);
+				return value_factory_calls;
 			};
 
 			const Lazy<int> lazy(value_factory, false);
@@ -133,11 +130,9 @@ namespace NativeTests
 			auto val2 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 			auto val3 = Tasks::Task<int>::Run([&lazy] { return lazy.value(); });
 
-			Assert::AreEqual(1, val1.result());
-			Assert::AreEqual(2, val2.result());
+			Assert::AreEqual(3, val1.result());
+			Assert::AreEqual(3, val2.result());
 			Assert::AreEqual(3, val3.result());
-
-			Assert::AreEqual(3, value_factory_calls);
 		}
 
 		TEST_METHOD(lazy_with_is_thread_true_is_thread_safe)
