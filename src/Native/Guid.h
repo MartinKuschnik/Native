@@ -26,21 +26,22 @@ namespace Native
 		{
 		}
 
-		const std::string string() const;
-		const std::wstring wstring() const;
+		std::string string() const;
+		std::wstring wstring() const;
 
-		operator const std::string() const;
-		operator const std::wstring() const;
+		operator std::string() const;
+		operator std::wstring() const;
 
 		static const Guid Empty;
 
-		static const Guid NewGuid();
+		static Guid NewGuid();
 
-		static const Guid Parse(const std::string_view value);
-		static const Guid Parse(const std::wstring_view value);
+		static Guid Parse(const std::string_view value);
+		static Guid Parse(const std::wstring_view value);
 
-		static const std::optional<Guid> TryParse(const std::string_view value);
-		static const std::optional<Guid> TryParse(const std::wstring_view value);
+		static std::optional<Guid> TryParse(const std::string_view value);
+		static std::optional<Guid> TryParse(const std::wstring_view value);
+
 	};
 }
 
