@@ -22,6 +22,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Version.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Library.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LoadLibraryOption.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Convert.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DoubleChar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
@@ -37,5 +39,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)StringUtils.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)OperatingSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Library.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Convert.cpp" />
   </ItemGroup>
 </Project>

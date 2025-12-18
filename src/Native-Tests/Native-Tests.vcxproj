@@ -186,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="ArgumentExceptionTests.cpp" />
     <ClCompile Include="ByteSizeTests.cpp" />
+    <ClCompile Include="ConvertTests.cpp" />
     <ClCompile Include="EventTests.cpp" />
     <ClCompile Include="FormatExceptionTests.cpp" />
     <ClCompile Include="GuidTests.cpp" />

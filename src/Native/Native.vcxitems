@@ -18,6 +18,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)ArgumentException.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ByteSize.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Console.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Convert.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DoubleChar.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Environment.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Event.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Exception.h" />
@@ -40,6 +42,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)AggregateException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ArgumentException.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Console.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Convert.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Environment.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Exception.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)FormatException.cpp" />
