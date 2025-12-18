@@ -17,6 +17,22 @@ namespace Native
 		{
 		}
 
+
+		constexpr Guid(uint32_t g1, uint16_t g2, uint16_t g3, uint16_t g4, uint64_t g5) noexcept
+			: GUID{ g1, g2, g3, {
+					static_cast<uint8_t>(g4 >> 8),
+					static_cast<uint8_t>(g4),
+					static_cast<uint8_t>(g5 >> 40),
+					static_cast<uint8_t>(g5 >> 32),
+					static_cast<uint8_t>(g5 >> 24),
+					static_cast<uint8_t>(g5 >> 16),
+					static_cast<uint8_t>(g5 >> 8),
+					static_cast<uint8_t>(g5)
+				} 
+			}
+		{
+		}
+
 		constexpr Guid(const GUID& other) noexcept
 			: GUID(other)
 		{
