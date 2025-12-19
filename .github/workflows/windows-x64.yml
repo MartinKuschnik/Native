@@ -32,6 +32,15 @@ jobs:
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1.2
       
+    - name: vcpkg integrate install
+      run: C:\vcpkg\vcpkg.exe integrate install
+
+    - name: Cache vcpkg_installed
+      uses: actions/cache@v3
+      with:
+        path: 'src/Backup Agent/vcpkg_installed'
+        key: vcpkg_installed-x64-${{env.BUILD_CONFIGURATION}}
+      
     - name: Build Solution (x64)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
@@ -40,3 +49,27 @@ jobs:
     - name: Unit Tests (x64)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       run: vstest.console.exe /Platform:x64 'src/**/*tests*.dll' 
+
+    - name: Benchmarking (x86)
+      working-directory: ${{env.GITHUB_WORKSPACE}}     
+      run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath .\benchmark-data-x86.json
+    
+      # Download previous benchmark result from cache (if exists)
+    - name: Download previous benchmark data
+      uses: actions/cache@v4
+      with:
+        path: ./cache
+        key: ${{ runner.os }}-benchmark-x86
+
+      # Run `github-action-benchmark` action
+    - name: Store benchmark result
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        # What benchmark tool the output.txt came from
+        tool: 'googlecpp'
+        # Where the output from the benchmark tool is stored
+        output-file-path: benchmark-data-x86.json
+        # Where the previous data file is stored
+        external-data-json-path: ./cache/benchmark-data-x86.json
+        # Workflow will fail when an alert happens
+        fail-on-alert: true
