@@ -164,6 +164,8 @@ Global
 		Native.Net\Native.Net.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
 		Native\Native.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
+		Native.Threading\Native.Threading.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
+		Native.Web\Native.Web.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
 		Native\Native.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
 	EndGlobalSection
