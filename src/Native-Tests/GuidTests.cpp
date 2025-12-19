@@ -20,7 +20,7 @@ namespace NativeTests
 			Assert::AreEqual(std::string("B463C5B8-2D96-4244-A1F7-E70746C4D2FA"), static_cast<std::string>(guid));			
 		}
 
-		TEST_METHOD(Ctor_Matches_WSring)
+		TEST_METHOD(Ctor_Matches_WString)
 		{
 			constexpr Guid guid = { 0xCCDD258C, 0x2D73, 0x47EE, 0xA656, 0x11C7746EBA19 };
 

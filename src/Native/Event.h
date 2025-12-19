@@ -1,6 +1,6 @@
 #pragma once
 
-#define NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED "This function creating a subscription represented by the return value. Discarding the return value will destroy the subscription instantly."
+#define NODISCARD_MSG_EVENTSUBSCRIPTION_DROPPED "This function creating a subscription represented by the return value. Discarding the return value will destroy the subscription instantly."
 
 #include <functional>
 #include <memory>
@@ -174,7 +174,7 @@ namespace Native
 
 		virtual ~Event() noexcept = default;
 
-		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPPED)]]
 		constexpr Subscription subscribe(EventHandler eventListener) const
 		{
 			std::shared_ptr<EventHandler> pEventListener = this->_eventHandlerList->add(eventListener);
@@ -183,14 +183,14 @@ namespace Native
 		}
 
 		template <class TMethod, class TInstance>
-		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPPED)]]
 		constexpr Subscription subscribe(TMethod&& func, TInstance&& object) const
 		{
 			return this->subscribe(static_cast<EventHandler>(std::bind(func, object, std::placeholders::_1)));
 		}
 
 		template <class TMethod>
-		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPED)]]
+		[[nodiscard(NODISCARD_MSG_EVENTSUBSCRIPTION_DROPPED)]]
 		constexpr Subscription subscribe(TMethod&& func) const
 		{
 			return this->subscribe(static_cast<EventHandler>(std::bind(func, std::placeholders::_1)));
