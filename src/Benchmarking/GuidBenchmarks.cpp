@@ -18,8 +18,6 @@ static void ParseGuidWithBrackets(benchmark::State& state) {
 	{
 		const Native::Guid guid = Native::Guid::Parse("{122AACBB-8F4B-486C-8C13-9330A0679126}");
 
-		std::string b("jbghjvv z ftzf hzh gjguzguzgzugzjgzuftzfgugzugftz  gz gz ggz gzug zug zj zu ");
-
 		benchmark::DoNotOptimize(guid);
 	}
 }
