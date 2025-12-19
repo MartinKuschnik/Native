@@ -52,14 +52,14 @@ jobs:
 
     - name: Benchmarking (x86)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
-      run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath .\benchmark-data.json
+      run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath .\benchmark-data-x86.json
     
       # Download previous benchmark result from cache (if exists)
     - name: Download previous benchmark data
       uses: actions/cache@v4
       with:
         path: ./cache
-        key: ${{ runner.os }}-benchmark
+        key: ${{ runner.os }}-benchmark-x86
 
       # Run `github-action-benchmark` action
     - name: Store benchmark result
@@ -68,8 +68,8 @@ jobs:
         # What benchmark tool the output.txt came from
         tool: 'googlecpp'
         # Where the output from the benchmark tool is stored
-        output-file-path: benchmark-data.json
+        output-file-path: benchmark-data-x86.json
         # Where the previous data file is stored
-        external-data-json-path: ./cache/benchmark-data.json
+        external-data-json-path: ./cache/benchmark-data-x86.json
         # Workflow will fail when an alert happens
         fail-on-alert: true
