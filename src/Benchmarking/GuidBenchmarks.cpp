@@ -2,7 +2,7 @@
 
 #include "Guid.h"
 
-static void Constexpr(benchmark::State& state) {
+static void Guid_Constexpr(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		constexpr Native::Guid guid{ 0x122AACBB, 0x8F4B, 0x486C , 0x8C13, 0x9330A0679126 };
@@ -11,9 +11,9 @@ static void Constexpr(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(Constexpr);
+BENCHMARK(Guid_Constexpr);
 
-static void ParseGuidWithBrackets(benchmark::State& state) {
+static void Guid_ParseWithBrackets(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const Native::Guid guid = Native::Guid::Parse("{122AACBB-8F4B-486C-8C13-9330A0679126}");
@@ -22,9 +22,9 @@ static void ParseGuidWithBrackets(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseGuidWithBrackets);
+BENCHMARK(Guid_ParseWithBrackets);
 
-static void ParseGuidWithBracketsW(benchmark::State& state) {
+static void Guid_ParseWithBracketsW(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const Native::Guid guid = Native::Guid::Parse(L"{122AACBB-8F4B-486C-8C13-9330A0679126}");
@@ -33,9 +33,9 @@ static void ParseGuidWithBracketsW(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseGuidWithBracketsW);
+BENCHMARK(Guid_ParseWithBracketsW);
 
-static void ParseGuidWithoutBrackets(benchmark::State& state) {
+static void Guid_ParseWithoutBrackets(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const Native::Guid guid = Native::Guid::Parse("122AACBB-8F4B-486C-8C13-9330A0679126");
@@ -44,10 +44,9 @@ static void ParseGuidWithoutBrackets(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseGuidWithoutBrackets);
+BENCHMARK(Guid_ParseWithoutBrackets);
 
-
-static void ParseGuidWithoutBracketsW(benchmark::State& state) {
+static void Guid_ParseWithoutBracketsW(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const Native::Guid guid = Native::Guid::Parse(L"122AACBB-8F4B-486C-8C13-9330A0679126");
@@ -56,9 +55,9 @@ static void ParseGuidWithoutBracketsW(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseGuidWithoutBracketsW);
+BENCHMARK(Guid_ParseWithoutBracketsW);
 
-static void TryParseNoneGuidWithoutBrackets(benchmark::State& state) {
+static void Guid_TryParseNoneWithoutBrackets(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const auto guid = Native::Guid::TryParse("9330A0679126");
@@ -67,9 +66,9 @@ static void TryParseNoneGuidWithoutBrackets(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(TryParseNoneGuidWithoutBrackets);
+BENCHMARK(Guid_TryParseNoneWithoutBrackets);
 
-static void TryParseNoneGuidWithoutBracketsW(benchmark::State& state) {
+static void Guid_TryParseNoneWithoutBracketsW(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const auto guid = Native::Guid::TryParse(L"9330A0679126");
@@ -78,10 +77,9 @@ static void TryParseNoneGuidWithoutBracketsW(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(TryParseNoneGuidWithoutBracketsW);
+BENCHMARK(Guid_TryParseNoneWithoutBracketsW);
 
-
-static void ParseEmptyGuidWithoutBrackets(benchmark::State& state) {
+static void Guid_ParseEmptyWithoutBrackets(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const auto guid = Native::Guid::TryParse("00000000-0000-0000-0000-000000000000");
@@ -90,10 +88,9 @@ static void ParseEmptyGuidWithoutBrackets(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseEmptyGuidWithoutBrackets);
+BENCHMARK(Guid_ParseEmptyWithoutBrackets);
 
-
-static void ParseEmptyGuidWithoutBracketsW(benchmark::State& state) {
+static void Guid_ParseEmptyWithoutBracketsW(benchmark::State& state) {
 	for (auto _ : state)
 	{
 		const auto guid = Native::Guid::TryParse(L"00000000-0000-0000-0000-000000000000");
@@ -102,9 +99,9 @@ static void ParseEmptyGuidWithoutBracketsW(benchmark::State& state) {
 	}
 }
 
-BENCHMARK(ParseEmptyGuidWithoutBracketsW);
+BENCHMARK(Guid_ParseEmptyWithoutBracketsW);
 
-static void GuidToString(benchmark::State& state)
+static void Guid_ToString(benchmark::State& state)
 {
 	constexpr const Native::Guid guid { 0xe11b7641, 0x3a9b, 0x4d9e,  0x9cb7, 0x72d85b0d81fd  };
 
@@ -116,9 +113,9 @@ static void GuidToString(benchmark::State& state)
 	}
 }
 
-BENCHMARK(GuidToString);
+BENCHMARK(Guid_ToString);
 
-static void GuidToWString(benchmark::State& state)
+static void Guid_ToWString(benchmark::State& state)
 {
 	constexpr const Native::Guid guid{ 0xe11b7641, 0x3a9b, 0x4d9e,  0x9cb7, 0x72d85b0d81fd };
 
@@ -130,4 +127,4 @@ static void GuidToWString(benchmark::State& state)
 	}
 }
 
-BENCHMARK(GuidToWString);
+BENCHMARK(Guid_ToWString);
