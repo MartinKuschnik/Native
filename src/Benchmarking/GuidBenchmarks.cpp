@@ -2,8 +2,6 @@
 
 #include "Guid.h"
 
-#include "AllocationTracking.h"
-
 static void Constexpr(benchmark::State& state) {
 	for (auto _ : state)
 	{
