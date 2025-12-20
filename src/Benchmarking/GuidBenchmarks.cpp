@@ -29,7 +29,7 @@ static void Guid_ParseWithBracketsW(benchmark::State& state) {
 	{
 		Native::Guid guid = Native::Guid::Parse(L"{122AACBB-8F4B-486C-8C13-9330A0679126}");
 
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 1000; i++)
 		{
 			guid = Native::Guid::Parse(L"{122AACBB-8F4B-486C-8C13-9330A0679126}");
 		}
