@@ -38,7 +38,7 @@ jobs:
     - name: Cache vcpkg_installed
       uses: actions/cache@v3
       with:
-        path: 'src/Backup Agent/vcpkg_installed'
+        path: 'src/Benchmarking/vcpkg_installed'
         key: vcpkg_installed-x64-${{env.BUILD_CONFIGURATION}}
       
     - name: Build Solution (x64)
@@ -50,7 +50,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       run: vstest.console.exe /Platform:x64 'src/**/*tests*.dll' 
 
-    - name: Benchmarking (x86)
+    - name: Benchmarking (x64)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       run: src/Benchmarking/bin/Release/x64/Benchmarking.exe --benchmark_format=json | Out-File -FilePath .\benchmark-data-x64.json
     

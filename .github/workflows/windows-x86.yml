@@ -38,8 +38,8 @@ jobs:
     - name: Cache vcpkg_installed
       uses: actions/cache@v3
       with:
-        path: 'src/Backup Agent/vcpkg_installed'
-        key: vcpkg_installed-x64-${{env.BUILD_CONFIGURATION}}
+        path: 'src/Benchmarking/vcpkg_installed'
+        key: vcpkg_installed-x86-${{env.BUILD_CONFIGURATION}}
       
     - name: Build Solution (x86)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
