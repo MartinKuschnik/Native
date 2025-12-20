@@ -80,3 +80,5 @@ jobs:
         comment-on-alert: true
         # Mention @rhysd in the commit comment
         alert-comment-cc-users: '@MartinKuschnik'
+        # Push and deploy GitHub pages branch automatically
+        auto-push: true
