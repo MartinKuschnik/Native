@@ -51,8 +51,7 @@ jobs:
       run: vstest.console.exe /Platform:x64 'src/**/*tests*.dll' 
 
     - name: Prepare Benchmark
-      run: |
-        mkdir -p .benchmark-results
+      run: mkdir -p .benchmark-results
 
     - name: Benchmarking (x64)
       working-directory: ${{env.GITHUB_WORKSPACE}}     

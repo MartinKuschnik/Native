@@ -50,6 +50,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       run: vstest.console.exe /Platform:x86 'src/**/*tests*.dll' 
 
+    - name: Prepare Benchmark
+      run: mkdir -p .benchmark-results
+
     - name: Benchmarking (x86)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
       run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath ./.benchmark-results/native-x86.json
