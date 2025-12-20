@@ -52,7 +52,7 @@ jobs:
 
     - name: Benchmarking (x86)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
-      run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath ./benchmarks/${GITHUB_REF##*/}-x86.json
+      run: src/Benchmarking/bin/Release/Win32/Benchmarking.exe --benchmark_format=json | Out-File -FilePath ./benchmarks/x86.json
     
       # Download previous benchmark result from cache (if exists)
     - name: Download previous benchmark data
@@ -63,12 +63,12 @@ jobs:
 
       # Run `github-action-benchmark` action
     - name: Store benchmark result
-      uses: benchmark-action/github-action-benchmark@v1.20.7
+      uses: benchmark-action/github-action-benchmark@v1
       with:
         # What benchmark tool the benchmark output file came from
         tool: 'googlecpp'
         # Where the output from the benchmark tool is stored
-        output-file-path: ./benchmarks/${GITHUB_REF##*/}-x86.json
+        output-file-path: ./benchmarks/x86.json
         # Workflow will fail when an alert happens
         fail-on-alert: true
         # GitHub API token to make a commit comment
