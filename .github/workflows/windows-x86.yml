@@ -15,12 +15,9 @@ env:
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
-
+  
 permissions:
-  # deployments permission to deploy GitHub pages website
-  deployments: write
-  # contents permission to update benchmark contents in gh-pages branch
-  contents: write
+  contents: read
 
 jobs:       
   build-windows-x86:
@@ -77,11 +74,3 @@ jobs:
         output-file-path: ./.benchmark-results/native-x86.json
         # Workflow will fail when an alert happens
         fail-on-alert: true
-        # GitHub API token to make a commit comment
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        # Enable alert commit comment
-        comment-on-alert: true
-        # Mention @rhysd in the commit comment
-        alert-comment-cc-users: '@MartinKuschnik'
-        # Push and deploy GitHub pages branch automatically
-        auto-push: true

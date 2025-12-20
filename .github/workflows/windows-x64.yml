@@ -17,10 +17,7 @@ env:
   BUILD_CONFIGURATION: Release
 
 permissions:
-  # deployments permission to deploy GitHub pages website
-  deployments: write
-  # contents permission to update benchmark contents in gh-pages branch
-  contents: write
+  contents: read
 
 jobs:       
   build-windows-x64:
@@ -71,17 +68,9 @@ jobs:
     - name: Store benchmark result
       uses: benchmark-action/github-action-benchmark@v1
       with:
-        # What benchmark tool the output file came from
+        # What benchmark tool the benchmark output file came from
         tool: 'googlecpp'
         # Where the output from the benchmark tool is stored
         output-file-path: ./.benchmark-results/native-x64.json
         # Workflow will fail when an alert happens
         fail-on-alert: true
-        # GitHub API token to make a commit comment
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        # Enable alert commit comment
-        comment-on-alert: true
-        # Mention @rhysd in the commit comment
-        alert-comment-cc-users: '@MartinKuschnik'
-        # Push and deploy GitHub pages branch automatically
-        auto-push: true
