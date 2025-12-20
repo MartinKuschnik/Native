@@ -1,5 +1,7 @@
 #include <benchmark/benchmark.h>
 
+#include <thread>
+
 #include "Guid.h"
 
 static void Guid_Constexpr(benchmark::State& state) {
@@ -18,8 +20,7 @@ static void Guid_ParseWithBrackets(benchmark::State& state) {
 	{
 		const Native::Guid guid = Native::Guid::Parse("{122AACBB-8F4B-486C-8C13-9330A0679126}");
 
-		std::string s2 = " wnnkln dkawnk nkan kdanwlkdnklawnkddnwlk nlkanlkn lkankl nalkn kankla wnlkna lk";
-		benchmark::DoNotOptimize(s2);
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 
 		benchmark::DoNotOptimize(guid);
 	}
