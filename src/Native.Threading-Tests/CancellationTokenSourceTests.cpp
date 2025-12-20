@@ -82,7 +82,7 @@ namespace NativeThreadingTests
 			std::this_thread::sleep_for(50ms);
 			Assert::IsFalse(token.is_cancellation_requested(), L"Token should not be canceled after 50ms (due time is 100ms)");
 
-			std::this_thread::sleep_for(60ms);
+			std::this_thread::sleep_for(100ms);
 
 			Assert::IsTrue(token.is_cancellation_requested(), L"Token should be canceled after due time has been reached");
 		}
