@@ -63,7 +63,7 @@ jobs:
 
       # Run `github-action-benchmark` action
     - name: Store benchmark result
-      uses: benchmark-action/github-action-benchmark@v1
+      uses: benchmark-action/github-action-benchmark@v1.20.7
       with:
         # What benchmark tool the benchmark output file came from
         tool: 'googlecpp'
