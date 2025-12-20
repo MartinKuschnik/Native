@@ -65,7 +65,7 @@ jobs:
     - name: Store benchmark result
       uses: benchmark-action/github-action-benchmark@v1
       with:
-        # What benchmark tool the output.txt came from
+        # What benchmark tool the output file came from
         tool: 'googlecpp'
         # Where the output from the benchmark tool is stored
         output-file-path: benchmark-data-x64.json
