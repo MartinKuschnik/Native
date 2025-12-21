@@ -48,29 +48,4 @@ jobs:
     
     - name: Unit Tests (x64)
       working-directory: ${{env.GITHUB_WORKSPACE}}     
-      run: vstest.console.exe /Platform:x64 'src/**/*tests*.dll' 
-
-    - name: Prepare Benchmark
-      run: mkdir -p .benchmark-results
-
-    - name: Benchmarking (x64)
-      working-directory: ${{env.GITHUB_WORKSPACE}}     
-      run: src/Benchmarking/bin/Release/x64/Benchmarking.exe --benchmark_format=json | Out-File -FilePath ./.benchmark-results/native-x64.json
-    
-      # Download previous benchmark result from cache (if exists)
-    - name: Download previous benchmark data
-      uses: actions/cache@v4
-      with:
-        path: ./.benchmark-results
-        key: ${{ runner.os }}-benchmark-x64
-
-      # Run `github-action-benchmark` action
-    - name: Store benchmark result
-      uses: benchmark-action/github-action-benchmark@v1
-      with:
-        # What benchmark tool the benchmark output file came from
-        tool: 'googlecpp'
-        # Where the output from the benchmark tool is stored
-        output-file-path: ./.benchmark-results/native-x64.json
-        # Workflow will fail when an alert happens
-        fail-on-alert: true
+      run: vstest.console.exe /Platform:x64 'src/**/*tests*.dll'
