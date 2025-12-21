@@ -37,6 +37,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Web", "Native.Web\Na
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Native.Web - Tests", "Native.Web-Tests\Native.Web-Tests.vcxproj", "{74ECC90E-C8EA-93FA-BFF4-6E07A4424ECE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Benchmarking", "Benchmarking\Benchmarking.vcxproj", "{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{EC5BD12D-C13F-467A-81CC-31FD7EA2608D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\windows-x64.yml = ..\.github\workflows\windows-x64.yml
+		..\.github\workflows\windows-x86.yml = ..\.github\workflows\windows-x86.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -109,9 +119,20 @@ Global
 		{74ECC90E-C8EA-93FA-BFF4-6E07A4424ECE}.Release|x64.Build.0 = Release|x64
 		{74ECC90E-C8EA-93FA-BFF4-6E07A4424ECE}.Release|x86.ActiveCfg = Release|Win32
 		{74ECC90E-C8EA-93FA-BFF4-6E07A4424ECE}.Release|x86.Build.0 = Release|Win32
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Debug|x64.ActiveCfg = Debug|x64
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Debug|x64.Build.0 = Debug|x64
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Debug|x86.ActiveCfg = Debug|Win32
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Debug|x86.Build.0 = Debug|Win32
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Release|x64.ActiveCfg = Release|x64
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Release|x64.Build.0 = Release|x64
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Release|x86.ActiveCfg = Release|Win32
+		{DC565E8E-8E52-4C69-A6BC-A5F64606E41C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC5BD12D-C13F-467A-81CC-31FD7EA2608D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AF380FC-EBA3-4AC6-8A7E-C49C5288F8C6}
@@ -143,5 +164,9 @@ Global
 		Native.Net\Native.Net.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
 		Native.Windows\Native.Windows.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
 		Native\Native.vcxitems*{d1215a4b-40fa-4f1d-96a2-bc5bdc690ac1}*SharedItemsImports = 4
+		Native.Threading\Native.Threading.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
+		Native.Web\Native.Web.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
+		Native.Windows\Native.Windows.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
+		Native\Native.vcxitems*{dc565e8e-8e52-4c69-a6bc-a5f64606e41c}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
